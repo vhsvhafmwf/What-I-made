@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" class="scroll-smooth" style="scroll-padding-top: 5rem;">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,26 +52,26 @@
 </head>
 <body class="min-h-screen font-sans selection:bg-accent selection:text-black overflow-x-hidden pb-24">
 
-  <!-- HERO SECTION -->
-  <section class="relative w-full h-screen flex flex-col items-center justify-center p-8 text-center overflow-hidden">
-    <!-- Background glow -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/20 rounded-full blur-[120px] -z-10 animate-pulse"></div>
-    
-    <h1 class="text-5xl md:text-8xl font-black mb-6 tracking-tight text-white drop-shadow-lg">
-      YUTA <br />
-      <span class="text-accent underline decoration-4 underline-offset-8">GOTO</span>
-    </h1>
-    <p class="max-w-xl text-lg md:text-xl text-gray-400 mb-10 leading-relaxed font-light">
-      法学から音楽、AI、ビジコンまで。<br>分野を横断し、物事の背後にある「普遍的な論理や相乗効果」を探究する。
-    </p>
-    <a href="#about" class="px-8 py-4 bg-accent text-black font-bold uppercase tracking-widest rounded transition-all hover:scale-105 hover:shadow-glow hover:bg-yellow-400">
-      Discover More
-    </a>
-  </section>
+  <!-- HEADER NAVIGATION -->
+  <header class="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-gray-900 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
+      <a href="#about" class="text-lg md:text-2xl font-black text-white tracking-widest hover:text-accent transition-colors">
+        YUTA GOTO
+      </a>
+      <nav>
+        <ul class="flex items-center gap-4 md:gap-8 text-xs md:text-sm font-bold tracking-wider">
+          <li><a href="#about" class="text-gray-300 hover:text-accent transition-colors">ABOUT</a></li>
+          <li><a href="#works" class="text-gray-300 hover:text-accent transition-colors">WORKS</a></li>
+          <li><a href="#journey" class="text-gray-300 hover:text-accent transition-colors">JOURNEY</a></li>
+          <li><a href="#awards" class="text-gray-300 hover:text-accent transition-colors">AWARDS</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-  <!-- ABOUT SECTION -->
-  <section id="about" class="w-full max-w-7xl mx-auto px-6 py-24">
-    <div class="flex flex-col md:flex-row gap-16 items-center">
+  <!-- ABOUT SECTION (Top Page) -->
+  <section id="about" class="w-full h-screen max-w-7xl mx-auto px-6 pt-24 md:pt-32 pb-16 flex items-center">
+    <div class="flex flex-col md:flex-row gap-16 items-center w-full">
       <div class="w-full md:w-5/12 relative group mt-8 md:mt-0">
         <!-- Profile Photos -->
         <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden border border-gray-800 group-hover:border-accent transition-colors duration-500">
@@ -124,48 +124,75 @@
       </h2>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-      <!-- Work 1 -->
-      <div class="group relative aspect-[4/5] bg-gray-900 overflow-hidden cursor-pointer transition-all duration-500 rounded-lg focus-within:ring-2 focus-within:ring-accent hover:shadow-[0_0_30px_rgba(255,204,0,0.5)] hover:-translate-y-2 border border-gray-800 hover:border-accent">
-        <img src="./assets/work1-moot-court.jpg" alt="2026 JAPAN CUP キックオフセミナー" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105" />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-          <span class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold">Seminar</span>
-          <h3 class="text-2xl md:text-3xl font-bold text-white group-hover:text-accent transition-colors">JAPAN CUP 2026</h3>
+    <div class="flex flex-col gap-32">
+      <!-- Work 1 (Left Text, Right Image) -->
+      <div class="flex flex-col md:flex-row items-center gap-12 group">
+        <div class="w-full md:w-1/2 space-y-4 order-2 md:order-1">
+          <span class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold flex items-center gap-3"><span class="w-8 h-px bg-accent"></span>Seminar</span>
+          <h3 class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">JAPAN CUP 2026</h3>
+          <p class="text-gray-400 leading-relaxed font-light text-lg">
+            国際法模擬裁判のキックオフセミナー用フライヤーデザイン。初学者の目を惹きつけるイエローを中心とした力強いタイポグラフィで、同法会の熱量を表現しています。
+          </p>
+        </div>
+        <div class="w-full md:w-1/2 order-1 md:order-2">
+          <div class="relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
+            <img src="./assets/work1-moot-court.jpg" alt="JAPAN CUP" class="w-full h-auto object-contain bg-gray-900" />
+          </div>
         </div>
       </div>
-      <!-- Work 2 -->
-      <div class="group relative aspect-[4/5] bg-gray-900 overflow-hidden cursor-pointer transition-all duration-500 rounded-lg focus-within:ring-2 focus-within:ring-accent hover:shadow-[0_0_30px_rgba(255,204,0,0.5)] hover:-translate-y-2 border border-gray-800 hover:border-accent">
-        <img src="./assets/work2-well-hunting.jpg" alt="WELL HUNTING by Rubyin" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105" />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-          <span class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold">Event</span>
-          <h3 class="text-2xl md:text-3xl font-bold text-white group-hover:text-accent transition-colors">WELL HUNTING</h3>
+
+      <!-- Work 2 (Left Image, Right Text) -->
+      <div class="flex flex-col md:flex-row items-center gap-12 group">
+        <div class="w-full md:w-1/2 order-1 md:order-1">
+          <div class="relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
+            <img src="./assets/work2-well-hunting.jpg" alt="WELL HUNTING by Rubyin" class="w-full h-auto object-contain bg-gray-900" />
+          </div>
+        </div>
+        <div class="w-full md:w-1/2 space-y-4 order-2 md:order-2">
+          <span class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold flex items-center gap-3"><span class="w-8 h-px bg-accent"></span>Event</span>
+          <h3 class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">WELL HUNTING</h3>
+          <p class="text-gray-400 leading-relaxed font-light text-lg">
+            就活イベント「WELL HUNTING」の告知ポスター。「ありのままを魅せる就活」というコンセプトを際立たせるため、余白を活かしたスタイリッシュなレイアウトを構築しました。
+          </p>
         </div>
       </div>
-      <!-- Work 3 -->
-      <div class="group relative aspect-[4/5] bg-gray-900 overflow-hidden cursor-pointer transition-all duration-500 rounded-lg focus-within:ring-2 focus-within:ring-accent hover:shadow-[0_0_30px_rgba(255,204,0,0.5)] hover:-translate-y-2 border border-gray-800 hover:border-accent">
-        <img src="./assets/work3-wing.jpg" alt="Business Contest WING" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105" />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-          <span class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold">Contest</span>
-          <h3 class="text-2xl md:text-3xl font-bold text-white group-hover:text-accent transition-colors">Business Contest WING</h3>
+
+      <!-- Work 3 (Left Text, Right Image) -->
+      <div class="flex flex-col md:flex-row items-center gap-12 group">
+        <div class="w-full md:w-1/2 space-y-4 order-2 md:order-1">
+          <span class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold flex items-center gap-3"><span class="w-8 h-px bg-accent"></span>Contest</span>
+          <h3 class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">Business Contest WING</h3>
+          <p class="text-gray-400 leading-relaxed font-light text-lg">
+            自身も渉外局員として携わる学生向けビジネスコンテスト「WING」のポスター。情熱に火をつけ、スケール感のある未来へと羽ばたく様子をデザインに落とし込んでいます。
+          </p>
+        </div>
+        <div class="w-full md:w-1/2 order-1 md:order-2">
+          <div class="relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
+            <img src="./assets/work3-wing.jpg" alt="Business Contest WING" class="w-full h-auto object-contain bg-gray-900" />
+          </div>
         </div>
       </div>
-      <!-- Work 4 -->
-      <div class="group relative aspect-[4/5] bg-gray-900 overflow-hidden cursor-pointer transition-all duration-500 rounded-lg focus-within:ring-2 focus-within:ring-accent hover:shadow-[0_0_30px_rgba(255,204,0,0.5)] hover:-translate-y-2 border border-gray-800 hover:border-accent">
-        <img src="./assets/work4-glee-club.jpg" alt="同志社グリークラブ 団員大募集" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105" />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-          <span class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold">Performance</span>
-          <h3 class="text-2xl md:text-3xl font-bold text-white group-hover:text-accent transition-colors">同志社グリークラブ</h3>
+
+      <!-- Work 4 (Left Image, Right Text) -->
+      <div class="flex flex-col md:flex-row items-center gap-12 group">
+        <div class="w-full md:w-1/2 order-1 md:order-1">
+          <div class="relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
+            <img src="./assets/work4-glee-club.jpg" alt="同志社グリークラブ 団員大募集" class="w-full h-auto object-contain bg-gray-900" />
+          </div>
+        </div>
+        <div class="w-full md:w-1/2 space-y-4 order-2 md:order-2">
+          <span class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold flex items-center gap-3"><span class="w-8 h-px bg-accent"></span>Performance</span>
+          <h3 class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">同志社グリークラブ</h3>
+          <p class="text-gray-400 leading-relaxed font-light text-lg">
+            全国大会に連続出場を果たす伝統ある男声合唱団の団員募集用フライヤー。長年の実績と力強さを伝えるため、ダイナミックな筆文字タイトルを用いました。
+          </p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- TIMELINE SECTION -->
-  <section class="w-full max-w-4xl mx-auto px-6 py-24 border-t border-gray-900 mt-10">
+  <section id="journey" class="w-full max-w-4xl mx-auto px-6 py-24 border-t border-gray-900 mt-10">
     <div class="text-center mb-16">
       <h2 class="text-4xl md:text-6xl font-bold text-white mb-4">THE JOURNEY</h2>
       <p class="text-gray-400">Extracurricular milestones and achievements</p>
@@ -173,57 +200,101 @@
 
     <div class="relative border-l border-gray-800 ml-3 md:ml-6 space-y-12 pb-8">
       
-      <!-- Experience 1 -->
+      <!-- High School -->
       <div class="relative pl-8 md:pl-12 group hover:-translate-y-1 transition-transform duration-300">
         <div class="absolute -left-3.5 md:-left-4 top-1 w-7 h-7 md:w-8 md:h-8 rounded-full bg-background border-2 border-gray-700 group-hover:border-accent group-hover:shadow-glow flex items-center justify-center transition-all duration-300">
           <div class="text-gray-500 group-hover:text-accent transition-colors">
-            <i data-lucide="scale" class="w-4 h-4 md:w-5 md:h-5"></i>
+            <i data-lucide="graduation-cap" class="w-4 h-4 md:w-5 md:h-5"></i>
           </div>
         </div>
         <div class="flex flex-col mb-2">
-          <span class="text-accent font-mono text-sm tracking-wider mb-2">2023 - Present</span>
-          <h3 class="text-2xl font-bold text-white">国際法模擬裁判</h3>
-          <span class="text-gray-400 font-medium mb-4">JAPANCUP / JESSUP</span>
+          <span class="text-accent font-mono text-sm tracking-wider mb-2">~ 2024.03</span>
+          <h3 class="text-2xl font-bold text-white">高校時代</h3>
+          <span class="text-gray-400 font-medium mb-4">吹奏楽 & ビジネス探究</span>
         </div>
         <p class="text-gray-300 leading-relaxed font-light">
-          緻密な論理的思考力と英語力を駆使し、初心者100%から多数の受賞歴を持つ同志社大学チームで活動。JAPAN CUP（原告書面部門2位受賞）のキックオフセミナー広報や運営にも携わる。
+          吹奏楽部にて関西吹奏楽コンクールに出場し音楽の追求とチームワークを学ぶ。同時に「マイナビキャリア甲子園」で全国ベスト16に進出するなど、文系・理系・芸術を問わず横断的に活動するルーツとなった。（2024年3月卒業）
         </p>
       </div>
 
-      <!-- Experience 2 -->
+      <!-- Gap Year -->
       <div class="relative pl-8 md:pl-12 group hover:-translate-y-1 transition-transform duration-300">
         <div class="absolute -left-3.5 md:-left-4 top-1 w-7 h-7 md:w-8 md:h-8 rounded-full bg-background border-2 border-gray-700 group-hover:border-accent group-hover:shadow-glow flex items-center justify-center transition-all duration-300">
           <div class="text-gray-500 group-hover:text-accent transition-colors">
-            <i data-lucide="music" class="w-4 h-4 md:w-5 md:h-5"></i>
+            <i data-lucide="book-open" class="w-4 h-4 md:w-5 md:h-5"></i>
           </div>
         </div>
         <div class="flex flex-col mb-2">
-          <span class="text-accent font-mono text-sm tracking-wider mb-2">Music Activities</span>
-          <h3 class="text-2xl font-bold text-white">合唱・吹奏楽</h3>
-          <span class="text-gray-400 font-medium mb-4">同志社グリークラブ ほか</span>
+          <span class="text-accent font-mono text-sm tracking-wider mb-2">2024.04 - 2025.03</span>
+          <h3 class="text-2xl font-bold text-white">浪人期間</h3>
+          <span class="text-gray-400 font-medium mb-4">自己探求と基盤拡充</span>
         </div>
         <p class="text-gray-300 leading-relaxed font-light">
-          合唱では年6回ほどの公演とコンクールへ出場し、創立122年目の男声合唱団にて全国大会2年連続出場を果たす。さらに吹奏楽でも年2回のコンサートに出演し、表現力とチームワークを追求。
+          1年間の浪人生活を経て、多様な視点と普遍的な論理の重要性を再認識。次に飛び込む大学という新しいフィールドに向けた思考の土台を固めた期間。
         </p>
       </div>
 
-      <!-- Experience 3 -->
+      <!-- University -->
       <div class="relative pl-8 md:pl-12 group hover:-translate-y-1 transition-transform duration-300">
         <div class="absolute -left-3.5 md:-left-4 top-1 w-7 h-7 md:w-8 md:h-8 rounded-full bg-background border-2 border-gray-700 group-hover:border-accent group-hover:shadow-glow flex items-center justify-center transition-all duration-300">
           <div class="text-gray-500 group-hover:text-accent transition-colors">
-            <i data-lucide="briefcase" class="w-4 h-4 md:w-5 md:h-5"></i>
+            <i data-lucide="rocket" class="w-4 h-4 md:w-5 md:h-5"></i>
           </div>
         </div>
         <div class="flex flex-col mb-2">
-          <span class="text-accent font-mono text-sm tracking-wider mb-2">Startup & Tech</span>
-          <h3 class="text-2xl font-bold text-white">スタートアップ支援 & AI</h3>
-          <span class="text-gray-400 font-medium mb-4">WING 渉外局員 / ハッカソン / AI活用</span>
+          <span class="text-accent font-mono text-sm tracking-wider mb-2">2025.04 - Present</span>
+          <h3 class="text-2xl font-bold text-white">同志社大学 入学</h3>
+          <span class="text-gray-400 font-medium mb-4">領域を横断する実践活動の幕開け</span>
         </div>
         <p class="text-gray-300 leading-relaxed font-light">
-          ビジネスコンテストWINGの渉外局員（法人営業）として関西の起業・キャリア形成を支援。スタートアップ関西のスタッフ、共創エキスポのアイデアソンやオリジン京都のハッカソンにも参画。ポスター・動画制作等のデザイン実務や、AIによるDX推進に取り組む。
+          法学部法律学科に入学。国際法模擬裁判（JAPANCUP等）で論理的思考を武器にする一方、合唱団で全国大会に出場し銀賞を受賞。さらにWINGの渉外局員（法人営業）やハッカソンへの参画など、一見バラバラに見える経験の中に相乗効果を見出しながら精力的に活動中。
         </p>
       </div>
 
+    </div>
+  </section>
+
+  <!-- AWARDS SECTION -->
+  <section id="awards" class="w-full max-w-4xl mx-auto px-6 py-24 border-t border-gray-900 mt-10">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-6xl font-bold text-white mb-4">AWARDS</h2>
+      <p class="text-gray-400">受賞歴・実績</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- 2025 -->
+      <div class="p-6 bg-gray-900/50 rounded-lg border border-gray-800 hover:border-accent transition-colors group">
+        <span class="text-accent text-sm font-mono mb-1 block group-hover:text-yellow-400">2025.10</span>
+        <h4 class="text-white font-bold text-lg mb-1">全国合唱コンクール</h4>
+        <p class="text-gray-400 text-sm">大学ユースの部 銀賞</p>
+      </div>
+      <div class="p-6 bg-gray-900/50 rounded-lg border border-gray-800 hover:border-accent transition-colors group">
+        <span class="text-accent text-sm font-mono mb-1 block group-hover:text-yellow-400">2025.09</span>
+        <h4 class="text-white font-bold text-lg mb-1">関西合唱コンクール</h4>
+        <p class="text-gray-400 text-sm">大学の部 金賞</p>
+      </div>
+      <div class="p-6 bg-gray-900/50 rounded-lg border border-gray-800 hover:border-accent transition-colors group">
+        <span class="text-accent text-sm font-mono mb-1 block group-hover:text-yellow-400">2025.07</span>
+        <h4 class="text-white font-bold text-lg mb-1">国際法模擬裁判 JAPAN CUP</h4>
+        <p class="text-gray-400 text-sm">原告書面部門 2位</p>
+      </div>
+      <!-- 2023 -->
+      <div class="p-6 bg-gray-900/50 rounded-lg border border-gray-800 hover:border-accent transition-colors group">
+        <span class="text-accent text-sm font-mono mb-1 block group-hover:text-yellow-400">2023.09</span>
+        <h4 class="text-white font-bold text-lg mb-1">関西/奈良県 吹奏楽コンクール</h4>
+        <p class="text-gray-400 text-sm">小編成の部 奈良県金賞代表 / 関西銀賞</p>
+      </div>
+      <div class="p-6 bg-gray-900/50 rounded-lg border border-gray-800 hover:border-accent transition-colors group">
+        <span class="text-accent text-sm font-mono mb-1 block group-hover:text-yellow-400">2023.02</span>
+        <h4 class="text-white font-bold text-lg mb-1">マイナビキャリア甲子園2022</h4>
+        <p class="text-gray-400 text-sm">全国ベスト16</p>
+      </div>
+      <!-- 2022 -->
+      <div class="p-6 bg-gray-900/50 rounded-lg border border-gray-800 hover:border-accent transition-colors group">
+        <span class="text-accent text-sm font-mono mb-1 block group-hover:text-yellow-400">2022.09</span>
+        <h4 class="text-white font-bold text-lg mb-1">関西/奈良県 吹奏楽コンクール</h4>
+        <p class="text-gray-400 text-sm">小編成の部 奈良県金賞代表 / 関西銀賞</p>
+      </div>
     </div>
   </section>
 
