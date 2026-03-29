@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yuta Goto | Portfolio</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            background: "#0a0a0a",
+            accent: {
+              DEFAULT: "#ffcc00",
+              glow: "rgba(255, 204, 0, 0.4)",
+            },
+          },
+          boxShadow: {
+            glow: "0 0 20px 5px rgba(255, 204, 0, 0.4)",
+          },
+        }
+      }
+    }
+  </script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: #f0f0f0;
+    }
+    ::selection {
+      background-color: #ffcc00;
+      color: #000;
+    }
+  </style>
+</head>
+<body class="min-h-screen font-sans selection:bg-accent selection:text-black overflow-x-hidden pb-24">
+
+  <!-- HERO SECTION -->
+  <section class="relative w-full h-screen flex flex-col items-center justify-center p-8 text-center overflow-hidden">
+    <!-- Background glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/20 rounded-full blur-[120px] -z-10 animate-pulse"></div>
+    
+    <h1 class="text-5xl md:text-8xl font-black mb-6 tracking-tight text-white drop-shadow-lg">
+      YUTA <br />
+      <span class="text-accent underline decoration-4 underline-offset-8">GOTO</span>
+    </h1>
+    <p class="max-w-xl text-lg md:text-xl text-gray-400 mb-10 leading-relaxed font-light">
+      法学から音楽、AI、ビジコンまで。<br>分野を横断し、物事の背後にある「普遍的な論理や相乗効果」を探究する。
+    </p>
+    <a href="#about" class="px-8 py-4 bg-accent text-black font-bold uppercase tracking-widest rounded transition-all hover:scale-105 hover:shadow-glow hover:bg-yellow-400">
+      Discover More
+    </a>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section id="about" class="w-full max-w-7xl mx-auto px-6 py-24">
+    <div class="flex flex-col md:flex-row gap-16 items-center">
+      <div class="w-full md:w-5/12 relative group mt-8 md:mt-0">
+        <!-- Profile Photos -->
+        <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden border border-gray-800 group-hover:border-accent transition-colors duration-500">
+          <img src="./assets/photo2-profile.jpg" alt="Yuta Goto" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none"></div>
+          
+          <div class="absolute bottom-6 left-6 flex gap-3">
+             <img src="./assets/photo1-trombone.jpg" class="w-16 h-16 md:w-20 md:h-20 rounded shadow-lg border-2 border-accent object-cover hover:scale-110 transition-transform" alt="Brassband">
+             <img src="./assets/photo3-choir.png" class="w-16 h-16 md:w-20 md:h-20 rounded shadow-lg border-2 border-accent object-cover hover:scale-110 transition-transform" alt="Choir">
+          </div>
+        </div>
+        <div class="absolute -z-10 top-6 -right-6 w-full h-full border-2 border-accent/50 rounded-xl group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform duration-500"></div>
+      </div>
+      
+      <div class="w-full md:w-7/12 space-y-8">
+        <div>
+          <h2 class="text-4xl md:text-6xl font-bold text-white mb-2">ABOUT ME</h2>
+          <div class="w-20 h-1 bg-accent mb-6"></div>
+          <p class="text-xl font-medium text-accent">同志社大学 法学部 法律学科</p>
+          <h3 class="text-3xl font-bold text-white mt-1">後藤 優太 <span class="text-gray-500 text-sm font-normal tracking-widest pl-2">YUTA GOTO</span></h3>
+        </div>
+        
+        <div class="text-gray-300 space-y-4 font-light leading-relaxed">
+          <p>私は現在、国際法模擬裁判で緻密な論理的思考力を強化する一方で、全国レベルでの合唱や吹奏楽、AIを活用した作業自動化やビジコンの運営など、一見するとバラバラな領域で活動しています。</p>
+          <p>このように多岐にわたる分野に足を踏み入れているのには、明確な理由があります。それは、複数の領域を横断することで、日常に潜む「普遍的な論理」や、異なる要素が結びつく「相乗効果」を発見できるからです。</p>
+          <p>そうした物事は本や伝聞で得られるものではなく、自ら体験することでしか得られません。だからこそ私は常に自分の感覚を更新し続けるため挑戦を止めません。</p>
+        </div>
+        
+        <div class="bg-gray-900/60 p-6 rounded-lg border border-gray-800 hover:border-accent/40 transition-colors">
+          <h4 class="text-white font-bold mb-3 flex items-center gap-2"><i data-lucide="rocket" class="w-5 h-5 text-accent"></i> Future Vision</h4>
+          <p class="text-gray-400 text-sm leading-relaxed">将来はこうした経験を生かして起業することを考えています。この思いに共感してくださる方、ぜひ1on1でお話ししましょう！🔥<br>(趣味: 野球観戦, 吹奏楽, 合唱, ポスター・ビラ・動画制作 / USJクルー経験あり)</p>
+        </div>
+        
+        <div class="flex flex-wrap gap-2 text-sm">
+          <span class="px-4 py-1.5 bg-gray-900 text-gray-300 rounded-full border border-gray-700 hover:text-accent hover:border-accent transition-colors">AI / DX</span>
+          <span class="px-4 py-1.5 bg-gray-900 text-gray-300 rounded-full border border-gray-700 hover:text-accent hover:border-accent transition-colors">Startup</span>
+          <span class="px-4 py-1.5 bg-gray-900 text-gray-300 rounded-full border border-gray-700 hover:text-accent hover:border-accent transition-colors">Design & Video</span>
+          <span class="px-4 py-1.5 bg-gray-900 text-gray-300 rounded-full border border-gray-700 hover:text-accent hover:border-accent transition-colors">Music Performance</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKS SECTION -->
+  <section id="works" class="w-full max-w-7xl mx-auto px-6 py-24">
+    <div class="flex items-end justify-between mb-16">
+      <h2 class="text-5xl md:text-7xl font-bold text-white relative inline-block">
+        SELECTED <br/> WORKS
+        <div class="absolute -left-6 top-0 w-2 h-full bg-accent"></div>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <!-- Work 1 -->
+      <div class="group relative aspect-[4/5] bg-gray-900 overflow-hidden cursor-pointer transition-all duration-500 rounded-lg focus-within:ring-2 focus-within:ring-accent hover:shadow-[0_0_30px_rgba(255,204,0,0.5)] hover:-translate-y-2 border border-gray-800 hover:border-accent">
+        <img src="./assets/work1-moot-court.jpg" alt="2026 JAPAN CUP キックオフセミナー" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+          <span class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold">Seminar</span>
+          <h3 class="text-2xl md:text-3xl font-bold text-white group-hover:text-accent transition-colors">JAPAN CUP 2026</h3>
+        </div>
+      </div>
+      <!-- Work 2 -->
+      <div class="group relative aspect-[4/5] bg-gray-900 overflow-hidden cursor-pointer transition-all duration-500 rounded-lg focus-within:ring-2 focus-within:ring-accent hover:shadow-[0_0_30px_rgba(255,204,0,0.5)] hover:-translate-y-2 border border-gray-800 hover:border-accent">
+        <img src="./assets/work2-well-hunting.jpg" alt="WELL HUNTING by Rubyin" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+          <span class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold">Event</span>
+          <h3 class="text-2xl md:text-3xl font-bold text-white group-hover:text-accent transition-colors">WELL HUNTING</h3>
+        </div>
+      </div>
+      <!-- Work 3 -->
+      <div class="group relative aspect-[4/5] bg-gray-900 overflow-hidden cursor-pointer transition-all duration-500 rounded-lg focus-within:ring-2 focus-within:ring-accent hover:shadow-[0_0_30px_rgba(255,204,0,0.5)] hover:-translate-y-2 border border-gray-800 hover:border-accent">
+        <img src="./assets/work3-wing.jpg" alt="Business Contest WING" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+          <span class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold">Contest</span>
+          <h3 class="text-2xl md:text-3xl font-bold text-white group-hover:text-accent transition-colors">Business Contest WING</h3>
+        </div>
+      </div>
+      <!-- Work 4 -->
+      <div class="group relative aspect-[4/5] bg-gray-900 overflow-hidden cursor-pointer transition-all duration-500 rounded-lg focus-within:ring-2 focus-within:ring-accent hover:shadow-[0_0_30px_rgba(255,204,0,0.5)] hover:-translate-y-2 border border-gray-800 hover:border-accent">
+        <img src="./assets/work4-glee-club.jpg" alt="同志社グリークラブ 団員大募集" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+          <span class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold">Performance</span>
+          <h3 class="text-2xl md:text-3xl font-bold text-white group-hover:text-accent transition-colors">同志社グリークラブ</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE SECTION -->
+  <section class="w-full max-w-4xl mx-auto px-6 py-24 border-t border-gray-900 mt-10">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-6xl font-bold text-white mb-4">THE JOURNEY</h2>
+      <p class="text-gray-400">Extracurricular milestones and achievements</p>
+    </div>
+
+    <div class="relative border-l border-gray-800 ml-3 md:ml-6 space-y-12 pb-8">
+      
+      <!-- Experience 1 -->
+      <div class="relative pl-8 md:pl-12 group hover:-translate-y-1 transition-transform duration-300">
+        <div class="absolute -left-3.5 md:-left-4 top-1 w-7 h-7 md:w-8 md:h-8 rounded-full bg-background border-2 border-gray-700 group-hover:border-accent group-hover:shadow-glow flex items-center justify-center transition-all duration-300">
+          <div class="text-gray-500 group-hover:text-accent transition-colors">
+            <i data-lucide="scale" class="w-4 h-4 md:w-5 md:h-5"></i>
+          </div>
+        </div>
+        <div class="flex flex-col mb-2">
+          <span class="text-accent font-mono text-sm tracking-wider mb-2">2023 - Present</span>
+          <h3 class="text-2xl font-bold text-white">国際法模擬裁判</h3>
+          <span class="text-gray-400 font-medium mb-4">JAPANCUP / JESSUP</span>
+        </div>
+        <p class="text-gray-300 leading-relaxed font-light">
+          緻密な論理的思考力と英語力を駆使し、初心者100%から多数の受賞歴を持つ同志社大学チームで活動。JAPAN CUP（原告書面部門2位受賞）のキックオフセミナー広報や運営にも携わる。
+        </p>
+      </div>
+
+      <!-- Experience 2 -->
+      <div class="relative pl-8 md:pl-12 group hover:-translate-y-1 transition-transform duration-300">
+        <div class="absolute -left-3.5 md:-left-4 top-1 w-7 h-7 md:w-8 md:h-8 rounded-full bg-background border-2 border-gray-700 group-hover:border-accent group-hover:shadow-glow flex items-center justify-center transition-all duration-300">
+          <div class="text-gray-500 group-hover:text-accent transition-colors">
+            <i data-lucide="music" class="w-4 h-4 md:w-5 md:h-5"></i>
+          </div>
+        </div>
+        <div class="flex flex-col mb-2">
+          <span class="text-accent font-mono text-sm tracking-wider mb-2">Music Activities</span>
+          <h3 class="text-2xl font-bold text-white">合唱・吹奏楽</h3>
+          <span class="text-gray-400 font-medium mb-4">同志社グリークラブ ほか</span>
+        </div>
+        <p class="text-gray-300 leading-relaxed font-light">
+          合唱では年6回ほどの公演とコンクールへ出場し、創立122年目の男声合唱団にて全国大会2年連続出場を果たす。さらに吹奏楽でも年2回のコンサートに出演し、表現力とチームワークを追求。
+        </p>
+      </div>
+
+      <!-- Experience 3 -->
+      <div class="relative pl-8 md:pl-12 group hover:-translate-y-1 transition-transform duration-300">
+        <div class="absolute -left-3.5 md:-left-4 top-1 w-7 h-7 md:w-8 md:h-8 rounded-full bg-background border-2 border-gray-700 group-hover:border-accent group-hover:shadow-glow flex items-center justify-center transition-all duration-300">
+          <div class="text-gray-500 group-hover:text-accent transition-colors">
+            <i data-lucide="briefcase" class="w-4 h-4 md:w-5 md:h-5"></i>
+          </div>
+        </div>
+        <div class="flex flex-col mb-2">
+          <span class="text-accent font-mono text-sm tracking-wider mb-2">Startup & Tech</span>
+          <h3 class="text-2xl font-bold text-white">スタートアップ支援 & AI</h3>
+          <span class="text-gray-400 font-medium mb-4">WING 渉外局員 / ハッカソン / AI活用</span>
+        </div>
+        <p class="text-gray-300 leading-relaxed font-light">
+          ビジネスコンテストWINGの渉外局員（法人営業）として関西の起業・キャリア形成を支援。スタートアップ関西のスタッフ、共創エキスポのアイデアソンやオリジン京都のハッカソンにも参画。ポスター・動画制作等のデザイン実務や、AIによるDX推進に取り組む。
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Initialize Icons -->
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
