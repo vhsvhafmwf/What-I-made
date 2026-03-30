@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth" style="scroll-padding-top: 5rem;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="後藤優太(Yuta Goto)の思想・哲学。自分自身の内面を見つめ、再定義した「本質的な価値観」と「内的動機」。">
+    <title>PHILOSOPHY | 後藤優太 (Yuta Goto)</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Shippori+Mincho:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', '"テロップ明朝"', '"TELOP MINCHO"', '"Shippori Mincho"', 'serif'],
+                        serif: ['"Shippori Mincho"', 'serif'],
+                    },
+                    colors: {
+                        background: "#0a0a0a",
+                        accent: {
+                            DEFAULT: "#ffcc00",
+                            glow: "rgba(255, 204, 0, 0.4)",
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #f0f0f0;
+        }
+        ::selection {
+            background-color: #ffcc00;
+            color: #000;
+        }
+
+        /* Header Hover UI from index.html */
+        .btn2 {
+            position: relative;
+            display: inline-block;
+            padding: 8px 6px;
+            border: 2px solid #fefefe;
+            text-transform: uppercase;
+            color: #fefefe;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            transition: 0.3s;
+            background-color: transparent;
+            cursor: pointer;
+        }
+        .btn2::before {
+            content: "";
+            position: absolute; top: -2px; left: -2px;
+            width: calc(100% + 4px); height: calc(100% + 2px);
+            background-color: #0a0a0a;
+            transition: 0.3s ease-out; transform: scaleY(1);
+        }
+        .btn2::after {
+            content: "";
+            position: absolute; top: -2px; left: -2px;
+            width: calc(100% + 4px); height: calc(100% - 32px);
+            background-color: #0a0a0a;
+            transition: 0.3s ease-out; transform: scaleY(1);
+        }
+        .btn2:hover::before { transform: translateY(-25px); height: 0; }
+        .btn2:hover::after { transform: scaleX(0); transition-delay: 0.15s; }
+        .btn2:hover { border: 2px solid #fefefe; }
+        .btn2 .spn2 {
+            position: relative; z-index: 3;
+            text-decoration: none; border: none;
+            background-color: transparent; transition: color 0.3s;
+        }
+        .btn2:hover .spn2 { color: #ffcc00; }
+        .btn2.active .spn2 { color: #ffcc00; }
+
+        /* Glow Text Card from index.html */
+        .glow-text-card {
+            width: 100%; background: #171717;
+            position: relative; border-radius: 10px;
+            padding: 2px; transition: transform 0.3s;
+            overflow: hidden; display: flex;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.5);
+        }
+        .glow-text-card .content {
+            border-radius: 8px; background: rgba(15, 15, 15, 0.95);
+            width: 100%; z-index: 1; position: relative; padding: 1.5rem;
+        }
+        .glow-text-card .content::before {
+            opacity: 0; transition: opacity 300ms;
+            content: " "; display: block; background: white;
+            width: 10%; height: 50%; position: absolute;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            filter: blur(40px); pointer-events: none; z-index: 2;
+        }
+        .glow-text-card:hover .content::before { opacity: 1; }
+        .glow-text-card::before {
+            content: " "; position: absolute; top: 50%; left: 50%;
+            width: 12rem; height: 250%;
+            background: linear-gradient(#ff2288, #387ef0);
+            transform: translate(-50%, -50%) rotate(0deg);
+            transform-origin: center; opacity: 0;
+            transition: opacity 300ms;
+            animation: rotation_9018 6000ms infinite linear;
+            animation-play-state: paused; z-index: 0;
+        }
+        .glow-text-card:hover::before { opacity: 1; animation-play-state: running; }
+        .glow-text-card::after {
+            content: " "; position: absolute; inset: 0;
+            background: rgba(23, 23, 23, 0.2);
+            backdrop-filter: blur(20px); z-index: 0;
+        }
+        @keyframes rotation_9018 {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Scroll Reveal */
+        .scroll-reveal {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .scroll-reveal.revealed { opacity: 1; transform: translateY(0); }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed; top: 0; left: 0; height: 3px;
+            background: linear-gradient(90deg, #ffcc00, #ffaa00);
+            width: 0%; z-index: 9999; transition: none;
+            box-shadow: 0 0 8px rgba(255, 204, 0, 0.6);
+        }
+
+        /* Philosophy Specific Styles */
+        .page-entrance {
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .page-entrance.entered { opacity: 1; transform: translateY(0); }
+
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+
+        .philosophy-quote {
+            border-left: 3px solid #ffcc00;
+            padding: 2rem;
+            margin: 3rem 0;
+            background: rgba(255, 204, 0, 0.05);
+            border-radius: 0 12px 12px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .philosophy-quote::after {
+            content: "\201C";
+            position: absolute;
+            top: -20px; right: 20px;
+            font-size: 12rem;
+            color: rgba(255, 204, 0, 0.05);
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: rgba(255, 204, 0, 0.4);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-5px);
+        }
+
+        /* Table Styling */
+        .system-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .system-table th, .system-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .system-table th {
+            background: rgba(255, 204, 0, 0.1);
+            color: #ffcc00;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+        }
+        .system-table tr:last-child td { border-bottom: none; }
+
+        .back-to-home {
+            position: fixed; bottom: 30px; left: 30px;
+            z-index: 100;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen font-sans selection:bg-accent selection:text-black overflow-x-hidden pb-24 text-white">
+
+    <!-- Scroll Progress Bar -->
+    <div id="scrollProgress" class="scroll-progress"></div>
+
+    <!-- Background -->
+    <div class="fixed inset-0 w-screen h-screen -z-50 m-0 bg-[#0a0a0a]">
+        <div class="absolute inset-0 w-full h-full overflow-hidden"
+            style="background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #0a0a0a 100%);">
+        </div>
+        <!-- Subtle noise overlay -->
+        <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');"></div>
+    </div>
+
+    <!-- HEADER NAVIGATION -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-gray-900 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
+            <a href="index.html" class="text-lg md:text-2xl font-black text-white tracking-widest hover:text-accent transition-colors">
+                YUTA GOTO
+            </a>
+            <nav>
+                <ul class="flex items-center gap-2 md:gap-4 font-bold tracking-wider">
+                    <li><a href="index.html#about" class="btn2"><span class="spn2">ABOUT</span></a></li>
+                    <li><a href="index.html#works" class="btn2"><span class="spn2">WORKS</span></a></li>
+                    <li><a href="philosophy.html" class="btn2 active"><span class="spn2">PHILOSOPHY</span></a></li>
+                    <li><a href="index.html#journey" class="btn2"><span class="spn2">JOURNEY</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative w-full min-h-[90vh] flex items-center justify-center pt-24 px-6 overflow-hidden">
+        <div class="max-w-7xl w-full grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+            <div class="md:col-span-8 space-y-8 page-entrance" id="heroText">
+                <div class="flex items-center gap-4">
+                    <span class="w-12 h-px bg-accent"></span>
+                    <span class="text-accent font-mono tracking-[0.3em] uppercase text-sm font-bold">My Personal Axioms</span>
+                </div>
+                <h1 class="text-5xl md:text-8xl font-black leading-tight">
+                    MY<br><span class="text-accent underline decoration-1 underline-offset-8">PHILOSOPHY</span>
+                </h1>
+                <p class="text-xl md:text-2xl font-serif text-gray-400 leading-relaxed max-w-2xl">
+                    自分自身の内面を見つめ、個の価値を再定義する。<br>知性と感覚、その奥底に流れる「私自身の本質」の探究。
+                </p>
+            </div>
+            <div class="hidden md:flex md:col-span-4 justify-end page-entrance" style="transition-delay: 0.3s">
+                <div class="vertical-text text-gray-700 font-serif text-4xl tracking-[1em] opacity-30 select-none">
+                    泰然自若。
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
+            <i data-lucide="chevron-down" class="w-6 h-6"></i>
+        </div>
+    </section>
+
+    <!-- INTRODUCTION -->
+    <section class="max-w-4xl mx-auto px-6 py-24 border-t border-gray-900">
+        <div class="scroll-reveal">
+            <h2 class="text-accent font-bold mb-6 flex items-center gap-2">
+                <i data-lucide="book-open" class="w-5 h-5"></i> INTRODUCTION
+            </h2>
+            <div class="space-y-6 text-gray-300 leading-relaxed font-light text-lg">
+                <p>
+                    私は、自身の内面を整理し、自分という存在を深く理解するために、日々内省を続けています。
+                </p>
+                <p>
+                    社会的な評価やビジネスの枠組みに自分を当てはめるのではなく、私の中に流れる「ブレない軸」を明確にすること。それが、私の生きる指針となります。
+                </p>
+                <p class="text-white font-medium">
+                    論理的な知性と、繊細な感覚。その複雑に絡み合う私自身の内面世界の構造を、ここに記します。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CORE VALUES -->
+    <section class="max-w-6xl mx-auto px-6 py-24 space-y-32">
+        <div class="text-center mb-16 scroll-reveal">
+            <h2 class="text-4xl md:text-6xl font-bold mb-4">THE CORE</h2>
+            <p class="text-accent tracking-widest font-mono">私の思考の核</p>
+        </div>
+
+        <!-- Core 1 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center scroll-reveal">
+            <div class="space-y-6">
+                <span class="text-6xl font-black text-white/5 font-mono">01</span>
+                <h3 class="text-3xl font-bold text-white leading-tight">
+                    外部装飾への非依存と、<br>自己完結した価値の確立。
+                </h3>
+                <div class="philosophy-quote mb-0">
+                    <p class="text-accent text-xl font-bold">「自分が宝石だから、宝石をつけない」</p>
+                </div>
+            </div>
+            <div class="glow-text-card">
+                <div class="content space-y-4">
+                    <p class="text-gray-400 leading-relaxed font-light">
+                        ジュエリーを身につけないという私の信条は、自己の価値を外部の象徴に依存させないという強い意志の表れです。装飾品が他者からの承認を得るための「盾」として機能する場合がある中で、私は自分自身の内面こそが最大の価値であると信じています。
+                    </p>
+                    <p class="text-gray-400 leading-relaxed font-light">
+                        他者の評価ではなく、自身の知性や行動そのものを「宝石」として位置づけること。この内発的な絶対評価の軸があるからこそ、いかなる競争環境においても、私は自分を見失うことなく実力を発揮することができます。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Core 2 -->
+        <div class="scroll-reveal">
+            <div class="flex flex-col md:flex-row gap-12 mb-12">
+                <div class="w-full md:w-1/2 space-y-6">
+                    <span class="text-6xl font-black text-white/5 font-mono">02</span>
+                    <h3 class="text-3xl font-bold text-white leading-tight">
+                        構造的調和と俯瞰的な<br>システムへの愛。
+                    </h3>
+                    <p class="text-gray-400 leading-relaxed font-light">
+                        都市の構造、工場夜景、巨大インフラ。私は、複雑な要素が論理的かつ美しく配置された「システム」に、深い愛着と共鳴を感じます。
+                    </p>
+                    <p class="text-gray-400 leading-relaxed font-light italic">
+                        私にとって「美しさ」とは、単なる視覚的な快楽ではなく、すべての要素が矛盾なく機能し、最適化された「システムの完全性」を意味します。
+                    </p>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <table class="system-table">
+                        <thead>
+                            <tr>
+                                <th>Scale</th>
+                                <th>Interest Objects</th>
+                                <th>Cognitive Process</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm font-light">
+                            <tr>
+                                <td class="font-bold text-accent">MACRO</td>
+                                <td>都市俯瞰, 歴史, 地政学</td>
+                                <td>世界の複雑性を俯瞰的に把握する</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-accent">MESO</td>
+                                <td>最効率の作業環境, 建築</td>
+                                <td>空間を論理的システムとして最適化する</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-accent">MICRO</td>
+                                <td>機械時計のギミック, 盆栽</td>
+                                <td>閉鎖空間内に成立する完璧な法則性を愛でる</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Core 3 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center scroll-reveal">
+            <div class="order-2 md:order-1 glass-card">
+                <h4 class="text-accent font-bold mb-4 flex items-center gap-2 italic">
+                    <i data-lucide="zap" class="w-4 h-4"></i> Pragmatism
+                </h4>
+                <p class="text-gray-300 leading-relaxed font-light">
+                    私は、完璧主義の呪縛をあえて「7割」という閾値を設定することで回避しています。
+                </p>
+                <p class="text-gray-300 mt-4 leading-relaxed font-light border-l-2 border-accent pl-4">
+                    投下するエネルギーと得られる成果を見極め、立ち止まることなく次々と新しい領域へと好奇心を拡張していく。このプラグマティズムによる機動力こそが、私の行動の源です。
+                </p>
+            </div>
+            <div class="order-1 md:order-2 space-y-6">
+                <span class="text-6xl font-black text-white/5 font-mono">03</span>
+                <h3 class="text-3xl font-bold text-white leading-tight">
+                    「7割の完成度」がもたらす<br>圧倒的な機動力。
+                </h3>
+                <p class="text-gray-400 font-serif italic text-lg">
+                    スピード感を最大化するための、意図的な集中と選択。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- DYNAMICS -->
+    <section class="max-w-6xl mx-auto px-6 py-24 bg-[#111] rounded-[3rem] border border-white/5">
+        <div class="max-w-4xl mx-auto space-y-24">
+            <div class="text-center scroll-reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 tracking-tighter">ENERGY DYNAMICS</h2>
+                <p class="text-gray-500 font-mono text-sm tracking-widest">私のエネルギーの循環</p>
+            </div>
+
+            <!-- Energy Up -->
+            <div class="space-y-12 scroll-reveal">
+                <h3 class="text-2xl font-bold text-white flex items-center gap-4">
+                    <span class="w-10 h-10 rounded-full bg-accent text-black flex items-center justify-center text-sm"><i data-lucide="trending-up" class="w-5 h-5"></i></span>
+                    ENERGY ASCENT: フローへの没入
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glass-card hover:bg-white/5">
+                        <i data-lucide="shield-off" class="text-accent mb-4"></i>
+                        <h4 class="font-bold mb-2">予測不能の遮断</h4>
+                        <p class="text-sm text-gray-400 font-light leading-relaxed">深夜の静寂やノイズキャンセリング。外部の干渉を遮断し、自分だけの「小さな宇宙」を構築した時、私のエネルギーは最も純化されます。</p>
+                    </div>
+                    <div class="glass-card hover:bg-white/5">
+                        <i data-lucide="search" class="text-accent mb-4"></i>
+                        <h4 class="font-bold mb-2">知的構造の探求</h4>
+                        <p class="text-sm text-gray-400 font-light leading-relaxed">地政学や歴史、美術の文脈。表面的な事象の背後にある「目に見えないルール」を解読し、知的モデルに組み込むことに大きな喜びを感じます。</p>
+                    </div>
+                    <div class="glass-card hover:bg-white/5">
+                        <i data-lucide="maximize-2" class="text-accent mb-4"></i>
+                        <h4 class="font-bold mb-2">限界の拡張</h4>
+                        <p class="text-sm text-gray-400 font-light leading-relaxed">未知の知識への没頭や身体的な限界突破。自らの意志で能力の境界線を拡張していくプロセスこそが、私の自己効力感の源です。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Energy Down -->
+            <div class="space-y-12 scroll-reveal">
+                <h3 class="text-2xl font-bold text-white flex items-center gap-4">
+                    <span class="w-10 h-10 rounded-full bg-red-900/50 text-red-500 flex items-center justify-center text-sm"><i data-lucide="trending-down" class="w-5 h-5"></i></span>
+                    CHAOS & RIGIDITY: 認知的負荷
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="p-8 border border-white/5 rounded-2xl bg-black/40">
+                        <h4 class="text-white font-bold mb-4 flex items-center gap-2">論理の崩壊に対する脆弱性</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed font-light">
+                            一度構築した自身の論理（プランA）を信頼しすぎるがゆえに、予測不可能な変数によってそのシステムが揺らいだ際、私は強いストレスを感じます。論理が通用しない現実に直面した時の認知的葛藤は、私が向き合うべき課題です。
+                        </p>
+                    </div>
+                    <div class="p-8 border border-white/5 rounded-2xl bg-black/40">
+                        <h4 class="text-white font-bold mb-4 flex items-center gap-2">過剰な自立の代償</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed font-light">
+                            すべてを自分一人で解決しようとする姿勢は、能力を発揮させる鍵であると同時に、膨大なリソースを消費する「過剰自立」の状態を招くことがあります。他者に頼ることを「弱さ」ではなく「システムの拡張」として捉えることが、今後の私の挑戦です。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARADOXES -->
+    <section class="max-w-4xl mx-auto px-6 py-48 space-y-12 text-center scroll-reveal">
+        <h2 class="text-accent font-mono tracking-widest text-sm uppercase">Paradox & Harmony</h2>
+        <h3 class="text-4xl md:text-6xl font-bold leading-tight">私の中に共存する、<br>矛盾と調和。</h3>
+        
+        <!-- Tab Layout or Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-left mt-16">
+            <div class="space-y-6">
+                <h4 class="text-xl font-bold text-white flex items-center gap-3">
+                     孤高の性質 と 音楽の共鳴
+                </h4>
+                <p class="text-gray-400 font-light leading-relaxed">
+                    人に頼ることを避ける一方で、私は吹奏楽や合唱が生み出す一体感を深く愛しています。音楽は「楽譜」という明確なルールに基づくからこそ、安心して自己の境界線を溶かし、他者と深く繋がることができるのです。
+                </p>
+            </div>
+            <div class="space-y-6">
+                <h4 class="text-xl font-bold text-white flex items-center gap-3">
+                     冷徹な論理 と 詩的な感覚
+                </h4>
+                <p class="text-gray-400 font-light leading-relaxed">
+                    効率的なプラグマティズムの一方で、「雨上がりの匂い」や「冬の空気」といった微細な感覚を私は大切にしています。論理だけでは疲弊してしまう精神を、こうした詩的な受容性がアンカー（錨）として繋ぎ止めています。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEEP DIVE (QUESTIONS) -->
+    <section class="max-w-6xl mx-auto px-6 py-24 mb-24 border-y border-white/5">
+        <div class="text-center mb-16 scroll-reveal">
+            <h2 class="text-3xl font-bold mb-4">DEEP DIVE</h2>
+            <p class="text-gray-500 italic">私たちがより良く生きるための、自分への問いかけ。</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Q1 -->
+            <div class="glow-text-card group">
+                <div class="content !p-8">
+                    <span class="text-accent font-mono text-xs mb-2 block">Reflection 01</span>
+                    <h4 class="text-lg font-bold text-white mb-4">私にとって「人に頼ること」は、何を意味（あるいは喪失）する行為なのか。</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed font-light group-hover:text-gray-300 transition-colors">
+                         それを弱さや効率の低下と捉えるのではなく、自分というシステムをより堅牢にし、可能性を押し広げるための「共同作業」として再定義したいと考えています。
+                    </p>
+                </div>
+            </div>
+            <!-- Q2 -->
+            <div class="glow-text-card group">
+                <div class="content !p-8">
+                    <span class="text-accent font-mono text-xs mb-2 block">Reflection 02</span>
+                    <h4 class="text-lg font-bold text-white mb-4">「プランB」を用意することは、私の直感に対する裏切りになるのか。</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed font-light group-hover:text-gray-300 transition-colors">
+                         想定外を楽しむための余裕を持つこと。それを「高度で知的な遊び」として捉え、自らの論理的システムをよりしなやかなものにしていきます。
+                    </p>
+                </div>
+            </div>
+            <!-- Q3 -->
+            <div class="glow-text-card group text-center flex items-center justify-center md:col-span-2">
+                <div class="content !p-12 max-w-2xl">
+                    <span class="text-accent font-mono text-xs mb-2 block">Reflection 03</span>
+                    <h4 class="text-2xl font-bold text-white mb-4 italic">私が目指す「自由」とは、何からの解放なのか。</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed font-light">
+                        場所や時間の制約を超え、他者の期待という枠組みからも解放されること。その先にある「人に恵まれた生活」という理想と、自立することの調和を探し続けています。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REFERENCES -->
+    <section class="max-w-4xl mx-auto px-6 py-24 text-center opacity-30 hover:opacity-100 transition-opacity duration-700">
+        <h5 class="text-xs font-mono tracking-widest text-gray-500 mb-8 uppercase">Theoretical Foundations</h5>
+        <ul class="text-[10px] space-y-2 text-gray-400 font-mono uppercase leading-loose">
+            <li>The Role of Jewelry in Self-Expression and Identity - Inspereza</li>
+            <li>Jewelry for Self-Expression - John S Brana</li>
+            <li>Neuroscience, Wellbeing, and Urban Design - ResearchGate</li>
+            <li>Hyper-Independence Trauma in Young Adults - Newport Institute</li>
+            <li>他者に頼りたくても頼れない要因 - 福岡県立大学</li>
+            <li>The Curse of Hyper-Independence - Psychology Today</li>
+        </ul>
+    </section>
+
+    <!-- BACK TO HOME -->
+    <div class="back-to-home">
+        <a href="index.html" class="flex items-center gap-3 text-accent font-bold tracking-widest text-xs hover:gap-5 transition-all">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> BACK TO HOME
+        </a>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 py-12 text-center text-gray-600 text-xs tracking-widest">
+        <p>&copy; 2026 Yuta Goto. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Page entrance animation
+        setTimeout(() => {
+            document.getElementById('heroText').classList.add('entered');
+            document.querySelectorAll('.page-entrance').forEach(el => el.classList.add('entered'));
+        }, 300);
+
+        // Scroll Reveal
+        const revealObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('revealed');
+                    revealObs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            if (el.getBoundingClientRect().top > window.innerHeight) {
+                revealObs.observe(el);
+            } else {
+                el.classList.add('revealed');
+            }
+        });
+
+        // Scroll Progress
+        const scrollProgressBar = document.getElementById('scrollProgress');
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement.scrollHeight - window.innerHeight;
+            scrollProgressBar.style.width = h > 0 ? (window.scrollY / h * 100) + '%' : '0%';
+        }, { passive: true });
+    });
+    </script>
+
+</body>
+</html>

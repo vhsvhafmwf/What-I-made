@@ -503,6 +503,40 @@
         .scroll-reveal.stagger-3 { transition-delay: 0.3s; }
         .scroll-reveal.stagger-4 { transition-delay: 0.4s; }
         .scroll-reveal.stagger-5 { transition-delay: 0.5s; }
+
+        /* Lightbox Gallery Navigation */
+        .lightbox-nav {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 48px; height: 48px; border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.25);
+            background: rgba(255,255,255,0.05); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.2s; z-index: 10;
+            backdrop-filter: blur(4px);
+        }
+        .lightbox-nav:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.6); }
+        .lightbox-nav.prev { left: 20px; }
+        .lightbox-nav.next { right: 20px; }
+        .lightbox-counter {
+            position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+            color: rgba(255,255,255,0.5); font-size: 13px; font-family: 'Inter', monospace;
+            letter-spacing: 3px;
+        }
+
+        /* About Entrance Animation */
+        .about-entrance {
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .about-entrance.entered {
+            opacity: 1; transform: translateY(0);
+        }
+
+        /* Parallax Photo */
+        .parallax-photo {
+            will-change: transform;
+            transition: transform 0.1s linear;
+        }
     </style>
 </head>
 
@@ -543,6 +577,7 @@
                 <ul class="flex items-center gap-2 md:gap-4 font-bold tracking-wider">
                     <li><a href="#about" class="btn2"><span class="spn2">ABOUT</span></a></li>
                     <li><a href="#works" class="btn2"><span class="spn2">WORKS</span></a></li>
+                    <li><a href="philosophy.html" class="btn2"><span class="spn2">PHILOSOPHY</span></a></li>
                     <li><a href="#journey" class="btn2"><span class="spn2">JOURNEY</span></a></li>
                     <li><a href="#awards" class="btn2"><span class="spn2">AWARDS</span></a></li>
                 </ul>
@@ -1010,7 +1045,14 @@
     <!-- Lightbox Overlay -->
     <div id="lightbox" class="lightbox-overlay">
         <button class="lightbox-close" aria-label="Close">&times;</button>
+        <button class="lightbox-nav prev" id="lbPrev" aria-label="Previous">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
         <img id="lightboxImg" src="" alt="">
+        <button class="lightbox-nav next" id="lbNext" aria-label="Next">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
+        </button>
+        <div class="lightbox-counter" id="lbCounter"></div>
     </div>
 
     <!-- Back to Top Button -->
@@ -1061,25 +1103,47 @@
         const navLinks = document.querySelectorAll('header .btn2');
         const sections = document.querySelectorAll('section[id]');
 
-        // === 3. Lightbox ===
+        // === 3. Lightbox Gallery ===
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightboxImg');
+        const lbCounter = document.getElementById('lbCounter');
+        const workImages = [...document.querySelectorAll('#works .rounded-xl img')];
+        let lbIndex = 0;
 
-        document.querySelectorAll('#works .rounded-xl img').forEach(img => {
-            img.addEventListener('click', () => {
-                lightboxImg.src = img.src;
-                lightboxImg.alt = img.alt;
-                lightbox.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
-        });
+        function showLightbox(idx) {
+            lbIndex = idx;
+            lightboxImg.src = workImages[idx].src;
+            lightboxImg.alt = workImages[idx].alt;
+            lbCounter.textContent = (idx + 1) + ' / ' + workImages.length;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        workImages.forEach((img, i) => img.addEventListener('click', () => showLightbox(i)));
 
         const closeLightbox = () => {
             lightbox.classList.remove('active');
             document.body.style.overflow = '';
         };
-        lightbox.addEventListener('click', (e) => { if (e.target !== lightboxImg) closeLightbox(); });
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+        document.getElementById('lbPrev').addEventListener('click', (e) => {
+            e.stopPropagation();
+            showLightbox((lbIndex - 1 + workImages.length) % workImages.length);
+        });
+        document.getElementById('lbNext').addEventListener('click', (e) => {
+            e.stopPropagation();
+            showLightbox((lbIndex + 1) % workImages.length);
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target.closest('.lightbox-close')) closeLightbox();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') showLightbox((lbIndex - 1 + workImages.length) % workImages.length);
+            if (e.key === 'ArrowRight') showLightbox((lbIndex + 1) % workImages.length);
+        });
 
         // === 4. Back to Top ===
         const backToTopBtn = document.getElementById('backToTop');
@@ -1144,6 +1208,19 @@
             if (el.classList.contains('scroll-reveal')) el.classList.add('stagger-' + Math.min(i + 1, 5));
         });
 
+        // === 9. About Entrance Animation (after splash) ===
+        const aboutEls = document.querySelectorAll('#about > div > div');
+        aboutEls.forEach((el, i) => el.classList.add('about-entrance'));
+        setTimeout(() => {
+            aboutEls.forEach((el, i) => {
+                setTimeout(() => el.classList.add('entered'), i * 200);
+            });
+        }, 3200); // after splash finishes
+
+        // === 10. Parallax on Profile Photo ===
+        const photoContainer = document.querySelector('#about .aspect-\\[4\\/5\\]');
+        if (photoContainer) photoContainer.classList.add('parallax-photo');
+
         // === Combined Scroll Handler ===
         window.addEventListener('scroll', () => {
             let cur = '';
@@ -1157,6 +1234,12 @@
             // Progress bar
             const h = document.documentElement.scrollHeight - window.innerHeight;
             scrollProgressBar.style.width = h > 0 ? (window.scrollY / h * 100) + '%' : '0%';
+
+            // Parallax
+            if (photoContainer) {
+                const speed = 0.15;
+                photoContainer.style.transform = `translateY(${window.scrollY * speed}px)`;
+            }
         }, { passive: true });
     });
     </script>
