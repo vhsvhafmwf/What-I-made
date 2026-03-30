@@ -251,6 +251,150 @@
         .sns-iso-card .iso-pro:hover span:nth-child(1) { opacity: 0.2; transform: translate(3px, -3px); }
         .sns-iso-card .iso-pro:hover span:nth-child(2) { opacity: 0.4; transform: translate(6px, -6px); }
         .sns-iso-card .iso-pro:hover span:nth-child(3) { opacity: 0.6; transform: translate(9px, -9px); }
+
+        /* Animated Glowing Text Card - Adapted from Uiverse.io by ElSombrero2 */
+        .glow-text-card {
+            width: 100%;
+            background: #171717;
+            position: relative;
+            border-radius: 10px;
+            padding: 2px; /* Border thickness */
+            transition: transform 0.3s;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .glow-text-card .content {
+            border-radius: 8px;
+            background: rgba(15, 15, 15, 0.95);
+            width: 100%;
+            z-index: 1;
+            position: relative;
+            padding: 1.5rem; /* Default inner spacing */
+        }
+
+        .glow-text-card .content::before {
+            opacity: 0;
+            transition: opacity 300ms;
+            content: " ";
+            display: block;
+            background: white;
+            width: 10%;
+            height: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter: blur(40px);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .glow-text-card:hover .content::before { opacity: 1; }
+
+        .glow-text-card::before {    
+            content: " ";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 12rem;
+            height: 250%; /* Reaches corners during rotation */
+            background: linear-gradient(#ff2288, #387ef0);
+            transform: translate(-50%, -50%) rotate(0deg);
+            transform-origin: center;
+            opacity: 0;
+            transition: opacity 300ms;
+            animation: rotation_9018 6000ms infinite linear;
+            animation-play-state: paused;
+            z-index: 0;
+        }
+
+        .glow-text-card:hover::before {
+            opacity: 1;
+            animation-play-state: running;
+        }
+
+        .glow-text-card::after {
+            content: " ";
+            position: absolute;
+            inset: 0;
+            background: rgba(23, 23, 23, 0.2);
+            backdrop-filter: blur(20px);
+            z-index: 0;
+        }
+
+        @keyframes rotation_9018 {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Header Hover UI - From Uiverse.io by TISEPSE */
+        .btn2 {
+            position: relative;
+            display: inline-block;
+            padding: 8px 6px;
+            border: 2px solid #fefefe;
+            text-transform: uppercase;
+            color: #fefefe;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            transition: 0.3s;
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        .btn2::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            width: calc(100% + 4px);
+            height: calc(100% + 2px);
+            background-color: #0a0a0a;
+            transition: 0.3s ease-out;
+            transform: scaleY(1);
+        }
+
+        .btn2::after {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            width: calc(100% + 4px);
+            height: calc(100% - 32px);
+            background-color: #0a0a0a;
+            transition: 0.3s ease-out;
+            transform: scaleY(1);
+        }
+
+        .btn2:hover::before {
+            transform: translateY(-25px);
+            height: 0;
+        }
+
+        .btn2:hover::after {
+            transform: scaleX(0);
+            transition-delay: 0.15s;
+        }
+
+        .btn2:hover {
+            border: 2px solid #fefefe;
+        }
+
+        .btn2 .spn2 {
+            position: relative;
+            z-index: 3;
+            text-decoration: none;
+            border: none;
+            background-color: transparent;
+            transition: color 0.3s;
+        }
+        
+        .btn2:hover .spn2 {
+            color: #ffcc00;
+        }
     </style>
 </head>
 
@@ -285,11 +429,11 @@
                 YUTA GOTO
             </a>
             <nav>
-                <ul class="flex items-center gap-4 md:gap-8 text-xs md:text-sm font-bold tracking-wider">
-                    <li><a href="#about" class="text-gray-300 hover:text-accent transition-colors">ABOUT</a></li>
-                    <li><a href="#works" class="text-gray-300 hover:text-accent transition-colors">WORKS</a></li>
-                    <li><a href="#journey" class="text-gray-300 hover:text-accent transition-colors">JOURNEY</a></li>
-                    <li><a href="#awards" class="text-gray-300 hover:text-accent transition-colors">AWARDS</a></li>
+                <ul class="flex items-center gap-2 md:gap-4 font-bold tracking-wider">
+                    <li><a href="#about" class="btn2"><span class="spn2">ABOUT</span></a></li>
+                    <li><a href="#works" class="btn2"><span class="spn2">WORKS</span></a></li>
+                    <li><a href="#journey" class="btn2"><span class="spn2">JOURNEY</span></a></li>
+                    <li><a href="#awards" class="btn2"><span class="spn2">AWARDS</span></a></li>
                 </ul>
             </nav>
         </div>
@@ -374,20 +518,21 @@
                             class="text-gray-500 text-sm font-normal tracking-widest pl-2">YUTA GOTO</span></h1>
                 </div>
 
-                <div class="text-gray-300 space-y-4 font-light leading-relaxed">
-                    <p>私は現在、国際法模擬裁判で緻密な論理的思考力を強化する一方で、全国レベルでの合唱や吹奏楽、AIを活用した作業自動化やビジコンの運営など、一見するとバラバラな領域で活動しています。</p>
-                    <p>このように多岐にわたる分野に足を踏み入れているのには、明確な理由があります。それは、複数の領域を横断することで、日常に潜む「普遍的な論理」や、異なる要素が結びつく「相乗効果」を発見できるからです。
-                    </p>
-                    <p>そうした物事は本や伝聞で得られるものではなく、自ら体験することでしか得られません。だからこそ私は常に自分の感覚を更新し続けるため挑戦を止めません。</p>
+                <div class="glow-text-card mt-8">
+                    <div class="content space-y-4 font-light leading-relaxed text-gray-300">
+                        <p>私は現在、国際法模擬裁判で緻密な論理的思考力を強化する一方で、全国レベルでの合唱や吹奏楽、AIを活用した作業自動化やビジコンの運営など、一見するとバラバラな領域で活動しています。</p>
+                        <p>このように多岐にわたる分野に足を踏み入れているのには、明確な理由があります。それは、複数の領域を横断することで、日常に潜む「普遍的な論理」や、異なる要素が結びつく「相乗効果」を発見できるからです。</p>
+                        <p>そうした物事は本や伝聞で得られるものではなく、自ら体験することでしか得られません。だからこそ私は常に自分の感覚を更新し続けるため挑戦を止めません。</p>
+                    </div>
                 </div>
 
-                <div
-                    class="bg-gray-900/60 p-6 rounded-lg border border-gray-800 hover:border-accent/40 transition-colors">
-                    <h4 class="text-white font-bold mb-3 flex items-center gap-2"><i data-lucide="rocket"
-                            class="w-5 h-5 text-accent"></i> Future Vision</h4>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        将来はこうした経験を生かして起業することを考えています。この思いに共感してくださる方、ぜひ1on1でお話ししましょう！🔥<br>(趣味: 野球観戦, 吹奏楽, 合唱,
-                        ポスター・ビラ・動画制作 / USJクルー経験あり)</p>
+                <div class="glow-text-card">
+                    <div class="content">
+                        <h4 class="text-white font-bold mb-3 flex items-center gap-2"><i data-lucide="rocket" class="w-5 h-5 text-accent"></i> Future Vision</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            将来はこうした経験を生かして起業することを考えています。この思いに共感してくださる方、ぜひ1on1でお話ししましょう！🔥<br>(趣味: 野球観戦, 吹奏楽, 合唱, ポスター・ビラ・動画制作 / USJクルー経験あり)
+                        </p>
+                    </div>
                 </div>
 
                 <div class="flex flex-wrap gap-2 text-sm">
@@ -460,9 +605,13 @@
                     <h3
                         class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">
                         JAPAN CUP 2026</h3>
-                    <p class="text-gray-400 leading-relaxed font-light text-lg">
-                        国際法模擬裁判のキックオフセミナー用フライヤーデザイン。初学者の目を惹きつけるイエローを中心とした力強いタイポグラフィで、同法会の熱量を表現しています。
-                    </p>
+                    <div class="glow-text-card mt-4">
+                        <div class="content !p-5">
+                            <p class="text-gray-400 leading-relaxed font-light text-lg">
+                                国際法模擬裁判のキックオフセミナー用フライヤーデザイン。初学者の目を惹きつけるイエローを中心とした力強いタイポグラフィで、同法会の熱量を表現しています。
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 <div class="w-full md:w-1/2 order-1 md:order-2">
                     <div
@@ -489,9 +638,13 @@
                     <h3
                         class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">
                         WELL HUNTING</h3>
-                    <p class="text-gray-400 leading-relaxed font-light text-lg">
-                        就活イベント「WELL HUNTING」の告知ポスター。「ありのままを魅せる就活」というコンセプトを際立たせるため、余白を活かしたスタイリッシュなレイアウトを構築しました。
-                    </p>
+                    <div class="glow-text-card mt-4">
+                        <div class="content !p-5">
+                            <p class="text-gray-400 leading-relaxed font-light text-lg">
+                                就活イベント「WELL HUNTING」の告知ポスター。「ありのままを魅せる就活」というコンセプトを際立たせるため、余白を活かしたスタイリッシュなレイアウトを構築しました。
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -504,9 +657,13 @@
                     <h3
                         class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">
                         Business Contest WING</h3>
-                    <p class="text-gray-400 leading-relaxed font-light text-lg">
-                        自身も渉外局員として携わる学生向けビジネスコンテスト「WING」のポスター。情熱に火をつけ、スケール感のある未来へと羽ばたく様子をデザインに落とし込んでいます。
-                    </p>
+                    <div class="glow-text-card mt-4">
+                        <div class="content !p-5">
+                            <p class="text-gray-400 leading-relaxed font-light text-lg">
+                                自身も渉外局員として携わる学生向けビジネスコンテスト「WING」のポスター。情熱に火をつけ、スケール感のある未来へと羽ばたく様子をデザインに落とし込んでいます。
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 <div class="w-full md:w-1/2 order-1 md:order-2">
                     <div
@@ -533,9 +690,13 @@
                     <h3
                         class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">
                         同志社グリークラブ</h3>
-                    <p class="text-gray-400 leading-relaxed font-light text-lg">
-                        全国大会に連続出場を果たす伝統ある男声合唱団の団員募集用フライヤー。長年の実績と力強さを伝えるため、ダイナミックな筆文字タイトルを用いました。
-                    </p>
+                    <div class="glow-text-card mt-4">
+                        <div class="content !p-5">
+                            <p class="text-gray-400 leading-relaxed font-light text-lg">
+                                全国大会に連続出場を果たす伝統ある男声合唱団の団員募集用フライヤー。長年の実績と力強さを伝えるため、ダイナミックな筆文字タイトルを用いました。
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -563,9 +724,13 @@
                     <h3 class="text-2xl font-bold text-white">高校時代</h3>
                     <span class="text-gray-400 font-medium mb-4">吹奏楽 & ビジネス探究</span>
                 </div>
-                <p class="text-gray-300 leading-relaxed font-light">
-                    吹奏楽部にて関西吹奏楽コンクールに出場し音楽の追求とチームワークを学ぶ。同時に「マイナビキャリア甲子園」で全国ベスト16に進出するなど、文系・理系・芸術を問わず横断的に活動するルーツとなった。（2024年3月卒業）
-                </p>
+                <div class="glow-text-card mt-4">
+                    <div class="content !p-5">
+                        <p class="text-gray-300 leading-relaxed font-light">
+                            吹奏楽部にて関西吹奏楽コンクールに出場し音楽の追求とチームワークを学ぶ。同時に「マイナビキャリア甲子園」で全国ベスト16に進出するなど、文系・理系・芸術を問わず横断的に活動するルーツとなった。（2024年3月卒業）
+                        </p>
+                    </div>
+                </div>
             </div>
 
             <!-- Gap Year -->
@@ -581,9 +746,13 @@
                     <h3 class="text-2xl font-bold text-white">浪人期間</h3>
                     <span class="text-gray-400 font-medium mb-4">自己探求と基盤拡充</span>
                 </div>
-                <p class="text-gray-300 leading-relaxed font-light">
-                    1年間の浪人生活を経て、多様な視点と普遍的な論理の重要性を再認識。次に飛び込む大学という新しいフィールドに向けた思考の土台を固めた期間。
-                </p>
+                <div class="glow-text-card mt-4">
+                    <div class="content !p-5">
+                        <p class="text-gray-300 leading-relaxed font-light">
+                            1年間の浪人生活を経て、多様な視点と普遍的な論理の重要性を再認識。次に飛び込む大学という新しいフィールドに向けた思考の土台を固めた期間。
+                        </p>
+                    </div>
+                </div>
             </div>
 
             <!-- University -->
@@ -599,9 +768,13 @@
                     <h3 class="text-2xl font-bold text-white">同志社大学 入学</h3>
                     <span class="text-gray-400 font-medium mb-4">領域を横断する実践活動の幕開け</span>
                 </div>
-                <p class="text-gray-300 leading-relaxed font-light">
-                    法学部法律学科に入学。国際法模擬裁判（JAPANCUP等）で論理的思考を武器にする一方、合唱団で全国大会に出場し銀賞を受賞。さらにWINGの渉外局員（法人営業）やハッカソンへの参画など、一見バラバラに見える経験の中に相乗効果を見出しながら精力的に活動中。
-                </p>
+                <div class="glow-text-card mt-4">
+                    <div class="content !p-5">
+                        <p class="text-gray-300 leading-relaxed font-light">
+                            法学部法律学科に入学。国際法模擬裁判（JAPANCUP等）で論理的思考を武器にする一方、合唱団で全国大会に出場し銀賞を受賞。さらにWINGの渉外局員（法人営業）やハッカソンへの参画など、一見バラバラに見える経験の中に相乗効果を見出しながら精力的に活動中。
+                        </p>
+                    </div>
+                </div>
             </div>
 
         </div>
