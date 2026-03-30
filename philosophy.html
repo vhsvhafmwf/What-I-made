@@ -7,10 +7,25 @@
     <meta name="description" content="後藤優太(Yuta Goto)の思想・哲学。自分自身の内面を見つめ、再定義した「本質的な価値観」と「内的動機」。">
     <title>PHILOSOPHY | 後藤優太 (Yuta Goto)</title>
 
+    <!-- OGP / Twitter Meta Tags -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="PHILOSOPHY | 後藤優太 (Yuta Goto)">
+    <meta property="og:description" content="自己の深淵を見つめ、価値を再定義する。後藤優太の思想と哲学。">
+    <meta property="og:image" content="./assets/ogp-card.png">
+    <meta property="og:site_name" content="後藤優太 ポートフォリオ">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PHILOSOPHY | 後藤優太 (Yuta Goto)">
+    <meta name="twitter:description" content="自己の深淵を見つめ、価値を再定義する。後藤優太の思想と哲学。">
+    <meta name="twitter:image" content="./assets/ogp-card.png">
+
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Shippori+Mincho:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Shippori+Mincho:wght@400;500;700;800&display=swap"
+        rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -44,6 +59,7 @@
             background-color: #0a0a0a;
             color: #f0f0f0;
         }
+
         ::selection {
             background-color: #ffcc00;
             color: #000;
@@ -64,93 +80,182 @@
             background-color: transparent;
             cursor: pointer;
         }
+
         .btn2::before {
             content: "";
-            position: absolute; top: -2px; left: -2px;
-            width: calc(100% + 4px); height: calc(100% + 2px);
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            width: calc(100% + 4px);
+            height: calc(100% + 2px);
             background-color: #0a0a0a;
-            transition: 0.3s ease-out; transform: scaleY(1);
+            transition: 0.3s ease-out;
+            transform: scaleY(1);
         }
+
         .btn2::after {
             content: "";
-            position: absolute; top: -2px; left: -2px;
-            width: calc(100% + 4px); height: calc(100% - 32px);
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            width: calc(100% + 4px);
+            height: calc(100% - 32px);
             background-color: #0a0a0a;
-            transition: 0.3s ease-out; transform: scaleY(1);
+            transition: 0.3s ease-out;
+            transform: scaleY(1);
         }
-        .btn2:hover::before { transform: translateY(-25px); height: 0; }
-        .btn2:hover::after { transform: scaleX(0); transition-delay: 0.15s; }
-        .btn2:hover { border: 2px solid #fefefe; }
+
+        .btn2:hover::before {
+            transform: translateY(-25px);
+            height: 0;
+        }
+
+        .btn2:hover::after {
+            transform: scaleX(0);
+            transition-delay: 0.15s;
+        }
+
+        .btn2:hover {
+            border: 2px solid #fefefe;
+        }
+
         .btn2 .spn2 {
-            position: relative; z-index: 3;
-            text-decoration: none; border: none;
-            background-color: transparent; transition: color 0.3s;
+            position: relative;
+            z-index: 3;
+            text-decoration: none;
+            border: none;
+            background-color: transparent;
+            transition: color 0.3s;
         }
-        .btn2:hover .spn2 { color: #ffcc00; }
-        .btn2.active .spn2 { color: #ffcc00; }
+
+        .btn2:hover .spn2 {
+            color: #ffcc00;
+        }
+
+        .btn2.active .spn2 {
+            color: #ffcc00;
+        }
 
         /* Glow Text Card from index.html */
         .glow-text-card {
-            width: 100%; background: #171717;
-            position: relative; border-radius: 10px;
-            padding: 2px; transition: transform 0.3s;
-            overflow: hidden; display: flex;
-            box-shadow: 0px 5px 15px rgba(0,0,0,0.5);
+            width: 100%;
+            background: #171717;
+            position: relative;
+            border-radius: 10px;
+            padding: 2px;
+            transition: transform 0.3s;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
         }
+
         .glow-text-card .content {
-            border-radius: 8px; background: rgba(15, 15, 15, 0.95);
-            width: 100%; z-index: 1; position: relative; padding: 1.5rem;
+            border-radius: 8px;
+            background: rgba(15, 15, 15, 0.95);
+            width: 100%;
+            z-index: 1;
+            position: relative;
+            padding: 1.5rem;
         }
+
         .glow-text-card .content::before {
-            opacity: 0; transition: opacity 300ms;
-            content: " "; display: block; background: white;
-            width: 10%; height: 50%; position: absolute;
-            top: 50%; left: 50%; transform: translate(-50%, -50%);
-            filter: blur(40px); pointer-events: none; z-index: 2;
+            opacity: 0;
+            transition: opacity 300ms;
+            content: " ";
+            display: block;
+            background: white;
+            width: 10%;
+            height: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter: blur(40px);
+            pointer-events: none;
+            z-index: 2;
         }
-        .glow-text-card:hover .content::before { opacity: 1; }
+
+        .glow-text-card:hover .content::before {
+            opacity: 1;
+        }
+
         .glow-text-card::before {
-            content: " "; position: absolute; top: 50%; left: 50%;
-            width: 12rem; height: 250%;
+            content: " ";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 12rem;
+            height: 250%;
             background: linear-gradient(#ff2288, #387ef0);
             transform: translate(-50%, -50%) rotate(0deg);
-            transform-origin: center; opacity: 0;
+            transform-origin: center;
+            opacity: 0;
             transition: opacity 300ms;
             animation: rotation_9018 6000ms infinite linear;
-            animation-play-state: paused; z-index: 0;
+            animation-play-state: paused;
+            z-index: 0;
         }
-        .glow-text-card:hover::before { opacity: 1; animation-play-state: running; }
+
+        .glow-text-card:hover::before {
+            opacity: 1;
+            animation-play-state: running;
+        }
+
         .glow-text-card::after {
-            content: " "; position: absolute; inset: 0;
+            content: " ";
+            position: absolute;
+            inset: 0;
             background: rgba(23, 23, 23, 0.2);
-            backdrop-filter: blur(20px); z-index: 0;
+            backdrop-filter: blur(20px);
+            z-index: 0;
         }
+
         @keyframes rotation_9018 {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
         }
 
         /* Scroll Reveal */
         .scroll-reveal {
-            opacity: 0; transform: translateY(30px);
+            opacity: 0;
+            transform: translateY(30px);
             transition: opacity 0.7s ease-out, transform 0.7s ease-out;
         }
-        .scroll-reveal.revealed { opacity: 1; transform: translateY(0); }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         /* Scroll Progress Bar */
         .scroll-progress {
-            position: fixed; top: 0; left: 0; height: 3px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
             background: linear-gradient(90deg, #ffcc00, #ffaa00);
-            width: 0%; z-index: 9999; transition: none;
+            width: 0%;
+            z-index: 9999;
+            transition: none;
             box-shadow: 0 0 8px rgba(255, 204, 0, 0.6);
         }
 
         /* Philosophy Specific Styles */
         .page-entrance {
-            opacity: 0; transform: translateY(24px);
+            opacity: 0;
+            transform: translateY(24px);
             transition: opacity 1s ease-out, transform 1s ease-out;
         }
-        .page-entrance.entered { opacity: 1; transform: translateY(0); }
+
+        .page-entrance.entered {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         .vertical-text {
             writing-mode: vertical-rl;
@@ -166,10 +271,12 @@
             position: relative;
             overflow: hidden;
         }
+
         .philosophy-quote::after {
             content: "\201C";
             position: absolute;
-            top: -20px; right: 20px;
+            top: -20px;
+            right: 20px;
             font-size: 12rem;
             color: rgba(255, 204, 0, 0.05);
             font-family: serif;
@@ -184,6 +291,7 @@
             padding: 2rem;
             transition: all 0.3s ease;
         }
+
         .glass-card:hover {
             border-color: rgba(255, 204, 0, 0.4);
             background: rgba(255, 255, 255, 0.05);
@@ -200,11 +308,14 @@
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .system-table th, .system-table td {
+
+        .system-table th,
+        .system-table td {
             padding: 1rem;
             text-align: left;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
+
         .system-table th {
             background: rgba(255, 204, 0, 0.1);
             color: #ffcc00;
@@ -213,11 +324,128 @@
             font-size: 0.8rem;
             letter-spacing: 0.1em;
         }
-        .system-table tr:last-child td { border-bottom: none; }
+
+        .system-table tr:last-child td {
+            border-bottom: none;
+        }
 
         .back-to-home {
-            position: fixed; bottom: 30px; left: 30px;
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
             z-index: 100;
+        }
+
+        /* Agenda / TOC Styles */
+        .agenda-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .agenda-btn {
+            width: 56px;
+            height: 56px;
+            background: #171717;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #ffcc00;
+        }
+
+        .agenda-btn:hover {
+            transform: scale(1.1);
+            border-color: #ffcc00;
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+        }
+
+        .agenda-menu {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 280px;
+            background: rgba(23, 23, 23, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transform: scale(0.9) translateY(20px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            transform-origin: bottom right;
+        }
+
+        .agenda-menu.active {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .agenda-header {
+            font-size: 0.75rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.5rem;
+        }
+
+        .agenda-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .agenda-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .agenda-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #999;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .agenda-link:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .agenda-link.active {
+            color: #ffcc00;
+            background: rgba(255, 204, 0, 0.05);
+            font-weight: 600;
+        }
+
+        .agenda-link.active .agenda-dot {
+            width: 6px;
+            height: 6px;
+            background: #ffcc00;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #ffcc00;
+        }
+
+        .agenda-dot {
+            width: 4px;
+            height: 4px;
+            background: #444;
+            border-radius: 50%;
+            transition: all 0.3s;
         }
     </style>
 </head>
@@ -233,13 +461,16 @@
             style="background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #0a0a0a 100%);">
         </div>
         <!-- Subtle noise overlay -->
-        <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');"></div>
+        <div class="absolute inset-0 opacity-[0.03] pointer-events-none"
+            style="background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');"></div>
     </div>
 
     <!-- HEADER NAVIGATION -->
-    <header class="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-gray-900 transition-all duration-300">
+    <header
+        class="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-gray-900 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
-            <a href="index.html" class="text-lg md:text-2xl font-black text-white tracking-widest hover:text-accent transition-colors">
+            <a href="index.html"
+                class="text-lg md:text-2xl font-black text-white tracking-widest hover:text-accent transition-colors">
                 YUTA GOTO
             </a>
             <nav>
@@ -259,7 +490,8 @@
             <div class="md:col-span-8 space-y-8 page-entrance" id="heroText">
                 <div class="flex items-center gap-4">
                     <span class="w-12 h-px bg-accent"></span>
-                    <span class="text-accent font-mono tracking-[0.3em] uppercase text-sm font-bold">My Personal Axioms</span>
+                    <span class="text-accent font-mono tracking-[0.3em] uppercase text-sm font-bold">My Personal
+                        Axioms</span>
                 </div>
                 <h1 class="text-5xl md:text-8xl font-black leading-tight">
                     MY<br><span class="text-accent underline decoration-1 underline-offset-8">PHILOSOPHY</span>
@@ -280,7 +512,7 @@
     </section>
 
     <!-- INTRODUCTION -->
-    <section class="max-w-4xl mx-auto px-6 py-24 border-t border-gray-900">
+    <section id="introduction" class="max-w-4xl mx-auto px-6 py-24 border-t border-gray-900">
         <div class="scroll-reveal">
             <h2 class="text-accent font-bold mb-6 flex items-center gap-2">
                 <i data-lucide="book-open" class="w-5 h-5"></i> INTRODUCTION
@@ -300,7 +532,7 @@
     </section>
 
     <!-- CORE VALUES -->
-    <section class="max-w-6xl mx-auto px-6 py-24 space-y-32">
+    <section id="core" class="max-w-6xl mx-auto px-6 py-24 space-y-32">
         <div class="text-center mb-16 scroll-reveal">
             <h2 class="text-4xl md:text-6xl font-bold mb-4">THE CORE</h2>
             <p class="text-accent tracking-widest font-mono">私の思考の核</p>
@@ -401,7 +633,7 @@
     </section>
 
     <!-- DYNAMICS -->
-    <section class="max-w-6xl mx-auto px-6 py-24 bg-[#111] rounded-[3rem] border border-white/5">
+    <section id="dynamics" class="max-w-6xl mx-auto px-6 py-24 bg-[#111] rounded-[3rem] border border-white/5">
         <div class="max-w-4xl mx-auto space-y-24">
             <div class="text-center scroll-reveal">
                 <h2 class="text-4xl md:text-5xl font-bold mb-4 tracking-tighter">ENERGY DYNAMICS</h2>
@@ -411,24 +643,29 @@
             <!-- Energy Up -->
             <div class="space-y-12 scroll-reveal">
                 <h3 class="text-2xl font-bold text-white flex items-center gap-4">
-                    <span class="w-10 h-10 rounded-full bg-accent text-black flex items-center justify-center text-sm"><i data-lucide="trending-up" class="w-5 h-5"></i></span>
+                    <span
+                        class="w-10 h-10 rounded-full bg-accent text-black flex items-center justify-center text-sm"><i
+                            data-lucide="trending-up" class="w-5 h-5"></i></span>
                     ENERGY ASCENT: フローへの没入
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="glass-card hover:bg-white/5">
                         <i data-lucide="shield-off" class="text-accent mb-4"></i>
                         <h4 class="font-bold mb-2">予測不能の遮断</h4>
-                        <p class="text-sm text-gray-400 font-light leading-relaxed">深夜の静寂やノイズキャンセリング。外部の干渉を遮断し、自分だけの「小さな宇宙」を構築した時、私のエネルギーは最も純化されます。</p>
+                        <p class="text-sm text-gray-400 font-light leading-relaxed">
+                            深夜の静寂やノイズキャンセリング。外部の干渉を遮断し、自分だけの「小さな宇宙」を構築した時、私のエネルギーは最も純化されます。</p>
                     </div>
                     <div class="glass-card hover:bg-white/5">
                         <i data-lucide="search" class="text-accent mb-4"></i>
                         <h4 class="font-bold mb-2">知的構造の探求</h4>
-                        <p class="text-sm text-gray-400 font-light leading-relaxed">地政学や歴史、美術の文脈。表面的な事象の背後にある「目に見えないルール」を解読し、知的モデルに組み込むことに大きな喜びを感じます。</p>
+                        <p class="text-sm text-gray-400 font-light leading-relaxed">
+                            地政学や歴史、美術の文脈。表面的な事象の背後にある「目に見えないルール」を解読し、知的モデルに組み込むことに大きな喜びを感じます。</p>
                     </div>
                     <div class="glass-card hover:bg-white/5">
                         <i data-lucide="maximize-2" class="text-accent mb-4"></i>
                         <h4 class="font-bold mb-2">限界の拡張</h4>
-                        <p class="text-sm text-gray-400 font-light leading-relaxed">未知の知識への没頭や身体的な限界突破。自らの意志で能力の境界線を拡張していくプロセスこそが、私の自己効力感の源です。</p>
+                        <p class="text-sm text-gray-400 font-light leading-relaxed">
+                            未知の知識への没頭や身体的な限界突破。自らの意志で能力の境界線を拡張していくプロセスこそが、私の自己効力感の源です。</p>
                     </div>
                 </div>
             </div>
@@ -436,7 +673,9 @@
             <!-- Energy Down -->
             <div class="space-y-12 scroll-reveal">
                 <h3 class="text-2xl font-bold text-white flex items-center gap-4">
-                    <span class="w-10 h-10 rounded-full bg-red-900/50 text-red-500 flex items-center justify-center text-sm"><i data-lucide="trending-down" class="w-5 h-5"></i></span>
+                    <span
+                        class="w-10 h-10 rounded-full bg-red-900/50 text-red-500 flex items-center justify-center text-sm"><i
+                            data-lucide="trending-down" class="w-5 h-5"></i></span>
                     CHAOS & RIGIDITY: 認知的負荷
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -458,15 +697,15 @@
     </section>
 
     <!-- PARADOXES -->
-    <section class="max-w-4xl mx-auto px-6 py-48 space-y-12 text-center scroll-reveal">
+    <section id="paradox" class="max-w-4xl mx-auto px-6 py-48 space-y-12 text-center scroll-reveal">
         <h2 class="text-accent font-mono tracking-widest text-sm uppercase">Paradox & Harmony</h2>
         <h3 class="text-4xl md:text-6xl font-bold leading-tight">私の中に共存する、<br>矛盾と調和。</h3>
-        
+
         <!-- Tab Layout or Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-left mt-16">
             <div class="space-y-6">
                 <h4 class="text-xl font-bold text-white flex items-center gap-3">
-                     孤高の性質 と 音楽の共鳴
+                    孤高の性質 と 音楽の共鳴
                 </h4>
                 <p class="text-gray-400 font-light leading-relaxed">
                     人に頼ることを避ける一方で、私は吹奏楽や合唱が生み出す一体感を深く愛しています。音楽は「楽譜」という明確なルールに基づくからこそ、安心して自己の境界線を溶かし、他者と深く繋がることができるのです。
@@ -474,7 +713,7 @@
             </div>
             <div class="space-y-6">
                 <h4 class="text-xl font-bold text-white flex items-center gap-3">
-                     冷徹な論理 と 詩的な感覚
+                    冷徹な論理 と 詩的な感覚
                 </h4>
                 <p class="text-gray-400 font-light leading-relaxed">
                     効率的なプラグマティズムの一方で、「雨上がりの匂い」や「冬の空気」といった微細な感覚を私は大切にしています。論理だけでは疲弊してしまう精神を、こうした詩的な受容性がアンカー（錨）として繋ぎ止めています。
@@ -484,7 +723,7 @@
     </section>
 
     <!-- DEEP DIVE (QUESTIONS) -->
-    <section class="max-w-6xl mx-auto px-6 py-24 mb-24 border-y border-white/5">
+    <section id="dive" class="max-w-6xl mx-auto px-6 py-24 mb-24 border-y border-white/5">
         <div class="text-center mb-16 scroll-reveal">
             <h2 class="text-3xl font-bold mb-4">DEEP DIVE</h2>
             <p class="text-gray-500 italic">私たちがより良く生きるための、自分への問いかけ。</p>
@@ -496,8 +735,9 @@
                 <div class="content !p-8">
                     <span class="text-accent font-mono text-xs mb-2 block">Reflection 01</span>
                     <h4 class="text-lg font-bold text-white mb-4">私にとって「人に頼ること」は、何を意味（あるいは喪失）する行為なのか。</h4>
-                    <p class="text-gray-400 text-sm leading-relaxed font-light group-hover:text-gray-300 transition-colors">
-                         それを弱さや効率の低下と捉えるのではなく、自分というシステムをより堅牢にし、可能性を押し広げるための「共同作業」として再定義したいと考えています。
+                    <p
+                        class="text-gray-400 text-sm leading-relaxed font-light group-hover:text-gray-300 transition-colors">
+                        それを弱さや効率の低下と捉えるのではなく、自分というシステムをより堅牢にし、可能性を押し広げるための「共同作業」として再定義したいと考えています。
                     </p>
                 </div>
             </div>
@@ -506,8 +746,9 @@
                 <div class="content !p-8">
                     <span class="text-accent font-mono text-xs mb-2 block">Reflection 02</span>
                     <h4 class="text-lg font-bold text-white mb-4">「プランB」を用意することは、私の直感に対する裏切りになるのか。</h4>
-                    <p class="text-gray-400 text-sm leading-relaxed font-light group-hover:text-gray-300 transition-colors">
-                         想定外を楽しむための余裕を持つこと。それを「高度で知的な遊び」として捉え、自らの論理的システムをよりしなやかなものにしていきます。
+                    <p
+                        class="text-gray-400 text-sm leading-relaxed font-light group-hover:text-gray-300 transition-colors">
+                        想定外を楽しむための余裕を持つこと。それを「高度で知的な遊び」として捉え、自らの論理的システムをよりしなやかなものにしていきます。
                     </p>
                 </div>
             </div>
@@ -525,7 +766,8 @@
     </section>
 
     <!-- REFERENCES -->
-    <section class="max-w-4xl mx-auto px-6 py-24 text-center opacity-30 hover:opacity-100 transition-opacity duration-700">
+    <section id="references"
+        class="max-w-4xl mx-auto px-6 py-24 text-center opacity-30 hover:opacity-100 transition-opacity duration-700">
         <h5 class="text-xs font-mono tracking-widest text-gray-500 mb-8 uppercase">Theoretical Foundations</h5>
         <ul class="text-[10px] space-y-2 text-gray-400 font-mono uppercase leading-loose">
             <li>The Role of Jewelry in Self-Expression and Identity - Inspereza</li>
@@ -539,9 +781,52 @@
 
     <!-- BACK TO HOME -->
     <div class="back-to-home">
-        <a href="index.html" class="flex items-center gap-3 text-accent font-bold tracking-widest text-xs hover:gap-5 transition-all">
+        <a href="index.html"
+            class="flex items-center gap-3 text-accent font-bold tracking-widest text-xs hover:gap-5 transition-all">
             <i data-lucide="arrow-left" class="w-4 h-4"></i> BACK TO HOME
         </a>
+    </div>
+
+    <!-- AGENDA / TOC -->
+    <div class="agenda-container" id="agendaContainer">
+        <button class="agenda-btn" id="agendaToggle" aria-label="Toggle Agenda">
+            <i data-lucide="list"></i>
+        </button>
+        <div class="agenda-menu" id="agendaMenu">
+            <div class="agenda-header">CONTENTS</div>
+            <ul class="agenda-list">
+                <li class="agenda-item">
+                    <a href="#introduction" class="agenda-link">
+                        <span class="agenda-dot"></span> INTRODUCTION
+                    </a>
+                </li>
+                <li class="agenda-item">
+                    <a href="#core" class="agenda-link">
+                        <span class="agenda-dot"></span> THE CORE
+                    </a>
+                </li>
+                <li class="agenda-item">
+                    <a href="#dynamics" class="agenda-link">
+                        <span class="agenda-dot"></span> ENERGY DYNAMICS
+                    </a>
+                </li>
+                <li class="agenda-item">
+                    <a href="#paradox" class="agenda-link">
+                        <span class="agenda-dot"></span> PARADOX & HARMONY
+                    </a>
+                </li>
+                <li class="agenda-item">
+                    <a href="#dive" class="agenda-link">
+                        <span class="agenda-dot"></span> DEEP DIVE
+                    </a>
+                </li>
+                <li class="agenda-item">
+                    <a href="#references" class="agenda-link">
+                        <span class="agenda-dot"></span> REFERENCES
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <!-- FOOTER -->
@@ -551,42 +836,83 @@
 
     <!-- Scripts -->
     <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        // Initialize Icons
-        lucide.createIcons();
+        document.addEventListener("DOMContentLoaded", () => {
+            // Initialize Icons
+            lucide.createIcons();
 
-        // Page entrance animation
-        setTimeout(() => {
-            document.getElementById('heroText').classList.add('entered');
-            document.querySelectorAll('.page-entrance').forEach(el => el.classList.add('entered'));
-        }, 300);
+            // Page entrance animation
+            setTimeout(() => {
+                document.getElementById('heroText').classList.add('entered');
+                document.querySelectorAll('.page-entrance').forEach(el => el.classList.add('entered'));
+            }, 300);
 
-        // Scroll Reveal
-        const revealObs = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.classList.add('revealed');
-                    revealObs.unobserve(e.target);
+            // Scroll Reveal
+            const revealObs = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('revealed');
+                        revealObs.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            document.querySelectorAll('.scroll-reveal').forEach(el => {
+                if (el.getBoundingClientRect().top > window.innerHeight) {
+                    revealObs.observe(el);
+                } else {
+                    el.classList.add('revealed');
                 }
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-        document.querySelectorAll('.scroll-reveal').forEach(el => {
-            if (el.getBoundingClientRect().top > window.innerHeight) {
-                revealObs.observe(el);
-            } else {
-                el.classList.add('revealed');
-            }
+            // Scroll Progress
+            const scrollProgressBar = document.getElementById('scrollProgress');
+            window.addEventListener('scroll', () => {
+                const h = document.documentElement.scrollHeight - window.innerHeight;
+                scrollProgressBar.style.width = h > 0 ? (window.scrollY / h * 100) + '%' : '0%';
+            }, { passive: true });
+
+            // Agenda Toggle
+            const agendaToggle = document.getElementById('agendaToggle');
+            const agendaMenu = document.getElementById('agendaMenu');
+            agendaToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                agendaMenu.classList.toggle('active');
+            });
+            document.addEventListener('click', () => {
+                agendaMenu.classList.remove('active');
+            });
+            agendaMenu.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+
+            // Scroll Spy/Active state for Agenda
+            const agendaLinks = document.querySelectorAll('.agenda-link');
+            const scrollSpy = () => {
+                const sections = ['introduction', 'core', 'dynamics', 'paradox', 'dive', 'references'];
+                let current = '';
+
+                for (const id of sections) {
+                    const section = document.getElementById(id);
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= 150) {
+                            current = id;
+                        }
+                    }
+                }
+
+                agendaLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            };
+            window.addEventListener('scroll', scrollSpy);
+            scrollSpy(); // Initial call
         });
-
-        // Scroll Progress
-        const scrollProgressBar = document.getElementById('scrollProgress');
-        window.addEventListener('scroll', () => {
-            const h = document.documentElement.scrollHeight - window.innerHeight;
-            scrollProgressBar.style.width = h > 0 ? (window.scrollY / h * 100) + '%' : '0%';
-        }, { passive: true });
-    });
     </script>
 
 </body>
+
 </html>
