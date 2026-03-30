@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth" style="scroll-padding-top: 5rem;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | 後藤優太 (Yuta Goto)</title>
+
+    <meta name="robots" content="noindex"> <!-- お問い合わせページは検索エンジンにインデックスさせない（任意） -->
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Shippori+Mincho:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', '"テロップ明朝"', '"TELOP MINCHO"', '"A-OTF TelopMincho Pro"', '"A-OTF TelopMincho Pr6"', '"Shippori Mincho"', 'serif'],
+                    },
+                    colors: {
+                        background: "#0a0a0a",
+                        accent: {
+                            DEFAULT: "#ffcc00",
+                            glow: "rgba(255, 204, 0, 0.4)",
+                        },
+                    },
+                    boxShadow: {
+                        glow: "0 0 20px 5px rgba(255, 204, 0, 0.4)",
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #f0f0f0;
+        }
+
+        ::selection {
+            background-color: #ffcc00;
+            color: #000;
+        }
+
+        /* フォームのフォーカス時のアウトラインを消す */
+        select:focus, input:focus, textarea:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        /* From Uiverse.io by chase2k25 (Background) */
+        .cube-svg {
+            position: absolute;
+            width: 200vw;
+            height: 200vh;
+            left: -30vw;
+            top: -20vh;
+            background: transparent;
+            opacity: 0.7;
+            z-index: 1;
+            animation: cubeMove 18s linear infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes cubeMove {
+            from {
+                transform: translateY(0) scale(1);
+            }
+
+            to {
+                transform: translateY(-20%) scale(1.02) rotate(1deg);
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen font-sans selection:bg-accent selection:text-black overflow-x-hidden text-white relative">
+
+    <!-- Background From Uiverse.io by chase2k25 -->
+    <div class="fixed inset-0 w-screen h-screen -z-50 m-0 bg-[#181c21]">
+        <div class="absolute inset-0 w-full h-full overflow-hidden" style="background: repeating-linear-gradient(135deg, #232526 0px, #232526 60px, #23252699 70px, #414345 130px);"></div>
+        <div class="cube-svg">
+            <svg preserveAspectRatio="xMidYMid slice" height="100%" width="100%" viewBox="0 0 120 104">
+                <defs>
+                    <linearGradient y2="100%" x2="100%" y1="0%" x1="0%" id="cube-dark">
+                        <stop stop-color="#232526" offset="0%"></stop>
+                        <stop stop-color="#414345" offset="100%"></stop>
+                    </linearGradient>
+                    <linearGradient y2="0%" x2="100%" y1="100%" x1="0%" id="cube-mid">
+                        <stop stop-color="#4b6cb7" offset="0%"></stop>
+                        <stop stop-color="#182848" offset="100%"></stop>
+                    </linearGradient>
+                    <linearGradient y2="100%" x2="0%" y1="0%" x1="100%" id="cube-light">
+                        <stop stop-color="#a8edea" offset="0%"></stop>
+                        <stop stop-color="#fed6e3" offset="100%"></stop>
+                    </linearGradient>
+                </defs>
+
+                <!-- Center Large Cube -->
+                <polygon points="60,10 100,30 60,52 20,30" fill="url(#cube-light)" />
+                <polygon points="20,30 60,52 60,94 20,74" fill="url(#cube-mid)" />
+                <polygon points="60,52 100,30 100,74 60,94" fill="url(#cube-dark)" />
+
+                <!-- Surrounding Small Cubes -->
+                <polygon points="20,-10 40,0 20,10 0,0" fill="url(#cube-light)" />
+                <polygon points="0,0 20,10 20,30 0,20" fill="url(#cube-mid)" />
+                <polygon points="20,10 40,0 40,20 20,30" fill="url(#cube-dark)" />
+
+                <polygon points="100,-10 120,0 100,10 80,0" fill="url(#cube-light)" />
+                <polygon points="80,0 100,10 100,30 80,20" fill="url(#cube-mid)" />
+                <polygon points="100,10 120,0 120,20 100,30" fill="url(#cube-dark)" />
+
+                <polygon points="20,74 40,84 20,94 0,84" fill="url(#cube-light)" />
+                <polygon points="0,84 20,94 20,114 0,104" fill="url(#cube-mid)" />
+                <polygon points="20,94 40,84 40,104 20,114" fill="url(#cube-dark)" />
+
+                <polygon points="100,74 120,84 100,94 80,84" fill="url(#cube-light)" />
+                <polygon points="80,84 100,94 100,114 80,104" fill="url(#cube-mid)" />
+                <polygon points="100,94 120,84 120,104 100,114" fill="url(#cube-dark)" />
+            </svg>
+        </div>
+    </div>
+
+    <!-- HEADER NAVIGATION -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-gray-900">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="text-xl font-bold tracking-widest text-white hover:text-accent transition-colors flex items-center gap-2 group">
+                <i data-lucide="arrow-left" class="w-5 h-5 group-hover:-translate-x-1 transition-transform"></i>
+                <span class="pl-2">BACK</span>
+            </a>
+            
+            <nav class="hidden md:flex gap-8 text-sm font-medium tracking-widest text-gray-400">
+                <a href="index.html#about" class="hover:text-white transition-colors">ABOUT</a>
+                <a href="index.html#works" class="hover:text-white transition-colors">WORKS</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTACT SECTION -->
+    <main class="w-full max-w-3xl mx-auto px-6 pt-32 pb-24 relative z-10">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">CONTACT</h1>
+            <p class="text-gray-400">プロジェクトのご相談、面談等お気軽にご連絡ください。<br>通常3日以内に返信いたします。</p>
+        </div>
+
+        <!-- CONTACT FORM -->
+        <!-- Web3Forms API -->
+        <div class="relative group">
+            <!-- Glow background -->
+            <div class="absolute -inset-1 bg-gradient-to-r from-accent to-[#e24a68] rounded-2xl blur opacity-20 group-hover:opacity-30 transition duration-1000 -z-10"></div>
+            
+            <form id="contactForm" class="bg-gray-900/80 backdrop-blur-xl border border-gray-800 rounded-2xl p-8 md:p-12 shadow-2xl space-y-6">
+                
+                <!-- [MUST EDIT]: Web3Forms Access Key here -->
+                <input type="hidden" name="access_key" value="90bd9fd1-ed13-47a7-9f41-35b2d37a8e60">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label for="name" class="block text-sm font-mono text-gray-400">Name <span class="text-red-500">*</span></label>
+                        <input type="text" id="name" name="name" required placeholder="お名前" class="w-full bg-black/50 border border-gray-700 text-white placeholder-gray-600 rounded-lg px-4 py-3 focus:border-accent focus:ring-1 focus:ring-accent transition-colors">
+                    </div>
+                    <div class="space-y-2">
+                        <label for="email" class="block text-sm font-mono text-gray-400">Email <span class="text-red-500">*</span></label>
+                        <input type="email" id="email" name="email" required placeholder="メールアドレス" class="w-full bg-black/50 border border-gray-700 text-white placeholder-gray-600 rounded-lg px-4 py-3 focus:border-accent focus:ring-1 focus:ring-accent transition-colors">
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label for="category" class="block text-sm font-mono text-gray-400">Category</label>
+                    <select id="category" name="category" class="w-full bg-black/50 border border-gray-700 text-white rounded-lg px-4 py-3 focus:border-accent focus:ring-1 focus:ring-accent transition-colors appearance-none cursor-pointer">
+                        <option value="ご相談・依頼" class="bg-gray-900">仕事のご相談・ご依頼</option>
+                        <option value="インターン・採用関連" class="bg-gray-900">インターン・スカウト関連</option>
+                        <option value="取材・登壇" class="bg-gray-900">取材・登壇のオファー</option>
+                        <option value="その他" class="bg-gray-900">その他のお問い合わせ</option>
+                    </select>
+                </div>
+
+                <div class="space-y-2">
+                    <label for="message" class="block text-sm font-mono text-gray-400">Message <span class="text-red-500">*</span></label>
+                    <textarea id="message" name="message" required rows="6" placeholder="お問い合わせ内容をご記入ください..." class="w-full bg-black/50 border border-gray-700 text-white placeholder-gray-600 rounded-lg px-4 py-3 focus:border-accent focus:ring-1 focus:ring-accent transition-colors resize-none"></textarea>
+                </div>
+
+                <!-- Web3Forms Honeypot (Spam Protection) -->
+                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                <!-- Submit Button -->
+                <button type="submit" id="submitBtn" class="w-full py-4 bg-accent hover:bg-yellow-400 text-black font-bold tracking-widest rounded-lg mt-4 transition-colors relative overflow-hidden group/btn shadow-[0_0_20px_rgba(255,204,0,0.3)] hover:shadow-[0_0_30px_rgba(255,204,0,0.5)]">
+                    <span class="relative z-10 flex items-center justify-center gap-2">
+                        <i data-lucide="send" class="w-5 h-5"></i> <span id="btnText">SEND MESSAGE</span>
+                    </span>
+                    <div class="absolute inset-0 bg-white/20 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 ease-out z-0"></div>
+                </button>
+                
+                <p class="text-center text-xs text-gray-600 mt-4">送信を押すとフォームが送信されます。入力内容を確認してから操作してください。</p>
+
+                <!-- 画面遷移防止＆結果表示用のメッセージボックス -->
+                <div id="formResult" class="hidden text-center mt-6 p-4 rounded-lg font-bold text-sm"></div>
+
+            </form>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full text-center py-8 border-t border-gray-900">
+        <p class="text-gray-500 font-mono text-sm">© 2026 Yuta Goto. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Initialize Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+
+    <!-- Web3Forms AJAX 送信スクリプト（画面遷移・真っ白になるのを防ぎます） -->
+    <script>
+        const form = document.getElementById('contactForm');
+        const result = document.getElementById('formResult');
+        const btnText = document.getElementById('btnText');
+        const submitBtn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // デフォルトの画面遷移（白い画面）を完全にブロック
+            
+            // 送信時の見た目の変化（送信中...）
+            btnText.innerHTML = "SENDING...";
+            submitBtn.classList.add('opacity-70', 'cursor-not-allowed', 'pointer-events-none');
+            result.className = "hidden text-center mt-6 p-4 rounded-lg font-bold text-sm"; // リセット
+
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: json
+                })
+                .then(async (response) => {
+                    let jsonData = await response.json();
+                    result.classList.remove('hidden');
+                    if (response.status == 200) {
+                        // 成功メッセージ（緑）
+                        result.classList.add('bg-green-500/20', 'text-green-400', 'border', 'border-green-500/50');
+                        result.innerHTML = "✅ メッセージの送信が完了しました！後ほどご連絡いたします。";
+                        form.reset();
+                    } else {
+                        // エラーメッセージ（赤）
+                        console.log(response);
+                        result.classList.add('bg-red-500/20', 'text-red-400', 'border', 'border-red-500/50');
+                        result.innerHTML = "❌ エラーが発生しました: " + jsonData.message;
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                    result.classList.remove('hidden');
+                    result.classList.add('bg-red-500/20', 'text-red-400', 'border', 'border-red-500/50');
+                    result.innerHTML = "❌ 通信エラーが発生しました。もう一度お試しください。";
+                })
+                .then(function() {
+                    // ボタンを元の状態に戻す
+                    btnText.innerHTML = "SEND MESSAGE";
+                    submitBtn.classList.remove('opacity-70', 'cursor-not-allowed', 'pointer-events-none');
+                    // 5秒後にメッセージを消す
+                    setTimeout(() => {
+                        result.classList.add('hidden');
+                    }, 5000);
+                });
+        });
+    </script>
+</body>
+</html>
