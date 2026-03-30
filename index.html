@@ -395,6 +395,72 @@
         .btn2:hover .spn2 {
             color: #ffcc00;
         }
+
+        /* Scroll Reveal Animation */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Lightbox */
+        .lightbox-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0, 0, 0, 0.93);
+            backdrop-filter: blur(10px);
+            z-index: 9998;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.3s;
+            cursor: zoom-out;
+        }
+        .lightbox-overlay.active { opacity: 1; pointer-events: auto; }
+        .lightbox-overlay img {
+            max-width: 90vw; max-height: 85vh;
+            object-fit: contain; border-radius: 6px;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.7);
+            transform: scale(0.92); transition: transform 0.3s ease-out;
+            cursor: default;
+        }
+        .lightbox-overlay.active img { transform: scale(1); }
+        .lightbox-close {
+            position: absolute; top: 20px; right: 24px;
+            width: 44px; height: 44px;
+            border: 1px solid rgba(255,255,255,0.3); border-radius: 50%;
+            background: rgba(255,255,255,0.05); color: #fff;
+            font-size: 22px; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .lightbox-close:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.6); }
+        #works .rounded-xl img { cursor: zoom-in; }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed; bottom: 30px; left: 30px;
+            width: 44px; height: 44px; border-radius: 50%;
+            background: #1a1c23; border: 1px solid rgba(255,204,0,0.3);
+            color: #ffcc00; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; opacity: 0; pointer-events: none;
+            transition: all 0.3s; z-index: 100;
+        }
+        .back-to-top.visible { opacity: 1; pointer-events: auto; }
+        .back-to-top:hover { background: #23252e; border-color: rgba(255,255,255,0.5); color: #fff; transform: translateY(-2px); }
+
+        /* Active Nav */
+        .btn2.active .spn2 { color: #ffcc00; }
+
+        /* Footer */
+        .site-footer {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding: 3rem 1.5rem; text-align: center;
+            color: #666; font-size: 0.85rem;
+        }
+        .site-footer a { color: #888; text-decoration: none; transition: color 0.2s; }
+        .site-footer a:hover { color: #ffcc00; }
     </style>
 </head>
 
@@ -876,6 +942,33 @@
         lucide.createIcons();
     </script>
 
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="max-w-7xl mx-auto">
+            <div style="display:flex; justify-content:center; gap:1.5rem; margin-bottom:1.5rem;">
+                <a href="https://www.instagram.com/yutayarogai/" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <span style="color:#333;">|</span>
+                <a href="https://youtrust.jp/users/yutagoto?source=qr" target="_blank" rel="noopener noreferrer">YOUTRUST</a>
+                <span style="color:#333;">|</span>
+                <a href="https://www.facebook.com/profile.php?id=61575688434111" target="_blank" rel="noopener noreferrer">Facebook</a>
+            </div>
+            <p>&copy; 2026 Yuta Goto. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox Overlay -->
+    <div id="lightbox" class="lightbox-overlay">
+        <button class="lightbox-close" aria-label="Close">&times;</button>
+        <img id="lightboxImg" src="" alt="">
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
     <!-- Floating Contact Button (From Uiverse.io by barisdogansutcu) -->
     <a href="contact.html" class="floating-contact-btn">
         <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -883,6 +976,77 @@
         </svg> 
         CONTACT
     </a>
+
+    <!-- UX Enhancement Scripts -->
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // === 1. Scroll Reveal ===
+        const revealEls = [
+            document.querySelector('#works > div:first-child'),
+            ...document.querySelectorAll('#works .gap-32 > div'),
+            document.querySelector('#journey > div:first-child'),
+            ...document.querySelectorAll('#journey .border-l > div'),
+            document.querySelector('#awards > div:first-child'),
+            ...document.querySelectorAll('#awards .gap-4 > div'),
+        ].filter(Boolean);
+
+        const revealObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('revealed');
+                    revealObs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        revealEls.forEach(el => {
+            if (el.getBoundingClientRect().top > window.innerHeight) {
+                el.classList.add('scroll-reveal');
+                revealObs.observe(el);
+            }
+        });
+
+        // === 2. Active Section Highlighting ===
+        const navLinks = document.querySelectorAll('header .btn2');
+        const sections = document.querySelectorAll('section[id]');
+
+        // === 3. Lightbox ===
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+
+        document.querySelectorAll('#works .rounded-xl img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        const closeLightbox = () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+        lightbox.addEventListener('click', (e) => { if (e.target !== lightboxImg) closeLightbox(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+        // === 4. Back to Top ===
+        const backToTopBtn = document.getElementById('backToTop');
+        backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // === Combined Scroll Handler ===
+        window.addEventListener('scroll', () => {
+            let cur = '';
+            sections.forEach(s => {
+                const r = s.getBoundingClientRect();
+                if (r.top <= 120 && r.bottom > 120) cur = s.id;
+            });
+            navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + cur));
+            backToTopBtn.classList.toggle('visible', window.scrollY > 600);
+        }, { passive: true });
+    });
+    </script>
+
 </body>
 
 </html>
