@@ -90,9 +90,40 @@
       -ms-overflow-style: none; /* IE and Edge */
       scrollbar-width: none; /* Firefox */
     }
+
+    /* From Uiverse.io by chase2k25 */
+    .cube-svg {
+      position: absolute;
+      width: 200vw;
+      height: 200vh;
+      left: -30vw;
+      top: -20vh;
+      background: transparent;
+      opacity: 0.7;
+      z-index: 1;
+      animation: cubeMove 18s linear infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes cubeMove {
+      from {
+        transform: translateY(0) scale(1);
+      }
+      to {
+        transform: translateY(-20%) scale(1.02) rotate(1deg);
+      }
+    }
   </style>
 </head>
-<body class="min-h-screen font-sans selection:bg-accent selection:text-black overflow-x-hidden pb-24">
+<body class="min-h-screen font-sans selection:bg-accent selection:text-black overflow-x-hidden pb-24 text-white">
+
+  <!-- Background From Uiverse.io by chase2k25 -->
+  <div class="fixed inset-0 w-screen h-screen -z-50 m-0 bg-[#181c21]">
+    <div class="absolute inset-0 w-full h-full overflow-hidden" style="background: repeating-linear-gradient(135deg, #232526 0px, #232526 60px, #23252699 70px, #414345 130px);"></div>
+    <div class="cube-svg">
+      <!-- (ここにUiverseのSVGのHTMLタグが入ります) -->
+    </div>
+  </div>
 
   <!-- HEADER NAVIGATION -->
   <header class="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-gray-900 transition-all duration-300">
