@@ -527,20 +527,6 @@
         .site-footer a { color: #888; text-decoration: none; transition: color 0.2s; }
         .site-footer a:hover { color: #ffcc00; }
 
-        /* Scroll Progress Bar (Matched with philosophy.html) */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #ffcc00, #ffaa00);
-            width: 0%;
-            z-index: 9999;
-            transition: none;
-            box-shadow: 0 0 8px rgba(255, 204, 0, 0.6);
-            pointer-events: none;
-        }
-
         /* Carousel Dot Indicators */
         .carousel-dots {
             display: flex; justify-content: center; gap: 8px;
@@ -573,6 +559,12 @@
         .scroll-reveal.stagger-3 { transition-delay: 0.3s; }
         .scroll-reveal.stagger-4 { transition-delay: 0.4s; }
         .scroll-reveal.stagger-5 { transition-delay: 0.5s; }
+
+        /* Optimized Scroll Indicator (scaleX) */
+        #ultimateScrollIndicator {
+            transition: transform 0.1s ease-out;
+            will-change: transform;
+        }
 
         /* Lightbox Gallery Navigation */
         .lightbox-nav {
@@ -766,36 +758,33 @@
         </div>
     </div>
 
-    <!-- Scroll Progress Bar (Banner at the very top) -->
-    <div id="scrollProgress" class="scroll-progress"></div>
-
     <!-- Custom Cursor Elements -->
     <div class="cursor-dot" id="cursorDot"></div>
     <div class="cursor-circle" id="cursorCircle"></div>
 
     <!-- HEADER NAVIGATION -->
     <header
-        class="fixed top-0 left-0 w-full z-50 bg-header-bg backdrop-blur-md border-b border-border-color transition-all duration-300"
-        style="background: var(--header-bg); border-color: var(--border-color);">
+        class="fixed top-0 left-0 w-full z-[1000] bg-black backdrop-blur-md border-b border-white/10 transition-all duration-300">
+        
+        <div id="ultimateScrollIndicator" class="absolute bottom-0 left-0 h-[3px] bg-yellow-400 z-[1001] w-full origin-left scale-x-0"></div>
+
         <div class="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
             <a href="#about"
                 class="text-lg md:text-2xl font-black text-white tracking-widest hover:text-accent transition-colors"
                 style="color: var(--text-color);">
                 YUTA GOTO
             </a>
-            <nav class="flex items-center gap-4">
-                <!-- Theme Toggle Button -->
-                <button id="themeToggle" class="p-2 mr-4 bg-white/5 border border-white/10 rounded-full hover:bg-accent hover:text-black transition-all" style="border-color: var(--border-color);">
-                    <i data-lucide="sun" class="w-4 h-4" id="themeIcon"></i>
-                </button>
-                <ul class="hidden md:flex items-center gap-4 font-bold tracking-wider">
+            <nav class="hidden md:block">
+                <ul class="flex items-center gap-8">
                     <li><a href="#about" class="btn2"><span class="spn2">ABOUT</span></a></li>
                     <li><a href="#works" class="btn2"><span class="spn2">WORKS</span></a></li>
-                    <li><a href="philosophy.html" class="btn2"><span class="spn2">PHILOSOPHY</span></a></li>
                     <li><a href="#journey" class="btn2"><span class="spn2">JOURNEY</span></a></li>
                     <li><a href="#awards" class="btn2"><span class="spn2">AWARDS</span></a></li>
+                    <li><a href="philosophy.html" class="btn2"><span class="spn2">PHILOSOPHY</span></a></li>
                 </ul>
             </nav>
+            <!-- Numerical percentage indicator -->
+            <div id="scrollPercentage" class="hidden sm:block text-accent font-mono text-[10px] md:text-xs opacity-60 ml-4 min-w-[40px] text-right">0%</div>
         </div>
     </header>
 
@@ -889,9 +878,12 @@
                         <div class="glow-text-card scroll-reveal">
                             <div class="content">
                                 <h4 class="text-white font-bold mb-3 flex items-center gap-2">Future Vision</h4>
-                                <p class="text-gray-400 text-sm leading-relaxed">
+                                <p class="text-gray-400 text-sm leading-relaxed mb-6">
                                     将来はこうした経験を生かして起業することを考えています。この思いに共感してくださる方、ぜひ1on1でお話ししましょう！🔥<br>(趣味: 野球観戦, 吹奏楽, 合唱, ポスター・ビラ・動画制作 / USJクルー経験あり)
                                 </p>
+                                <a href="contact.html" class="inline-flex items-center gap-2 px-6 py-3 bg-accent text-black font-black text-xs tracking-widest rounded-full hover:bg-yellow-400 transition-all hover:scale-105 active:scale-95 shadow-glow">
+                                    まずは気軽に面談しませんか？ <i data-lucide="mail" class="w-4 h-4"></i>
+                                </a>
                             </div>
                         </div>
 
@@ -1209,10 +1201,15 @@
         </div>
     </section>
 
-    <!-- FINAL CTA SECTION -->
+    <!-- FINAL CTA SECTION (FUTURE VISION) -->
     <section class="w-full max-w-5xl mx-auto px-6 py-32 text-center scroll-reveal">
         <div class="glow-text-card !rounded-3xl">
             <div class="content !p-12 md:!p-20 space-y-10">
+                <div class="flex items-center justify-center gap-4 mb-4">
+                    <span class="w-12 h-px bg-accent/30"></span>
+                    <span class="text-accent font-mono tracking-[0.4em] uppercase text-xs font-bold opacity-70">FUTURE VISION</span>
+                    <span class="w-12 h-px bg-accent/30"></span>
+                </div>
                 <h2 class="text-4xl md:text-7xl font-black tracking-tighter leading-none">
                     LET'S SHAPE THE <br/> <span class="text-accent">LOGICAL FUTURE</span> TOGETHER.
                 </h2>
@@ -1222,7 +1219,7 @@
                 </p>
                 <div class="flex flex-col md:flex-row items-center justify-center gap-6 pt-6">
                     <a href="contact.html" class="group relative px-10 py-5 bg-accent text-black font-black text-lg rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(255,204,0,0.3)]">
-                        <span class="relative z-10 flex items-center gap-3">TALK WITH ME <i data-lucide="arrow-right" class="w-5 h-5 transition-transform group-hover:translate-x-1"></i></span>
+                        <span class="relative z-10 flex items-center gap-3">CONTACT / お問い合わせ <i data-lucide="mail" class="w-5 h-5 transition-transform group-hover:rotate-12"></i></span>
                     </a>
                     <a href="philosophy.html" class="px-10 py-5 border border-white/20 text-white font-bold text-lg rounded-full hover:bg-white/5 transition-all">
                         READ PHILOSOPHY
@@ -1472,11 +1469,11 @@
 
         document.getElementById('lbPrev').addEventListener('click', (e) => {
             e.stopPropagation();
-            showLightbox((lbIndex - 1 + workImages.length) % workImages.length);
+            if (galleryImages.length > 0) showLightbox((lbIndex - 1 + galleryImages.length) % galleryImages.length);
         });
         document.getElementById('lbNext').addEventListener('click', (e) => {
             e.stopPropagation();
-            showLightbox((lbIndex + 1) % workImages.length);
+            if (galleryImages.length > 0) showLightbox((lbIndex + 1) % galleryImages.length);
         });
 
         lightbox.addEventListener('click', (e) => {
@@ -1485,13 +1482,15 @@
         document.addEventListener('keydown', (e) => {
             if (!lightbox.classList.contains('active')) return;
             if (e.key === 'Escape') closeLightbox();
-            if (e.key === 'ArrowLeft') showLightbox((lbIndex - 1 + workImages.length) % workImages.length);
-            if (e.key === 'ArrowRight') showLightbox((lbIndex + 1) % workImages.length);
+            if (e.key === 'ArrowLeft') showLightbox((lbIndex - 1 + galleryImages.length) % galleryImages.length);
+            if (e.key === 'ArrowRight') showLightbox((lbIndex + 1) % galleryImages.length);
         });
 
         // === 4. Back to Top ===
         const backToTopBtn = document.getElementById('backToTop');
-        backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        if (backToTopBtn) {
+            backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        }
 
         // === 10. Intro Animation ===
         const photoContainer = document.querySelector('#about .aspect-\\[4\\/5\\]');
@@ -1531,32 +1530,8 @@
         }
         resetAutoPlay();
 
-        // === 14. Theme Toggle Logic ===
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const body = document.body;
-
-        function updateThemeIcon() {
-            if (body.classList.contains('light-mode')) {
-                themeIcon.setAttribute('data-lucide', 'moon');
-            } else {
-                themeIcon.setAttribute('data-lucide', 'sun');
-            }
-            lucide.createIcons();
-        }
-
-        // Check saved theme
-        if (localStorage.getItem('theme') === 'light') {
-            body.classList.add('light-mode');
-            updateThemeIcon();
-        }
-
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('light-mode');
-            const isLight = body.classList.contains('light-mode');
-            localStorage.setItem('theme', isLight ? 'light' : 'dark');
-            updateThemeIcon();
-        });
+        // === 14. Theme Logic Removed (Always Dark Mode) ===
+        // body.classList.remove('light-mode'); // No action needed as default is dark
 
         // === 15. Custom Cursor Logic ===
         const cursorDot = document.getElementById('cursorDot');
@@ -1602,72 +1577,51 @@
             });
         });
 
-        // === Combined Scroll Handler & Navigation Sync ===
-        const navLinks = document.querySelectorAll('header nav ul li a');
-        
+        // Back to Top Visibility
+        const bttBtn = document.getElementById('backToTop');
         window.addEventListener('scroll', () => {
-            let cur = '';
-            const sections = document.querySelectorAll('section');
-            const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
-
-            sections.forEach(section => {
-                if (!section.offsetTop) return;
-                const top = section.offsetTop - 100;
-                if (scrollPos >= top) {
-                    cur = section.getAttribute('id');
+            const scrollPos = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+            if (bttBtn) {
+                if (scrollPos > 600) {
+                    bttBtn.classList.add('visible');
+                } else {
+                    bttBtn.classList.remove('visible');
                 }
-            });
-
-            // Update Active Link
-            navLinks.forEach(link => {
-                const parentBtn = link.closest('.btn2');
-                if (parentBtn) parentBtn.classList.toggle('active', link.getAttribute('href').includes(cur));
-            });
-
-            // Update Progress Bar
-            const winScroll = window.pageYOffset || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            const scrollProgressBar = document.getElementById('scrollProgress');
-            if (scrollProgressBar) scrollProgressBar.style.width = scrolled + "%";
-
-            // Back to Top Visibility
-            const backToTopBtn = document.getElementById('backToTop');
-            if (scrollPos > 500) {
-                backToTopBtn.classList.add('visible');
-            } else {
-                backToTopBtn.classList.remove('visible');
             }
-        });
 
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('light-mode');
-            const isLight = body.classList.contains('light-mode');
-            localStorage.setItem('theme', isLight ? 'light' : 'dark');
-            updateThemeIcon();
-        });
-
-        // === Combined Scroll Handler ===
-        window.addEventListener('scroll', () => {
-            let cur = '';
-            sections.forEach(s => {
-                const r = s.getBoundingClientRect();
-                if (r.top <= 120 && r.bottom > 120) cur = s.id;
-            });
-            navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + cur));
-            backToTopBtn.classList.toggle('visible', window.scrollY > 600);
-
-            // Progress bar
-            const h = document.documentElement.scrollHeight - window.innerHeight;
-            scrollProgressBar.style.width = h > 0 ? (window.scrollY / h * 100) + '%' : '0%';
-
-            // Parallax
-            if (photoContainer) {
+            // Parallax Photo Animation
+            const photoCont = document.querySelector('.parallax-photo');
+            if (photoCont) {
                 const speed = 0.15;
-                photoContainer.style.transform = `translateY(${window.scrollY * speed}px)`;
+                photoCont.style.transform = `translateY(${scrollPos * speed}px)`;
             }
         }, { passive: true });
     });
+    </script>
+
+    <!-- CRITICAL: Stand-alone Scroll Progress Script (Isolated from main errors) -->
+    <script>
+    (function() {
+        const bar = document.getElementById('ultimateScrollIndicator');
+        const pct = document.getElementById('scrollPercentage');
+        
+        function updateScroll() {
+            const scrollPos = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = docHeight > 0 ? scrollPos / docHeight : 0;
+
+            // Update Progress Line
+            if (bar) bar.style.transform = `scaleX(${scrolled})`;
+            
+            // Update Percentage Text
+            if (pct) pct.textContent = Math.round(scrolled * 100) + '%';
+            
+            requestAnimationFrame(updateScroll);
+        }
+        
+        // Use AnimationFrame for ultra-smooth performance and guaranteed recovery
+        updateScroll();
+    })();
     </script>
 
 </body>

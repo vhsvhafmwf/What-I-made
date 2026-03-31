@@ -243,16 +243,15 @@
             }
         }
 
-        /* Scroll Reveal */
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-        }
-
         .scroll-reveal.revealed {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Optimized Scroll Indicator (scaleX) */
+        #ultimateScrollIndicator {
+            transition: transform 0.1s ease-out;
+            will-change: transform;
         }
 
         /* Custom Cursor (Matched with index.html) */
@@ -281,18 +280,9 @@
         /* Magnetic Wrap */
         .btn2, .agenda-btn, .back-to-home a { transition: transform 0.2s linear; }
 
-        /* Scroll Progress Bar */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #ffcc00, #ffaa00);
-            width: 0%;
-            z-index: 9999;
-            transition: none;
-            box-shadow: 0 0 8px rgba(255, 204, 0, 0.6);
-            pointer-events: none;
+        /* Tailwind-based Scroll Indicator (Sync) */
+        #ultimateScrollIndicator {
+            transition: width 0.1s linear;
         }
 
         /* Philosophy Specific Styles */
@@ -502,9 +492,6 @@
 
 <body class="min-h-screen font-sans selection:bg-accent selection:text-black overflow-x-hidden pb-24 text-white">
 
-    <!-- Scroll Progress Bar -->
-    <div id="scrollProgress" class="scroll-progress"></div>
-
     <!-- Custom Cursor Elements -->
     <div class="cursor-dot" id="cursorDot"></div>
     <div class="cursor-circle" id="cursorCircle"></div>
@@ -521,7 +508,8 @@
 
     <!-- HEADER NAVIGATION -->
     <header
-        class="fixed top-0 left-0 w-full z-50 bg-header-bg backdrop-blur-md border-b border-border-color transition-all duration-300">
+        class="fixed top-0 left-0 w-full z-[1000] bg-black backdrop-blur-md border-b border-white/10 transition-all duration-300">
+        <div id="ultimateScrollIndicator" class="absolute bottom-0 left-0 h-[3px] bg-yellow-400 z-[1001] w-full origin-left scale-x-0"></div>
         <div class="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
             <a href="index.html"
                 class="text-lg md:text-2xl font-black text-white tracking-widest hover:text-accent transition-colors">
@@ -535,11 +523,6 @@
                     <li><a href="index.html#journey" class="btn2"><span class="spn2">JOURNEY</span></a></li>
                 </ul>
             </nav>
-            <div class="flex items-center gap-4">
-                <button id="themeToggle" class="p-2 rounded-full border border-border-color hover:bg-white/5 transition-colors">
-                    <i id="themeIcon" data-lucide="sun" class="w-5 h-5 text-accent"></i>
-                </button>
-            </div>
         </div>
     </header>
 
@@ -899,31 +882,7 @@
             // === 1. Initialize Icons ===
             lucide.createIcons();
 
-            // === 2. Theme Toggle Logic (Synced with index.html) ===
-            const themeToggle = document.getElementById('themeToggle');
-            const themeIcon = document.getElementById('themeIcon');
-            const body = document.body;
-
-            function updateThemeIcon() {
-                if (body.classList.contains('light-mode')) {
-                    themeIcon.setAttribute('data-lucide', 'moon');
-                } else {
-                    themeIcon.setAttribute('data-lucide', 'sun');
-                }
-                lucide.createIcons();
-            }
-
-            if (localStorage.getItem('theme') === 'light') {
-                body.classList.add('light-mode');
-                updateThemeIcon();
-            }
-
-            themeToggle.addEventListener('click', () => {
-                body.classList.toggle('light-mode');
-                const isLight = body.classList.contains('light-mode');
-                localStorage.setItem('theme', isLight ? 'light' : 'dark');
-                updateThemeIcon();
-            });
+            // === 2. Theme Logic Removed (Always Dark Mode) ===
 
             // === 3. Page Entrance Animation ===
             setTimeout(() => {
@@ -950,22 +909,13 @@
                 }
             });
 
-            // === 5. Scroll Progress Bar & Nav Sync ===
-            const scrollProgressBar = document.getElementById('scrollProgress');
+            // === 5. Navigation Sync (Stand-alone for active state) ===
             const navLinks = document.querySelectorAll('header nav ul li a');
-            
             window.addEventListener('scroll', () => {
-                const h = document.documentElement.scrollHeight - window.innerHeight;
-                const scrolled = h > 0 ? (window.scrollY / h * 100) : 0;
-                if (scrollProgressBar) scrollProgressBar.style.width = scrolled + '%';
-
-                // Simple active state check for primary nav
                 navLinks.forEach(link => {
                    const parentBtn = link.closest('.btn2');
                    if (parentBtn) {
-                       const isHomeLink = link.getAttribute('href').includes('index.html');
                        const isPhilosophy = link.getAttribute('href').includes('philosophy.html');
-                       // On philosophy.html, only highlight PHILOSOPHY link
                        parentBtn.classList.toggle('active', isPhilosophy);
                    }
                 });
@@ -1049,6 +999,31 @@
             window.addEventListener('scroll', scrollSpy);
             scrollSpy(); 
         });
+    </script>
+
+    <!-- CRITICAL: Stand-alone Scroll Progress Script (Isolated from main errors) -->
+    <script>
+    (function() {
+        const bar = document.getElementById('ultimateScrollIndicator');
+        const pct = document.getElementById('scrollPercentage');
+        
+        function updateScroll() {
+            const scrollPos = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = docHeight > 0 ? scrollPos / docHeight : 0;
+
+            // Update Progress Line
+            if (bar) bar.style.transform = `scaleX(${scrolled})`;
+            
+            // Update Percentage Text
+            if (pct) pct.textContent = Math.round(scrolled * 100) + '%';
+            
+            requestAnimationFrame(updateScroll);
+        }
+        
+        // Use AnimationFrame for ultra-smooth performance and guaranteed recovery
+        updateScroll();
+    })();
     </script>
 
 </body>
