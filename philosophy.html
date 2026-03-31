@@ -58,13 +58,33 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #f0f0f0;
+            --accent-color: #ffcc00;
+            --card-bg: rgba(23, 23, 23, 0.6);
+            --header-bg: rgba(10, 10, 10, 0.8);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --glow-color: rgba(255, 204, 0, 0.4);
+        }
+
+        body.light-mode {
+            --bg-color: #fcfcfc;
+            --text-color: #1a1a1a;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --header-bg: rgba(252, 252, 252, 0.9);
+            --border-color: rgba(0, 0, 0, 0.1);
+            --glow-color: rgba(255, 204, 0, 0.2);
+        }
+
         body {
-            background-color: #0a0a0a;
-            color: #f0f0f0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
         }
 
         ::selection {
-            background-color: #ffcc00;
+            background-color: var(--accent-color);
             color: #000;
         }
 
@@ -235,6 +255,32 @@
             transform: translateY(0);
         }
 
+        /* Custom Cursor (Matched with index.html) */
+        .cursor-dot, .cursor-circle {
+            pointer-events: none;
+            position: fixed;
+            top: 0; left: 0;
+            border-radius: 50%;
+            z-index: 99999;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+        }
+        .cursor-dot { width: 6px; height: 6px; background: var(--accent-color); }
+        .cursor-circle { 
+            width: 44px; height: 44px; 
+            border: 1px solid var(--accent-color); 
+            mix-blend-mode: difference;
+        }
+        body.light-mode .cursor-circle { border-color: rgba(0,0,0,0.5); }
+        .cursor-active { transform: scale(1.5); background: rgba(255, 204, 0, 0.1); border-color: var(--accent-color); }
+
+        @media (hover: none) {
+            .cursor-dot, .cursor-circle { display: none !important; }
+        }
+
+        /* Magnetic Wrap */
+        .btn2, .agenda-btn, .back-to-home a { transition: transform 0.2s linear; }
+
         /* Scroll Progress Bar */
         .scroll-progress {
             position: fixed;
@@ -246,6 +292,7 @@
             z-index: 9999;
             transition: none;
             box-shadow: 0 0 8px rgba(255, 204, 0, 0.6);
+            pointer-events: none;
         }
 
         /* Philosophy Specific Styles */
@@ -458,6 +505,10 @@
     <!-- Scroll Progress Bar -->
     <div id="scrollProgress" class="scroll-progress"></div>
 
+    <!-- Custom Cursor Elements -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-circle" id="cursorCircle"></div>
+
     <!-- Background -->
     <div class="fixed inset-0 w-screen h-screen -z-50 m-0 bg-[#0a0a0a]">
         <div class="absolute inset-0 w-full h-full overflow-hidden"
@@ -470,7 +521,7 @@
 
     <!-- HEADER NAVIGATION -->
     <header
-        class="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-gray-900 transition-all duration-300">
+        class="fixed top-0 left-0 w-full z-50 bg-header-bg backdrop-blur-md border-b border-border-color transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
             <a href="index.html"
                 class="text-lg md:text-2xl font-black text-white tracking-widest hover:text-accent transition-colors">
@@ -484,6 +535,11 @@
                     <li><a href="index.html#journey" class="btn2"><span class="spn2">JOURNEY</span></a></li>
                 </ul>
             </nav>
+            <div class="flex items-center gap-4">
+                <button id="themeToggle" class="p-2 rounded-full border border-border-color hover:bg-white/5 transition-colors">
+                    <i id="themeIcon" data-lucide="sun" class="w-5 h-5 text-accent"></i>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -840,16 +896,43 @@
     <!-- Scripts -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Initialize Icons
+            // === 1. Initialize Icons ===
             lucide.createIcons();
 
-            // Page entrance animation
+            // === 2. Theme Toggle Logic (Synced with index.html) ===
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const body = document.body;
+
+            function updateThemeIcon() {
+                if (body.classList.contains('light-mode')) {
+                    themeIcon.setAttribute('data-lucide', 'moon');
+                } else {
+                    themeIcon.setAttribute('data-lucide', 'sun');
+                }
+                lucide.createIcons();
+            }
+
+            if (localStorage.getItem('theme') === 'light') {
+                body.classList.add('light-mode');
+                updateThemeIcon();
+            }
+
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('light-mode');
+                const isLight = body.classList.contains('light-mode');
+                localStorage.setItem('theme', isLight ? 'light' : 'dark');
+                updateThemeIcon();
+            });
+
+            // === 3. Page Entrance Animation ===
             setTimeout(() => {
-                document.getElementById('heroText').classList.add('entered');
+                const heroText = document.getElementById('heroText');
+                if (heroText) heroText.classList.add('entered');
                 document.querySelectorAll('.page-entrance').forEach(el => el.classList.add('entered'));
             }, 300);
 
-            // Scroll Reveal
+            // === 4. Scroll Reveal ===
             const revealObs = new IntersectionObserver((entries) => {
                 entries.forEach(e => {
                     if (e.isIntersecting) {
@@ -867,52 +950,104 @@
                 }
             });
 
-            // Scroll Progress
+            // === 5. Scroll Progress Bar & Nav Sync ===
             const scrollProgressBar = document.getElementById('scrollProgress');
+            const navLinks = document.querySelectorAll('header nav ul li a');
+            
             window.addEventListener('scroll', () => {
                 const h = document.documentElement.scrollHeight - window.innerHeight;
-                scrollProgressBar.style.width = h > 0 ? (window.scrollY / h * 100) + '%' : '0%';
+                const scrolled = h > 0 ? (window.scrollY / h * 100) : 0;
+                if (scrollProgressBar) scrollProgressBar.style.width = scrolled + '%';
+
+                // Simple active state check for primary nav
+                navLinks.forEach(link => {
+                   const parentBtn = link.closest('.btn2');
+                   if (parentBtn) {
+                       const isHomeLink = link.getAttribute('href').includes('index.html');
+                       const isPhilosophy = link.getAttribute('href').includes('philosophy.html');
+                       // On philosophy.html, only highlight PHILOSOPHY link
+                       parentBtn.classList.toggle('active', isPhilosophy);
+                   }
+                });
             }, { passive: true });
 
-            // Agenda Toggle
-            const agendaToggle = document.getElementById('agendaToggle');
-            const agendaMenu = document.getElementById('agendaMenu');
-            agendaToggle.addEventListener('click', (e) => {
-                e.stopPropagation();
-                agendaMenu.classList.toggle('active');
-            });
-            document.addEventListener('click', () => {
-                agendaMenu.classList.remove('active');
-            });
-            agendaMenu.addEventListener('click', (e) => {
-                e.stopPropagation();
+            // === 6. Custom Cursor Logic ===
+            const cursorDot = document.getElementById('cursorDot');
+            const cursorCircle = document.getElementById('cursorCircle');
+            let mouseX = 0, mouseY = 0;
+            let circleX = 0, circleY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                cursorDot.style.opacity = '1';
+                cursorCircle.style.opacity = '1';
+                cursorDot.style.transform = `translate(${mouseX - 3}px, ${mouseY - 3}px)`;
             });
 
-            // Scroll Spy/Active state for Agenda
+            function animateCursor() {
+                circleX += (mouseX - circleX) * 0.15;
+                circleY += (mouseY - circleY) * 0.15;
+                cursorCircle.style.transform = `translate(${circleX - 22}px, ${circleY - 22}px)`;
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+
+            const interactables = document.querySelectorAll('a, button, .glow-text-card, .agenda-btn');
+            interactables.forEach(el => {
+                el.addEventListener('mouseenter', () => cursorCircle.classList.add('cursor-active'));
+                el.addEventListener('mouseleave', () => cursorCircle.classList.remove('cursor-active'));
+            });
+
+            // === 7. Magnetic Buttons ===
+            const magnets = document.querySelectorAll('.btn2, .agenda-btn, #themeToggle, .back-to-home a');
+            magnets.forEach((m) => {
+                m.addEventListener('mousemove', (e) => {
+                    const rect = m.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    m.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px) scale(1.05)`;
+                });
+                m.addEventListener('mouseleave', () => {
+                    m.style.transform = '';
+                });
+            });
+
+            // === 8. Agenda Toggle ===
+            const agendaToggle = document.getElementById('agendaToggle');
+            const agendaMenu = document.getElementById('agendaMenu');
+            if (agendaToggle) {
+                agendaToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    agendaMenu.classList.toggle('active');
+                });
+            }
+            document.addEventListener('click', () => {
+                if (agendaMenu) agendaMenu.classList.remove('active');
+            });
+            if (agendaMenu) {
+                agendaMenu.addEventListener('click', (e) => e.stopPropagation());
+            }
+
+            // === 9. Scroll Spy/Active state for Agenda ===
             const agendaLinks = document.querySelectorAll('.agenda-link');
             const scrollSpy = () => {
                 const sections = ['introduction', 'core', 'dynamics', 'paradox', 'dive', 'references'];
                 let current = '';
-
                 for (const id of sections) {
                     const section = document.getElementById(id);
                     if (section) {
                         const rect = section.getBoundingClientRect();
-                        if (rect.top <= 150) {
-                            current = id;
-                        }
+                        if (rect.top <= 150) current = id;
                     }
                 }
-
                 agendaLinks.forEach(link => {
                     link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${current}`) {
-                        link.classList.add('active');
-                    }
+                    if (link.getAttribute('href') === `#${current}`) link.classList.add('active');
                 });
             };
             window.addEventListener('scroll', scrollSpy);
-            scrollSpy(); // Initial call
+            scrollSpy(); 
         });
     </script>
 

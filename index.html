@@ -527,13 +527,17 @@
         .site-footer a { color: #888; text-decoration: none; transition: color 0.2s; }
         .site-footer a:hover { color: #ffcc00; }
 
-        /* Scroll Progress Bar */
+        /* Scroll Progress Bar (Matched with philosophy.html) */
         .scroll-progress {
-            position: absolute; top: 0; left: 0; height: 5px;
-            background: linear-gradient(90deg, #ffcc00, #ffaa00, #ffcc00);
-            width: 0%; z-index: 2147483647; /* Absolute maximum z-index */
-            transition: width 0.15s ease-out;
-            box-shadow: 0 0 20px rgba(255, 204, 0, 1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ffcc00, #ffaa00);
+            width: 0%;
+            z-index: 9999;
+            transition: none;
+            box-shadow: 0 0 8px rgba(255, 204, 0, 0.6);
             pointer-events: none;
         }
 
@@ -588,6 +592,33 @@
             color: rgba(255,255,255,0.5); font-size: 13px; font-family: 'Inter', monospace;
             letter-spacing: 3px;
         }
+
+        /* Custom Cursor */
+        .cursor-dot, .cursor-circle {
+            pointer-events: none;
+            position: fixed;
+            top: 0; left: 0;
+            border-radius: 50%;
+            z-index: 99999;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+        }
+        .cursor-dot { width: 6px; height: 6px; background: var(--accent-color); }
+        .cursor-circle { 
+            width: 44px; height: 44px; 
+            border: 1px solid var(--accent-color); 
+            mix-blend-mode: difference;
+        }
+        body.light-mode .cursor-circle { border-color: rgba(0,0,0,0.5); }
+        .cursor-active { transform: scale(1.5); background: rgba(255, 204, 0, 0.1); border-color: var(--accent-color); }
+
+        @media (hover: none) {
+            .cursor-dot, .cursor-circle { display: none !important; }
+        }
+
+        /* Magnetic Button Effect (JS applied) */
+        .magnetic-wrap { display: inline-block; }
+        .btn2, .floating-contact-btn, .canva-badge, .cta-btn, .back-to-top { transition: transform 0.2s linear; }
 
         /* Work Card Enhancements */
         .work-card {
@@ -735,12 +766,17 @@
         </div>
     </div>
 
+    <!-- Scroll Progress Bar (Banner at the very top) -->
+    <div id="scrollProgress" class="scroll-progress"></div>
+
+    <!-- Custom Cursor Elements -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-circle" id="cursorCircle"></div>
+
     <!-- HEADER NAVIGATION -->
     <header
         class="fixed top-0 left-0 w-full z-50 bg-header-bg backdrop-blur-md border-b border-border-color transition-all duration-300"
         style="background: var(--header-bg); border-color: var(--border-color);">
-        <!-- Scroll Progress Bar (Inside Header for perfect overlay) -->
-        <div id="scrollProgress" class="scroll-progress"></div>
         <div class="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
             <a href="#about"
                 class="text-lg md:text-2xl font-black text-white tracking-widest hover:text-accent transition-colors"
@@ -1461,8 +1497,6 @@
         const photoContainer = document.querySelector('#about .aspect-\\[4\\/5\\]');
         if (photoContainer) photoContainer.classList.add('parallax-photo');
 
-        const scrollProgressBar = document.getElementById('scrollProgress');
-
         // === 11. Carousel Slide Highlighting ===
         function updateDots() {
             if (!carousel) return;
@@ -1497,30 +1531,6 @@
         }
         resetAutoPlay();
 
-        // === 7. 3D Tilt on Work Images ===
-        document.querySelectorAll('#works .rounded-xl').forEach(card => {
-            card.classList.add('work-tilt');
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = (e.clientX - rect.left) / rect.width - 0.5;
-                const y = (e.clientY - rect.top) / rect.height - 0.5;
-                card.style.transform = `perspective(800px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg)`;
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(800px) rotateY(0) rotateX(0)';
-            });
-        });
-
-        // === 8. Staggered Scroll Reveal ===
-        document.querySelectorAll('#awards .gap-4 > div').forEach((el, i) => {
-            if (el.classList.contains('scroll-reveal')) el.classList.add('stagger-' + Math.min(i + 1, 5));
-        });
-        document.querySelectorAll('#works .gap-32 > div').forEach((el, i) => {
-            if (el.classList.contains('scroll-reveal')) el.classList.add('stagger-' + Math.min(i + 1, 5));
-        });
-
-
-
         // === 14. Theme Toggle Logic ===
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = document.getElementById('themeIcon');
@@ -1540,6 +1550,95 @@
             body.classList.add('light-mode');
             updateThemeIcon();
         }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            const isLight = body.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            updateThemeIcon();
+        });
+
+        // === 15. Custom Cursor Logic ===
+        const cursorDot = document.getElementById('cursorDot');
+        const cursorCircle = document.getElementById('cursorCircle');
+        
+        let mouseX = 0, mouseY = 0;
+        let circleX = 0, circleY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursorDot.style.opacity = '1';
+            cursorCircle.style.opacity = '1';
+            cursorDot.style.transform = `translate(${mouseX - 3}px, ${mouseY - 3}px)`;
+        });
+
+        function animateCursor() {
+            circleX += (mouseX - circleX) * 0.15;
+            circleY += (mouseY - circleY) * 0.15;
+            cursorCircle.style.transform = `translate(${circleX - 22}px, ${circleY - 22}px)`;
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Cursor hover effect for all links and buttons
+        const interactables = document.querySelectorAll('a, button, .work-item-container, .iso-pro');
+        interactables.forEach(el => {
+            el.addEventListener('mouseenter', () => cursorCircle.classList.add('cursor-active'));
+            el.addEventListener('mouseleave', () => cursorCircle.classList.remove('cursor-active'));
+        });
+
+        // === 16. Magnetic Button Effect ===
+        const magnets = document.querySelectorAll('.btn2, .floating-contact-btn, .canva-badge, .back-to-top');
+        magnets.forEach((m) => {
+            m.addEventListener('mousemove', (e) => {
+                const rect = m.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                m.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px) scale(1.05)`;
+            });
+            m.addEventListener('mouseleave', () => {
+                m.style.transform = '';
+            });
+        });
+
+        // === Combined Scroll Handler & Navigation Sync ===
+        const navLinks = document.querySelectorAll('header nav ul li a');
+        
+        window.addEventListener('scroll', () => {
+            let cur = '';
+            const sections = document.querySelectorAll('section');
+            const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+
+            sections.forEach(section => {
+                if (!section.offsetTop) return;
+                const top = section.offsetTop - 100;
+                if (scrollPos >= top) {
+                    cur = section.getAttribute('id');
+                }
+            });
+
+            // Update Active Link
+            navLinks.forEach(link => {
+                const parentBtn = link.closest('.btn2');
+                if (parentBtn) parentBtn.classList.toggle('active', link.getAttribute('href').includes(cur));
+            });
+
+            // Update Progress Bar
+            const winScroll = window.pageYOffset || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            const scrollProgressBar = document.getElementById('scrollProgress');
+            if (scrollProgressBar) scrollProgressBar.style.width = scrolled + "%";
+
+            // Back to Top Visibility
+            const backToTopBtn = document.getElementById('backToTop');
+            if (scrollPos > 500) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
 
         themeToggle.addEventListener('click', () => {
             body.classList.toggle('light-mode');
