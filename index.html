@@ -80,13 +80,33 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #f0f0f0;
+            --accent-color: #ffcc00;
+            --card-bg: rgba(23, 23, 23, 0.6);
+            --header-bg: rgba(10, 10, 10, 0.8);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --glow-color: rgba(255, 204, 0, 0.4);
+        }
+
+        body.light-mode {
+            --bg-color: #fcfcfc;
+            --text-color: #1a1a1a;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --header-bg: rgba(252, 252, 252, 0.9);
+            --border-color: rgba(0, 0, 0, 0.1);
+            --glow-color: rgba(255, 204, 0, 0.2);
+        }
+
         body {
-            background-color: #0a0a0a;
-            color: #f0f0f0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
         ::selection {
-            background-color: #ffcc00;
+            background-color: var(--accent-color);
             color: #000;
         }
 
@@ -259,7 +279,7 @@
             background: #171717;
             position: relative;
             border-radius: 10px;
-            padding: 2px; /* Border thickness */
+            padding: 2px; /* Border thickness for neon effect */
             transition: transform 0.3s;
             overflow: hidden;
             display: flex;
@@ -268,11 +288,47 @@
 
         .glow-text-card .content {
             border-radius: 8px;
-            background: rgba(15, 15, 15, 0.95);
+            background: var(--bg-color); /* Use theme bg color to mask internal rotation */
             width: 100%;
-            z-index: 1;
+            z-index: 10;
             position: relative;
-            padding: 1.5rem; /* Default inner spacing */
+            padding: 1.5rem;
+            /* Remove backdrop-filter to prevent light bleed inside */
+        }
+
+        .glow-text-card::before {    
+            content: " ";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 15rem;
+            height: 250%; 
+            background: linear-gradient(#ff2288, #387ef0);
+            transform: translate(-50%, -50%) rotate(0deg);
+            transform-origin: center;
+            opacity: 0;
+            transition: opacity 300ms;
+            animation: rotation_9018 6000ms infinite linear;
+            animation-play-state: paused;
+            z-index: 1;
+        }
+
+        .glow-text-card:hover::before {
+            opacity: 1;
+            animation-play-state: running;
+        }
+
+        .glow-text-card::after {
+            content: " ";
+            position: absolute;
+            inset: 0;
+            background: var(--bg-color);
+            z-index: 0;
+        }
+
+        @keyframes rotation_9018 {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
         .glow-text-card .content::before {
@@ -442,14 +498,22 @@
         /* Back to Top */
         .back-to-top {
             position: fixed; bottom: 30px; left: 30px;
-            width: 44px; height: 44px; border-radius: 50%;
-            background: #1a1c23; border: 1px solid rgba(255,204,0,0.3);
-            color: #ffcc00; display: flex; align-items: center; justify-content: center;
+            width: 50px; height: 50px; border-radius: 50%;
+            background: #1a1c23; border: 1px solid rgba(255,204,0,0.5);
+            color: #ffcc00; display: flex; flex-direction: column; align-items: center; justify-content: center;
             cursor: pointer; opacity: 0; pointer-events: none;
-            transition: all 0.3s; z-index: 100;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 100;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
         .back-to-top.visible { opacity: 1; pointer-events: auto; }
-        .back-to-top:hover { background: #23252e; border-color: rgba(255,255,255,0.5); color: #fff; transform: translateY(-2px); }
+        .back-to-top:hover { 
+            background: #ffcc00; color: #000; border-color: #ffcc00; 
+            transform: translateY(-5px); 
+            box-shadow: 0 15px 30px rgba(255,204,0,0.3);
+        }
+        .back-to-top span {
+            font-size: 8px; font-weight: 900; margin-top: -2px; letter-spacing: 0.05em;
+        }
 
         /* Active Nav */
         .btn2.active .spn2 { color: #ffcc00; }
@@ -465,11 +529,12 @@
 
         /* Scroll Progress Bar */
         .scroll-progress {
-            position: fixed; top: 0; left: 0; height: 3px;
-            background: linear-gradient(90deg, #ffcc00, #ffaa00);
-            width: 0%; z-index: 9999;
-            transition: none;
-            box-shadow: 0 0 8px rgba(255, 204, 0, 0.6);
+            position: absolute; top: 0; left: 0; height: 5px;
+            background: linear-gradient(90deg, #ffcc00, #ffaa00, #ffcc00);
+            width: 0%; z-index: 2147483647; /* Absolute maximum z-index */
+            transition: width 0.15s ease-out;
+            box-shadow: 0 0 20px rgba(255, 204, 0, 1);
+            pointer-events: none;
         }
 
         /* Carousel Dot Indicators */
@@ -524,11 +589,117 @@
             letter-spacing: 3px;
         }
 
-        /* About Entrance Animation */
-        .about-entrance {
-            opacity: 0; transform: translateY(24px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        /* Work Card Enhancements */
+        .work-card {
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
+        .work-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 20;
+            padding: 2rem;
+            text-align: center;
+            pointer-events: none; /* Let parent handle click */
+        }
+        .work-card:hover .work-overlay {
+            opacity: 1;
+        }
+        .canva-badge {
+            background: #00c4cc; /* Canva Brand Color */
+            color: white;
+            padding: 4px 12px;
+            border-radius: 99px;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 15px rgba(0, 196, 204, 0.4);
+        }
+        .view-detail-text {
+            color: #ffcc00;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            margin-top: 1rem;
+            border-bottom: 1px solid #ffcc00;
+            padding-bottom: 4px;
+        }
+
+        /* Detailed Work Modal */
+        .work-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(20px);
+            display: none;
+            overflow-y: auto;
+            padding: 4rem 1.5rem;
+        }
+        .work-modal.active {
+            display: block;
+            animation: modalFadeIn 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .modal-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .modal-close {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10001;
+        }
+        .modal-close:hover {
+            background: #ffcc00;
+            color: #000;
+            transform: rotate(90deg);
+        }
+        .modal-section-title {
+            color: #666;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .modal-section-title::after {
+            content: "";
+            height: 1px;
+            flex-grow: 1;
+            background: #333;
+        }
+
+        /* About Entrance Animation */
+
         .about-entrance.entered {
             opacity: 1; transform: translateY(0);
         }
@@ -543,8 +714,6 @@
 
 <body class="min-h-screen font-sans selection:bg-accent selection:text-black overflow-x-hidden pb-24 text-white">
 
-    <!-- Scroll Progress Bar -->
-    <div id="scrollProgress" class="scroll-progress"></div>
 
     <!-- SPLASH SCREEN GIMMICK (Curtain Rise) -->
     <div id="splashScreen"
@@ -568,14 +737,22 @@
 
     <!-- HEADER NAVIGATION -->
     <header
-        class="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-gray-900 transition-all duration-300">
+        class="fixed top-0 left-0 w-full z-50 bg-header-bg backdrop-blur-md border-b border-border-color transition-all duration-300"
+        style="background: var(--header-bg); border-color: var(--border-color);">
+        <!-- Scroll Progress Bar (Inside Header for perfect overlay) -->
+        <div id="scrollProgress" class="scroll-progress"></div>
         <div class="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
             <a href="#about"
-                class="text-lg md:text-2xl font-black text-white tracking-widest hover:text-accent transition-colors">
+                class="text-lg md:text-2xl font-black text-white tracking-widest hover:text-accent transition-colors"
+                style="color: var(--text-color);">
                 YUTA GOTO
             </a>
-            <nav>
-                <ul class="flex items-center gap-2 md:gap-4 font-bold tracking-wider">
+            <nav class="flex items-center gap-4">
+                <!-- Theme Toggle Button -->
+                <button id="themeToggle" class="p-2 mr-4 bg-white/5 border border-white/10 rounded-full hover:bg-accent hover:text-black transition-all" style="border-color: var(--border-color);">
+                    <i data-lucide="sun" class="w-4 h-4" id="themeIcon"></i>
+                </button>
+                <ul class="hidden md:flex items-center gap-4 font-bold tracking-wider">
                     <li><a href="#about" class="btn2"><span class="spn2">ABOUT</span></a></li>
                     <li><a href="#works" class="btn2"><span class="spn2">WORKS</span></a></li>
                     <li><a href="philosophy.html" class="btn2"><span class="spn2">PHILOSOPHY</span></a></li>
@@ -587,7 +764,7 @@
     </header>
 
     <!-- ABOUT SECTION (Top Page) -->
-    <section id="about" class="w-full min-h-screen max-w-7xl mx-auto px-6 pt-28 md:pt-40 pb-16">
+    <section id="about" class="w-full min-h-screen max-w-7xl mx-auto px-6 py-32 md:py-48">
         <div class="flex flex-col md:flex-row gap-16 items-center w-full">
             <div class="w-full md:w-5/12 relative group mt-8 md:mt-0">
                 <!-- Profile Photos (Carousel) -->
@@ -597,16 +774,18 @@
                         class="w-full h-full flex overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-smooth">
 
                         <!-- Photo 1 -->
-                        <div class="w-full h-full flex-shrink-0 snap-center relative group/photo">
+                        <div class="w-full h-full flex-shrink-0 snap-center relative group/photo active">
                             <img src="./assets/photo2-profile.jpg" alt="Yuta Goto"
                                 class="absolute inset-0 w-full h-full object-cover group-hover/photo:scale-105 transition-transform duration-700 pointer-events-none" />
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none z-10">
-                            </div>
-                            <div class="absolute bottom-6 left-6 z-20 pointer-events-none">
-                                <span class="text-accent font-mono text-xs tracking-widest font-bold block mb-1">01 /
-                                    03</span>
-                                <span class="text-white font-bold tracking-widest text-lg">Profile</span>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-10"></div>
+                            <div class="absolute bottom-10 left-10 z-20 flex flex-col gap-4">
+                                <div>
+                                    <span class="text-accent font-mono text-xs tracking-widest font-bold block mb-1">01 / 03</span>
+                                    <span class="text-white font-bold tracking-widest text-lg">Profile</span>
+                                </div>
+                                <a href="philosophy.html" class="inline-block px-6 py-2.5 bg-accent text-black font-bold text-[10px] tracking-[0.2em] rounded-full hover:bg-yellow-400 transition-all hover:scale-105 shadow-glow w-max">
+                                    READ PHILOSOPHY
+                                </a>
                             </div>
                         </div>
 
@@ -614,12 +793,9 @@
                         <div class="w-full h-full flex-shrink-0 snap-center relative group/photo">
                             <img src="./assets/photo1-trombone.jpg" alt="Brassband"
                                 class="absolute inset-0 w-full h-full object-cover group-hover/photo:scale-105 transition-transform duration-700 pointer-events-none" />
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none z-10">
-                            </div>
-                            <div class="absolute bottom-6 left-6 z-20 pointer-events-none">
-                                <span class="text-accent font-mono text-xs tracking-widest font-bold block mb-1">02 /
-                                    03</span>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-10"></div>
+                            <div class="absolute bottom-10 left-10 z-20">
+                                <span class="text-accent font-mono text-xs tracking-widest font-bold block mb-1">02 / 03</span>
                                 <span class="text-white font-bold tracking-widest text-lg">Brassband</span>
                             </div>
                         </div>
@@ -628,16 +804,12 @@
                         <div class="w-full h-full flex-shrink-0 snap-center relative group/photo">
                             <img src="./assets/photo3-choir.png" alt="Choir"
                                 class="absolute inset-0 w-full h-full object-cover group-hover/photo:scale-105 transition-transform duration-700 pointer-events-none" />
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none z-10">
-                            </div>
-                            <div class="absolute bottom-6 left-6 z-20 pointer-events-none">
-                                <span class="text-accent font-mono text-xs tracking-widest font-bold block mb-1">03 /
-                                    03</span>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-10"></div>
+                            <div class="absolute bottom-10 left-10 z-20">
+                                <span class="text-accent font-mono text-xs tracking-widest font-bold block mb-1">03 / 03</span>
                                 <span class="text-white font-bold tracking-widest text-lg">Choir</span>
                             </div>
                         </div>
-
                     </div>
 
                     <!-- Navigation Buttons -->
@@ -662,31 +834,30 @@
                 </div>
             </div>
 
-            <div class="w-full md:w-7/12 space-y-8">
-                <div>
-                    <h2 class="text-4xl md:text-6xl font-bold text-white mb-2">ABOUT ME</h2>
-                    <div class="w-20 h-1 bg-accent mb-6"></div>
-                    <p class="text-xl font-medium text-accent">同志社大学 法学部 法律学科</p>
-                    <h1 class="text-3xl font-bold text-white mt-1">後藤 優太 <span
-                            class="text-gray-500 text-sm font-normal tracking-widest pl-2">YUTA GOTO</span></h1>
-                </div>
+                    <div class="w-full md:w-7/12 space-y-8">
+                        <div class="scroll-reveal">
+                            <h2 class="text-4xl md:text-6xl font-bold text-white mb-2">ABOUT ME</h2>
+                            <div class="w-20 h-1 bg-accent mb-6"></div>
+                            <p class="text-xl font-medium text-accent">同志社大学 法学部 法律学科</p>
+                            <h1 class="text-3xl font-bold text-white mt-1">後藤 優太 <span class="text-gray-500 text-sm font-normal tracking-widest pl-2">YUTA GOTO</span></h1>
+                        </div>
 
-                <div class="glow-text-card mt-8">
-                    <div class="content space-y-4 font-light leading-relaxed text-gray-300">
-                        <p>私は現在、国際法模擬裁判で緻密な論理的思考力を強化する一方で、全国レベルでの合唱や吹奏楽、AIを活用した作業自動化やビジコンの運営など、一見するとバラバラな領域で活動しています。</p>
-                        <p>このように多岐にわたる分野に足を踏み入れているのには、明確な理由があります。それは、複数の領域を横断することで、日常に潜む「普遍的な論理」や、異なる要素が結びつく「相乗効果」を発見できるからです。</p>
-                        <p>そうした物事は本や伝聞で得られるものではなく、自ら体験することでしか得られません。だからこそ私は常に自分の感覚を更新し続けるため挑戦を止めません。</p>
-                    </div>
-                </div>
+                        <div class="glow-text-card mt-8 scroll-reveal">
+                            <div class="content space-y-4 font-light leading-relaxed text-gray-300">
+                                <p>私は現在、国際法模擬裁判で緻密な論理的思考力を強化する一方で、全国レベルでの合唱や吹奏楽、AIを活用した作業自動化やビジコンの運営など、一見するとバラバラな領域で活動しています。</p>
+                                <p>このように多岐にわたる分野に足を踏み入れているのには、明確な理由があります。それは、複数の領域を横断することで、日常に潜む「普遍的な論理」や、異なる要素が結びつく「相乗効果」を発見できるからです。</p>
+                                <p>そうした物事は本や伝聞で得られるものではなく、自ら体験することでしか得られません。だからこそ私は常に自分の感覚を更新し続けるため挑戦を止めません。</p>
+                            </div>
+                        </div>
 
-                <div class="glow-text-card">
-                    <div class="content">
-                        <h4 class="text-white font-bold mb-3 flex items-center gap-2">Future Vision</h4>
-                        <p class="text-gray-400 text-sm leading-relaxed">
-                            将来はこうした経験を生かして起業することを考えています。この思いに共感してくださる方、ぜひ1on1でお話ししましょう！🔥<br>(趣味: 野球観戦, 吹奏楽, 合唱, ポスター・ビラ・動画制作 / USJクルー経験あり)
-                        </p>
-                    </div>
-                </div>
+                        <div class="glow-text-card scroll-reveal">
+                            <div class="content">
+                                <h4 class="text-white font-bold mb-3 flex items-center gap-2">Future Vision</h4>
+                                <p class="text-gray-400 text-sm leading-relaxed">
+                                    将来はこうした経験を生かして起業することを考えています。この思いに共感してくださる方、ぜひ1on1でお話ししましょう！🔥<br>(趣味: 野球観戦, 吹奏楽, 合唱, ポスター・ビラ・動画制作 / USJクルー経験あり)
+                                </p>
+                            </div>
+                        </div>
 
                 <div class="flex flex-wrap gap-2 text-sm">
                     <span
@@ -740,7 +911,7 @@
     </section>
 
     <!-- WORKS SECTION -->
-    <section id="works" class="w-full max-w-7xl mx-auto px-6 py-24">
+    <section id="works" class="w-full max-w-7xl mx-auto px-6 py-32 md:py-48 scroll-mt-24">
         <div class="flex items-end justify-between mb-16">
             <h2 class="text-5xl md:text-7xl font-bold text-white relative inline-block">
                 SELECTED <br /> WORKS
@@ -750,13 +921,17 @@
 
         <div class="flex flex-col gap-32">
             <!-- Work 1 (Left Text, Right Image) -->
-            <div class="flex flex-col md:flex-row items-center gap-12 group">
+            <div class="flex flex-col md:flex-row items-center gap-12 group work-item-container scroll-reveal"
+                 data-title="JAPAN CUP 2026" 
+                 data-cat="Seminar Flyer"
+                 data-challenge="初学者でも手を止めて内容を確認したくなるような、圧倒的な視覚的インパクトの追求。"
+                 data-process="「論理を象徴する直線」と「情熱を象徴する黄」を大胆に組み合わせ、ターゲット層に刺さるモダンなタイポグラフィを核としたレイアウトを構築。"
+                 data-img="./assets/work1-moot-court.jpg">
                 <div class="w-full md:w-1/2 space-y-4 order-2 md:order-1">
-                    <span
-                        class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold flex items-center gap-3"><span
-                            class="w-8 h-px bg-accent"></span>Seminar</span>
-                    <h3
-                        class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">
+                    <span class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold flex items-center gap-3">
+                        <span class="w-8 h-px bg-accent"></span>Seminar
+                    </span>
+                    <h3 class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">
                         JAPAN CUP 2026</h3>
                     <div class="glow-text-card mt-4">
                         <div class="content !p-5">
@@ -767,29 +942,39 @@
                     </div>
                 </div>
                 <div class="w-full md:w-1/2 order-1 md:order-2">
-                    <div
-                        class="relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
-                        <img src="./assets/work1-moot-court.jpg" alt="JAPAN CUP"
-                            class="w-full h-auto object-contain bg-gray-900" />
+                    <div class="work-card relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
+                        <img src="./assets/work1-moot-court.jpg" alt="JAPAN CUP" class="w-full h-auto object-contain bg-gray-900" />
+                        <div class="work-overlay">
+                            <div class="canva-badge">DESIGNED WITH CANVA</div>
+                            <p class="text-white text-sm font-medium">論理と情熱の視覚化</p>
+                            <div class="view-detail-text">VIEW STORY</div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Work 2 (Left Image, Right Text) -->
-            <div class="flex flex-col md:flex-row items-center gap-12 group">
+            <div class="flex flex-col md:flex-row items-center gap-12 group work-item-container scroll-reveal"
+                 data-title="WELL HUNTING"
+                 data-cat="Event Poster"
+                 data-challenge="「就活＝重苦しい」という先入観を払拭し、自分らしさを肯定できるポジティブな空間の演出。"
+                 data-process="感情の機微を表現する余白と、信頼感を与えるミニマルな配置を徹底。Canvaの素材をカスタマイズし、高級感のあるトーンに統一。"
+                 data-img="./assets/work2-well-hunting.jpg">
                 <div class="w-full md:w-1/2 order-1 md:order-1">
-                    <div
-                        class="relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
-                        <img src="./assets/work2-well-hunting.jpg" alt="WELL HUNTING by Rubyin"
-                            class="w-full h-auto object-contain bg-gray-900" />
+                    <div class="work-card relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
+                        <img src="./assets/work2-well-hunting.jpg" alt="WELL HUNTING by Rubyin" class="w-full h-auto object-contain bg-gray-900" />
+                        <div class="work-overlay">
+                            <div class="canva-badge">DESIGNED WITH CANVA</div>
+                            <p class="text-white text-sm font-medium">ありのままを魅せる就活</p>
+                            <div class="view-detail-text">VIEW STORY</div>
+                        </div>
                     </div>
                 </div>
                 <div class="w-full md:w-1/2 space-y-4 order-2 md:order-2">
-                    <span
-                        class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold flex items-center gap-3"><span
-                            class="w-8 h-px bg-accent"></span>Event</span>
-                    <h3
-                        class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">
+                    <span class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold flex items-center gap-3">
+                        <span class="w-8 h-px bg-accent"></span>Event
+                    </span>
+                    <h3 class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">
                         WELL HUNTING</h3>
                     <div class="glow-text-card mt-4">
                         <div class="content !p-5">
@@ -802,13 +987,17 @@
             </div>
 
             <!-- Work 3 (Left Text, Right Image) -->
-            <div class="flex flex-col md:flex-row items-center gap-12 group">
+            <div class="flex flex-col md:flex-row items-center gap-12 group work-item-container scroll-reveal"
+                 data-title="Business Contest WING"
+                 data-cat="Promotion Poster"
+                 data-challenge="挑戦者の「初めの一歩」を後押しする、躍動感とスケール感の共存。"
+                 data-process="「羽ばたく」というコンセプトに基づき、対角線上の構図と光の演出を多用。テキストと情報の優先順位を整理し、一瞬で概要が伝わる視認性を確保。"
+                 data-img="./assets/work3-wing.jpg">
                 <div class="w-full md:w-1/2 space-y-4 order-2 md:order-1">
-                    <span
-                        class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold flex items-center gap-3"><span
-                            class="w-8 h-px bg-accent"></span>Contest</span>
-                    <h3
-                        class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">
+                    <span class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold flex items-center gap-3">
+                        <span class="w-8 h-px bg-accent"></span>Contest
+                    </span>
+                    <h3 class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">
                         Business Contest WING</h3>
                     <div class="glow-text-card mt-4">
                         <div class="content !p-5">
@@ -819,29 +1008,39 @@
                     </div>
                 </div>
                 <div class="w-full md:w-1/2 order-1 md:order-2">
-                    <div
-                        class="relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
-                        <img src="./assets/work3-wing.jpg" alt="Business Contest WING"
-                            class="w-full h-auto object-contain bg-gray-900" />
+                    <div class="work-card relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
+                        <img src="./assets/work3-wing.jpg" alt="Business Contest WING" class="w-full h-auto object-contain bg-gray-900" />
+                        <div class="work-overlay">
+                            <div class="canva-badge">DESIGNED WITH CANVA</div>
+                            <p class="text-white text-sm font-medium">未来へ羽ばたく情熱</p>
+                            <div class="view-detail-text">VIEW STORY</div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Work 4 (Left Image, Right Text) -->
-            <div class="flex flex-col md:flex-row items-center gap-12 group">
+            <div class="flex flex-col md:flex-row items-center gap-12 group work-item-container scroll-reveal"
+                 data-title="同志社グリークラブ 団員募集"
+                 data-cat="Member Recruitment"
+                 data-challenge="120年の伝統と現代の感性の融合を、一目で感じさせる強烈なインパクト。"
+                 data-process="伝統に敬意を払い、力強い筆文字と洗練されたレイアウトを融合。合唱の「共鳴」をディテールの装飾（ドットやライン）で施し、多次元的な魅力を構築。"
+                 data-img="./assets/work4-glee-club.jpg">
                 <div class="w-full md:w-1/2 order-1 md:order-1">
-                    <div
-                        class="relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
-                        <img src="./assets/work4-glee-club.jpg" alt="同志社グリークラブ 団員大募集"
-                            class="w-full h-auto object-contain bg-gray-900" />
+                    <div class="work-card relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
+                        <img src="./assets/work4-glee-club.jpg" alt="同志社グリークラブ 団員大募集" class="w-full h-auto object-contain bg-gray-900" />
+                        <div class="work-overlay">
+                            <div class="canva-badge">DESIGNED WITH CANVA</div>
+                            <p class="text-white text-sm font-medium">伝統と革新のハーモニー</p>
+                            <div class="view-detail-text">VIEW STORY</div>
+                        </div>
                     </div>
                 </div>
                 <div class="w-full md:w-1/2 space-y-4 order-2 md:order-2">
-                    <span
-                        class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold flex items-center gap-3"><span
-                            class="w-8 h-px bg-accent"></span>Performance</span>
-                    <h3
-                        class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">
+                    <span class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold flex items-center gap-3">
+                        <span class="w-8 h-px bg-accent"></span>Performance
+                    </span>
+                    <h3 class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">
                         同志社グリークラブ</h3>
                     <div class="glow-text-card mt-4">
                         <div class="content !p-5">
@@ -856,7 +1055,7 @@
     </section>
 
     <!-- TIMELINE SECTION -->
-    <section id="journey" class="w-full max-w-4xl mx-auto px-6 py-24 border-t border-gray-900 mt-10">
+    <section id="journey" class="w-full max-w-4xl mx-auto px-6 py-32 md:py-48 border-t border-border-color mt-10">
         <div class="text-center mb-16">
             <h2 class="text-4xl md:text-6xl font-bold text-white mb-4">THE JOURNEY</h2>
             <p class="text-gray-400">Extracurricular milestones and achievements</p>
@@ -925,7 +1124,7 @@
     </section>
 
     <!-- AWARDS SECTION -->
-    <section id="awards" class="w-full max-w-4xl mx-auto px-6 py-24 border-t border-gray-900 mt-10">
+    <section id="awards" class="w-full max-w-4xl mx-auto px-6 py-32 md:py-48 border-t border-border-color mt-10">
         <div class="text-center mb-16">
             <h2 class="text-4xl md:text-6xl font-bold text-white mb-4">AWARDS</h2>
             <p class="text-gray-400">受賞歴・実績</p>
@@ -974,6 +1173,29 @@
         </div>
     </section>
 
+    <!-- FINAL CTA SECTION -->
+    <section class="w-full max-w-5xl mx-auto px-6 py-32 text-center scroll-reveal">
+        <div class="glow-text-card !rounded-3xl">
+            <div class="content !p-12 md:!p-20 space-y-10">
+                <h2 class="text-4xl md:text-7xl font-black tracking-tighter leading-none">
+                    LET'S SHAPE THE <br/> <span class="text-accent">LOGICAL FUTURE</span> TOGETHER.
+                </h2>
+                <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
+                    論理と感性が交差する場所に、新しい価値が生まれます。<br/>
+                    1on1のご相談、プロジェクトへの参画、雑談まで、お気軽にご連絡ください。
+                </p>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-6 pt-6">
+                    <a href="contact.html" class="group relative px-10 py-5 bg-accent text-black font-black text-lg rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(255,204,0,0.3)]">
+                        <span class="relative z-10 flex items-center gap-3">TALK WITH ME <i data-lucide="arrow-right" class="w-5 h-5 transition-transform group-hover:translate-x-1"></i></span>
+                    </a>
+                    <a href="philosophy.html" class="px-10 py-5 border border-white/20 text-white font-bold text-lg rounded-full hover:bg-white/5 transition-all">
+                        READ PHILOSOPHY
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Carousel Script -->
     <script>
         function scrollCarousel(direction) {
@@ -1014,6 +1236,10 @@
             // 3. 幕が上がる（上にスライド）
             setTimeout(() => {
                 splash.classList.add('-translate-y-full');
+                // 幕が上がり始めたと同時にAboutセクションのアニメーションを開始
+                document.querySelectorAll('#about .scroll-reveal').forEach((el, i) => {
+                    setTimeout(() => el.classList.add('revealed'), i * 200);
+                });
             }, 2600);
 
             // 4. スクロール制限を解除し、裏で非表示に
@@ -1043,6 +1269,48 @@
         </div>
     </footer>
 
+    <!-- Detailed Work Modal -->
+    <div id="workModal" class="work-modal">
+        <button class="modal-close" id="modalClose" aria-label="Close">
+            <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+        <div class="modal-content">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+                <!-- Image Side -->
+                <div class="space-y-6">
+                    <img id="modalImg" src="" alt="" class="w-full h-auto rounded-2xl shadow-2xl border border-white/10">
+                    <div class="flex items-center gap-4">
+                        <div class="canva-badge">CANVA</div>
+                        <span class="text-gray-500 text-xs font-mono uppercase tracking-widest" id="modalCat"></span>
+                    </div>
+                </div>
+                <!-- Text Side -->
+                <div class="space-y-12">
+                    <div>
+                        <h2 id="modalTitle" class="text-3xl md:text-5xl font-bold text-white mb-2"></h2>
+                        <div class="w-16 h-1 bg-accent"></div>
+                    </div>
+
+                    <div class="space-y-8">
+                        <div>
+                            <h4 class="modal-section-title">Challenge</h4>
+                            <p id="modalChallenge" class="text-gray-300 leading-relaxed font-light text-lg"></p>
+                        </div>
+                        <div>
+                            <h4 class="modal-section-title">Logical Process</h4>
+                            <p id="modalProcess" class="text-gray-400 leading-relaxed font-light"></p>
+                        </div>
+                    </div>
+
+                    <div class="pt-8 border-t border-white/5">
+                        <p class="text-xs text-gray-600 mb-4 italic">※当制作物はCanvaを用いて、思考のスピードを最大化しつつクオリティを追求し、すべて独力で制作したものです。</p>
+                        <button id="closeStoryBtn" class="px-8 py-3 bg-white/5 border border-white/20 text-white rounded-full text-xs font-bold tracking-widest hover:bg-accent hover:text-black hover:border-accent transition-all">CLOSE STORY</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Lightbox Overlay -->
     <div id="lightbox" class="lightbox-overlay">
         <button class="lightbox-close" aria-label="Close">&times;</button>
@@ -1058,9 +1326,10 @@
 
     <!-- Back to Top Button -->
     <button id="backToTop" class="back-to-top" aria-label="Back to top">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="18 15 12 9 6 15"></polyline>
         </svg>
+        <span>TOP</span>
     </button>
 
     <!-- Floating Contact Button (From Uiverse.io by barisdogansutcu) -->
@@ -1076,6 +1345,7 @@
     document.addEventListener("DOMContentLoaded", () => {
         // === 1. Scroll Reveal ===
         const revealEls = [
+            ...document.querySelectorAll('#about .scroll-reveal'),
             document.querySelector('#works > div:first-child'),
             ...document.querySelectorAll('#works .gap-32 > div'),
             document.querySelector('#journey > div:first-child'),
@@ -1100,27 +1370,64 @@
             }
         });
 
-        // === 2. Active Section Highlighting ===
-        const navLinks = document.querySelectorAll('header .btn2');
-        const sections = document.querySelectorAll('section[id]');
+        // === 3. Work Details Modal ===
+        const workModal = document.getElementById('workModal');
+        const modalImg = document.getElementById('modalImg');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalCat = document.getElementById('modalCat');
+        const modalChallenge = document.getElementById('modalChallenge');
+        const modalProcess = document.getElementById('modalProcess');
+        const workItems = document.querySelectorAll('.work-item-container');
+        const closeStoryBtn = document.getElementById('closeStoryBtn');
 
-        // === 3. Lightbox Gallery ===
+        function openWorkModal(el) {
+            modalImg.src = el.dataset.img;
+            modalTitle.innerText = el.dataset.title;
+            modalCat.innerText = el.dataset.cat;
+            modalChallenge.innerText = el.dataset.challenge;
+            modalProcess.innerText = el.dataset.process;
+            
+            workModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons(); // 閉じるボタンの再描画
+        }
+
+        function closeWorkModal() {
+            workModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        workItems.forEach(item => {
+            item.addEventListener('click', () => openWorkModal(item));
+        });
+
+        // モーダル内のボタンにもイベントを登録
+        if (closeStoryBtn) closeStoryBtn.addEventListener('click', closeWorkModal);
+        document.getElementById('modalClose').addEventListener('click', closeWorkModal);
+
+        workModal.addEventListener('click', (e) => {
+            if (e.target === workModal) closeWorkModal();
+        });
+
+        // === 14. Lightbox Gallery (Removed works images to prevent conflict) ===
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightboxImg');
         const lbCounter = document.getElementById('lbCounter');
-        const workImages = [...document.querySelectorAll('#works .rounded-xl img')];
+        // 他のギャラリーがあればここに追加可能
+        const galleryImages = []; 
         let lbIndex = 0;
 
         function showLightbox(idx) {
+            if (galleryImages.length === 0) return;
             lbIndex = idx;
-            lightboxImg.src = workImages[idx].src;
-            lightboxImg.alt = workImages[idx].alt;
-            lbCounter.textContent = (idx + 1) + ' / ' + workImages.length;
+            lightboxImg.src = galleryImages[idx].src;
+            lightboxImg.alt = galleryImages[idx].alt;
+            lbCounter.textContent = (idx + 1) + ' / ' + galleryImages.length;
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
-        workImages.forEach((img, i) => img.addEventListener('click', () => showLightbox(i)));
+        galleryImages.forEach((img, i) => img.addEventListener('click', () => showLightbox(i)));
 
         const closeLightbox = () => {
             lightbox.classList.remove('active');
@@ -1150,18 +1457,21 @@
         const backToTopBtn = document.getElementById('backToTop');
         backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-        // === 5. Scroll Progress Bar ===
+        // === 10. Intro Animation ===
+        const photoContainer = document.querySelector('#about .aspect-\\[4\\/5\\]');
+        if (photoContainer) photoContainer.classList.add('parallax-photo');
+
         const scrollProgressBar = document.getElementById('scrollProgress');
 
-        // === 6. Carousel Dots + Auto-play ===
-        const carousel = document.getElementById('photoCarousel');
-        const dots = document.querySelectorAll('#carouselDots button');
-        let autoPlayTimer;
-
+        // === 11. Carousel Slide Highlighting ===
         function updateDots() {
             if (!carousel) return;
             const idx = Math.round(carousel.scrollLeft / carousel.clientWidth);
             dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+            
+            // Add 'active' class to current slide for overlay transition
+            const slides = carousel.querySelectorAll('.snap-center');
+            slides.forEach((s, i) => s.classList.toggle('active', i === idx));
         }
 
         if (carousel) {
@@ -1209,18 +1519,34 @@
             if (el.classList.contains('scroll-reveal')) el.classList.add('stagger-' + Math.min(i + 1, 5));
         });
 
-        // === 9. About Entrance Animation (after splash) ===
-        const aboutEls = document.querySelectorAll('#about > div > div');
-        aboutEls.forEach((el, i) => el.classList.add('about-entrance'));
-        setTimeout(() => {
-            aboutEls.forEach((el, i) => {
-                setTimeout(() => el.classList.add('entered'), i * 200);
-            });
-        }, 3200); // after splash finishes
 
-        // === 10. Parallax on Profile Photo ===
-        const photoContainer = document.querySelector('#about .aspect-\\[4\\/5\\]');
-        if (photoContainer) photoContainer.classList.add('parallax-photo');
+
+        // === 14. Theme Toggle Logic ===
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const body = document.body;
+
+        function updateThemeIcon() {
+            if (body.classList.contains('light-mode')) {
+                themeIcon.setAttribute('data-lucide', 'moon');
+            } else {
+                themeIcon.setAttribute('data-lucide', 'sun');
+            }
+            lucide.createIcons();
+        }
+
+        // Check saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            body.classList.add('light-mode');
+            updateThemeIcon();
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            const isLight = body.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            updateThemeIcon();
+        });
 
         // === Combined Scroll Handler ===
         window.addEventListener('scroll', () => {
