@@ -585,6 +585,55 @@
             letter-spacing: 3px;
         }
 
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: flex; flex-direction: column; gap: 6px;
+            background: none; border: none; padding: 12px; cursor: pointer; z-index: 99999;
+            margin: -8px; /* Offset the padding to keep visual alignment */
+        }
+        .menu-toggle span {
+            width: 26px; height: 3px; background: #fff;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .menu-toggle.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); background: #ffcc00; }
+        .menu-toggle.open span:nth-child(2) { opacity: 0; }
+        .menu-toggle.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background: #ffcc00; }
+
+        /* Mobile Menu Overlay & Staggered Animation */
+        #mobileMenu {
+            position: fixed; inset: 0; background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(30px); z-index: 99998;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 3.5rem; opacity: 0; pointer-events: none;
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            transform: translateY(-20px);
+        }
+        #mobileMenu.active { opacity: 1; pointer-events: auto; transform: translateY(0); }
+        #mobileMenu a {
+            font-size: 2.8rem; font-weight: 700; letter-spacing: 0.15em;
+            color: #fff; text-decoration: none; transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            position: relative; line-height: 1.2;
+            transform: translateY(40px); opacity: 0;
+        }
+        #mobileMenu.active a { transform: translateY(0); opacity: 1; }
+        #mobileMenu a.active { color: var(--accent-color); }
+        #mobileMenu a::after {
+            content: ""; position: absolute; bottom: -12px; left: 0; width: 0; height: 4px;
+            background: var(--accent-color); transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        #mobileMenu a.active::after { width: 100%; }
+
+        /* Stagger Delays */
+        #mobileMenu.active a:nth-child(1) { transition-delay: 0.1s; }
+        #mobileMenu.active a:nth-child(2) { transition-delay: 0.2s; }
+        #mobileMenu.active a:nth-child(3) { transition-delay: 0.3s; }
+        #mobileMenu.active a:nth-child(4) { transition-delay: 0.4s; }
+        #mobileMenu.active a:nth-child(5) { transition-delay: 0.5s; }
+        @keyframes rotate-ccw {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+
         /* Custom Cursor */
         .cursor-dot, .cursor-circle {
             pointer-events: none;
@@ -595,52 +644,58 @@
             opacity: 0;
             transition: opacity 0.3s, transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
         }
-        .cursor-dot { width: 6px; height: 6px; background: var(--accent-color); }
+        .cursor-dot { width: 12px; height: 12px; background: var(--accent-color); }
         .cursor-circle { 
             width: 44px; height: 44px; 
             border: 1px solid var(--accent-color); 
             mix-blend-mode: difference;
         }
-
-        /* Mobile Menu */
-        .menu-toggle {
-            display: flex; flex-direction: column; gap: 6px;
-            background: transparent; border: none; cursor: pointer;
-            padding: 10px; z-index: 1002; position: relative;
+        .cursor-circle::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: repeating-conic-gradient(
+                var(--accent-color) 0deg 15deg,
+                transparent 15deg 35deg
+            );
+            mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px + 1px));
+            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px + 1px));
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
         }
-        .menu-toggle span {
-            width: 24px; height: 2px; background: #fff;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .menu-toggle.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); background: #ffcc00; }
-        .menu-toggle.open span:nth-child(2) { opacity: 0; }
-        .menu-toggle.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background: #ffcc00; }
-
-        #mobileMenu {
-            position: fixed; inset: 0; background: rgba(10, 10, 10, 0.98);
-            backdrop-filter: blur(30px); z-index: 1001;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            gap: 2.5rem; opacity: 0; pointer-events: none;
-            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-            transform: translateY(-20px);
-        }
-        #mobileMenu.active { opacity: 1; pointer-events: auto; transform: translateY(0); }
-        #mobileMenu a {
-            font-size: 1.5rem; font-weight: 900; letter-spacing: 0.3em;
-            color: #fff; text-decoration: none; transition: all 0.3s;
-            position: relative;
-        }
-        #mobileMenu a::after {
-            content: ""; position: absolute; bottom: -8px; left: 0; width: 0; height: 2px;
-            background: #ffcc00; transition: width 0.3s;
-        }
-        #mobileMenu a.text-accent::after { width: 100%; }
-
-        body.light-mode .cursor-circle { border-color: rgba(0,0,0,0.5); }
         .cursor-active { transform: scale(1.5); background: rgba(255, 204, 0, 0.1); border-color: var(--accent-color); }
+
+        /* Cursor text label (VIEW) */
+        .cursor-circle span {
+            opacity: 0; font-size: 9px; font-weight: 900;
+            letter-spacing: 0.2em; color: var(--accent-color);
+            transition: opacity 0.2s, transform 0.2s;
+            pointer-events: none;
+            transform: translate(18px, -18px);
+        }
+        .cursor-text {
+            width: 80px !important; height: 80px !important;
+            background: rgba(255, 204, 0, 0.08) !important;
+            border-color: transparent !important; 
+            display: flex; align-items: center; justify-content: center;
+            mix-blend-mode: normal !important;
+        }
+        .cursor-text::before {
+            opacity: 1;
+            animation: rotate-ccw 6s linear infinite;
+        }
+        .cursor-text span { opacity: 1; }
+
+        /* Hide default cursor */
+        body { cursor: none; }
+        a, button, .work-item-container, .iso-pro, .work-card, .menu-toggle { cursor: none !important; }
 
         @media (hover: none) {
             .cursor-dot, .cursor-circle { display: none !important; }
+            body { cursor: auto; }
+            a, button, .work-item-container, .iso-pro, .work-card, .menu-toggle { cursor: auto !important; }
         }
 
         /* Magnetic Button Effect (JS applied) */
@@ -767,11 +822,24 @@
             will-change: transform;
             transition: transform 0.1s linear;
         }
+
+        /* Page Transition Overlay */
+        .page-transition {
+            position: fixed; inset: 0;
+            background: #0a0a0a;
+            z-index: 99998;
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+        .page-transition.done { opacity: 0; }
     </style>
 </head>
 
 <body class="min-h-screen font-sans selection:bg-accent selection:text-black overflow-x-hidden pb-24 text-white">
 
+    <!-- Page Transition Overlay -->
+    <div class="page-transition" id="pageTransition"></div>
 
     <!-- SPLASH SCREEN GIMMICK (Curtain Rise) -->
     <div id="splashScreen"
@@ -795,11 +863,12 @@
 
     <!-- Custom Cursor Elements -->
     <div class="cursor-dot" id="cursorDot"></div>
-    <div class="cursor-circle" id="cursorCircle"></div>
+    <div class="cursor-circle" id="cursorCircle"><span></span></div>
+
 
     <!-- HEADER NAVIGATION -->
     <header
-        class="fixed top-0 left-0 w-full z-[1000] bg-black backdrop-blur-md border-b border-white/10 transition-all duration-300">
+        class="fixed top-0 left-0 w-full z-[1100] bg-black backdrop-blur-md border-b border-white/10 transition-all duration-300">
         
         <div id="ultimateScrollIndicator" class="absolute bottom-0 left-0 h-[3px] bg-yellow-400 z-[1001] w-full origin-left scale-x-0"></div>
 
@@ -811,11 +880,11 @@
             </a>
             <nav class="hidden md:block">
                 <ul class="flex items-center gap-8">
-                    <li><a href="#about" class="btn2"><span class="spn2">ABOUT</span></a></li>
-                    <li><a href="#works" class="btn2"><span class="spn2">WORKS</span></a></li>
-                    <li><a href="#journey" class="btn2"><span class="spn2">JOURNEY</span></a></li>
-                    <li><a href="#awards" class="btn2"><span class="spn2">AWARDS</span></a></li>
-                    <li><a href="philosophy.html" class="btn2"><span class="spn2">PHILOSOPHY</span></a></li>
+                    <li><a href="#about" class="btn2" data-cursor="GO"><span class="spn2">ABOUT</span></a></li>
+                    <li><a href="#works" class="btn2" data-cursor="GO"><span class="spn2">WORKS</span></a></li>
+                    <li><a href="#journey" class="btn2" data-cursor="GO"><span class="spn2">JOURNEY</span></a></li>
+                    <li><a href="#awards" class="btn2" data-cursor="GO"><span class="spn2">AWARDS</span></a></li>
+                    <li><a href="philosophy.html" class="btn2" data-cursor="READ"><span class="spn2">PHILOSOPHY</span></a></li>
                 </ul>
             </nav>
             <!-- Mobile Menu Toggle Button -->
@@ -829,11 +898,11 @@
 
     <!-- MOBILE MENU OVERLAY -->
     <div id="mobileMenu">
-        <a href="#about">ABOUT</a>
-        <a href="#works">WORKS</a>
-        <a href="#journey">JOURNEY</a>
-        <a href="#awards">AWARDS</a>
-        <a href="philosophy.html">PHILOSOPHY</a>
+        <a href="#about" data-cursor="GO">ABOUT</a>
+        <a href="#works" data-cursor="GO">WORKS</a>
+        <a href="#journey" data-cursor="GO">JOURNEY</a>
+        <a href="#awards" data-cursor="GO">AWARDS</a>
+        <a href="philosophy.html" data-cursor="READ">PHILOSOPHY</a>
     </div>
 
     <!-- ABOUT SECTION (Top Page) -->
@@ -856,7 +925,7 @@
                                     <span class="text-accent font-mono text-xs tracking-widest font-bold block mb-1">01 / 03</span>
                                     <span class="text-white font-bold tracking-widest text-lg">Profile</span>
                                 </div>
-                                <a href="philosophy.html" 
+                                <a href="philosophy.html" data-cursor="READ"
                                    class="group/btn-slide relative inline-flex items-center justify-center px-6 py-2.5 bg-accent text-black font-bold text-[10px] tracking-[0.2em] rounded-full overflow-hidden hover:bg-white transition-all hover:scale-105 shadow-glow min-w-[200px]">
                                     <!-- Initial State -->
                                     <span class="flex items-center transition-all duration-500 group-hover/btn-slide:-translate-x-[120%] group-hover/btn-slide:opacity-0 whitespace-nowrap">
@@ -872,7 +941,7 @@
 
                         <!-- Photo 2 -->
                         <div class="w-full h-full flex-shrink-0 snap-center relative group/photo">
-                            <img src="./assets/photo1-trombone.jpg" alt="Brassband"
+                            <img src="./assets/photo1-trombone.jpg" alt="Brassband" loading="lazy"
                                 class="absolute inset-0 w-full h-full object-cover group-hover/photo:scale-105 transition-transform duration-700 pointer-events-none" />
                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-10"></div>
                             <div class="absolute bottom-10 left-10 z-20">
@@ -883,7 +952,7 @@
 
                         <!-- Photo 3 -->
                         <div class="w-full h-full flex-shrink-0 snap-center relative group/photo">
-                            <img src="./assets/photo3-choir.png" alt="Choir"
+                            <img src="./assets/photo3-choir.png" alt="Choir" loading="lazy"
                                 class="absolute inset-0 w-full h-full object-cover group-hover/photo:scale-105 transition-transform duration-700 pointer-events-none" />
                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-10"></div>
                             <div class="absolute bottom-10 left-10 z-20">
@@ -937,7 +1006,7 @@
                                 <p class="text-gray-400 text-sm leading-relaxed mb-6">
                                     将来はこうした経験を生かして起業することを考えています。この思いに共感してくださる方、ぜひ1on1でお話ししましょう！🔥<br>(趣味: 野球観戦, 吹奏楽, 合唱, ポスター・ビラ・動画制作 / USJクルー経験あり)
                                 </p>
-                                <a href="contact.html" 
+                                <a href="contact.html" data-cursor="MAIL"
                                    class="group/btn-slide relative inline-flex items-center justify-center px-8 py-3 bg-accent text-black font-black text-[10px] md:text-xs tracking-widest rounded-full overflow-hidden hover:bg-white transition-all hover:scale-105 active:scale-95 shadow-glow min-w-[240px]">
                                     <!-- Initial State -->
                                     <span class="flex items-center gap-2 transition-all duration-500 group-hover/btn-slide:-translate-x-[120%] group-hover/btn-slide:opacity-0 whitespace-nowrap">
@@ -974,7 +1043,7 @@
                         <!-- Instagram -->
                         <li class="iso-pro inst">
                             <span></span><span></span><span></span>
-                            <a href="https://www.instagram.com/yutayarogai/" target="_blank" rel="noopener noreferrer">
+                            <a href="https://www.instagram.com/yutayarogai/" target="_blank" rel="noopener noreferrer" data-cursor="OPEN">
                                 <svg class="w-6 h-6 fill-current" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path>
                                 </svg>
@@ -984,7 +1053,7 @@
                         <!-- Youtrust -->
                         <li class="iso-pro you">
                             <span></span><span></span><span></span>
-                            <a href="https://youtrust.jp/users/yutagoto?source=qr" target="_blank" rel="noopener noreferrer">
+                            <a href="https://youtrust.jp/users/yutagoto?source=qr" target="_blank" rel="noopener noreferrer" data-cursor="OPEN">
                                 <img src="./assets/youtrust.png" alt="YOUTRUST" class="w-6 h-6 object-contain" style="filter: brightness(0) invert(1);" onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22white%22 stroke-width=%222%22><circle cx=%2212%22 cy=%2212%22 r=%2210%22/><text x=%2212%22 y=%2216%22 font-family=%22sans-serif%22 font-size=%2212%22 text-anchor=%22middle%22 fill=%22white%22 stroke=%22none%22>Y</text></svg>';">
                             </a>
                             <div class="text">YOUTRUST</div>
@@ -992,7 +1061,7 @@
                         <!-- Facebook -->
                         <li class="iso-pro face">
                             <span></span><span></span><span></span>
-                            <a href="https://www.facebook.com/profile.php?id=61575688434111" target="_blank" rel="noopener noreferrer">
+                            <a href="https://www.facebook.com/profile.php?id=61575688434111" target="_blank" rel="noopener noreferrer" data-cursor="OPEN">
                                 <svg class="w-6 h-6 fill-current" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"></path>
                                 </svg>
@@ -1021,7 +1090,8 @@
                  data-cat="Seminar Flyer"
                  data-challenge="初学者でも手を止めて内容を確認したくなるような、圧倒的な視覚的インパクトの追求。"
                  data-process="「論理を象徴する直線」と「情熱を象徴する黄」を大胆に組み合わせ、ターゲット層に刺さるモダンなタイポグラフィを核としたレイアウトを構築。"
-                 data-img="./assets/work1-moot-court.jpg">
+                 data-img="./assets/work1-moot-court.jpg"
+                 data-cursor="VIEW">
                 <div class="w-full md:w-1/2 space-y-4 order-2 md:order-1">
                     <span class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold flex items-center gap-3">
                         <span class="w-8 h-px bg-accent"></span>Seminar
@@ -1038,7 +1108,7 @@
                 </div>
                 <div class="w-full md:w-1/2 order-1 md:order-2">
                     <div class="work-card relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
-                        <img src="./assets/work1-moot-court.jpg" alt="JAPAN CUP" class="w-full h-auto object-contain bg-gray-900" />
+                        <img src="./assets/work1-moot-court.jpg" alt="JAPAN CUP" loading="lazy" class="w-full h-auto object-contain bg-gray-900" />
                         <div class="work-overlay">
                             <div class="canva-badge">DESIGNED WITH CANVA</div>
                             <p class="text-white text-sm font-medium">論理と情熱の視覚化</p>
@@ -1054,10 +1124,11 @@
                  data-cat="Event Poster"
                  data-challenge="「就活＝重苦しい」という先入観を払拭し、自分らしさを肯定できるポジティブな空間の演出。"
                  data-process="感情の機微を表現する余白と、信頼感を与えるミニマルな配置を徹底。Canvaの素材をカスタマイズし、高級感のあるトーンに統一。"
-                 data-img="./assets/work2-well-hunting.jpg">
+                 data-img="./assets/work2-well-hunting.jpg"
+                 data-cursor="VIEW">
                 <div class="w-full md:w-1/2 order-1 md:order-1">
                     <div class="work-card relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
-                        <img src="./assets/work2-well-hunting.jpg" alt="WELL HUNTING by Rubyin" class="w-full h-auto object-contain bg-gray-900" />
+                        <img src="./assets/work2-well-hunting.jpg" alt="WELL HUNTING by Rubyin" loading="lazy" class="w-full h-auto object-contain bg-gray-900" />
                         <div class="work-overlay">
                             <div class="canva-badge">DESIGNED WITH CANVA</div>
                             <p class="text-white text-sm font-medium">ありのままを魅せる就活</p>
@@ -1087,7 +1158,8 @@
                  data-cat="Promotion Poster"
                  data-challenge="挑戦者の「初めの一歩」を後押しする、躍動感とスケール感の共存。"
                  data-process="「羽ばたく」というコンセプトに基づき、対角線上の構図と光の演出を多用。テキストと情報の優先順位を整理し、一瞬で概要が伝わる視認性を確保。"
-                 data-img="./assets/work3-wing.jpg">
+                 data-img="./assets/work3-wing.jpg"
+                 data-cursor="VIEW">
                 <div class="w-full md:w-1/2 space-y-4 order-2 md:order-1">
                     <span class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold flex items-center gap-3">
                         <span class="w-8 h-px bg-accent"></span>Contest
@@ -1104,7 +1176,7 @@
                 </div>
                 <div class="w-full md:w-1/2 order-1 md:order-2">
                     <div class="work-card relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
-                        <img src="./assets/work3-wing.jpg" alt="Business Contest WING" class="w-full h-auto object-contain bg-gray-900" />
+                        <img src="./assets/work3-wing.jpg" alt="Business Contest WING" loading="lazy" class="w-full h-auto object-contain bg-gray-900" />
                         <div class="work-overlay">
                             <div class="canva-badge">DESIGNED WITH CANVA</div>
                             <p class="text-white text-sm font-medium">未来へ羽ばたく情熱</p>
@@ -1120,10 +1192,11 @@
                  data-cat="Member Recruitment"
                  data-challenge="120年の伝統と現代の感性の融合を、一目で感じさせる強烈なインパクト。"
                  data-process="伝統に敬意を払い、力強い筆文字と洗練されたレイアウトを融合。合唱の「共鳴」をディテールの装飾（ドットやライン）で施し、多次元的な魅力を構築。"
-                 data-img="./assets/work4-glee-club.jpg">
+                 data-img="./assets/work4-glee-club.jpg"
+                 data-cursor="VIEW">
                 <div class="w-full md:w-1/2 order-1 md:order-1">
                     <div class="work-card relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
-                        <img src="./assets/work4-glee-club.jpg" alt="同志社グリークラブ 団員大募集" class="w-full h-auto object-contain bg-gray-900" />
+                        <img src="./assets/work4-glee-club.jpg" alt="同志社グリークラブ 団員大募集" loading="lazy" class="w-full h-auto object-contain bg-gray-900" />
                         <div class="work-overlay">
                             <div class="canva-badge">DESIGNED WITH CANVA</div>
                             <p class="text-white text-sm font-medium">伝統と革新のハーモニー</p>
@@ -1285,7 +1358,7 @@
                     1on1のご相談、プロジェクトへの参画、雑談まで、お気軽にご連絡ください。
                 </p>
                 <div class="flex flex-col md:flex-row items-center justify-center gap-6 pt-6">
-                    <a href="contact.html" 
+                    <a href="contact.html" data-cursor="MAIL"
                        class="group/btn-slide relative inline-flex items-center justify-center px-10 py-5 bg-accent text-black font-black text-lg rounded-full overflow-hidden hover:bg-white transition-all hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(255,204,0,0.3)] min-w-[320px]">
                         <!-- Initial State -->
                         <span class="flex items-center gap-3 transition-all duration-500 group-hover/btn-slide:-translate-x-[120%] group-hover/btn-slide:opacity-0 whitespace-nowrap">
@@ -1296,7 +1369,7 @@
                             お問い合わせフォームへ <i data-lucide="send" class="w-5 h-5"></i>
                         </span>
                     </a>
-                    <a href="philosophy.html" 
+                    <a href="philosophy.html" data-cursor="READ"
                        class="group/btn-slide relative inline-flex items-center justify-center px-10 py-5 border border-white/20 text-white font-bold text-lg rounded-full overflow-hidden hover:bg-white transition-all min-w-[320px]">
                         <!-- Initial State -->
                         <span class="flex items-center transition-all duration-500 group-hover/btn-slide:-translate-x-[120%] group-hover/btn-slide:opacity-0 whitespace-nowrap">
@@ -1453,11 +1526,11 @@
     <footer class="site-footer">
         <div class="max-w-7xl mx-auto">
             <div style="display:flex; justify-content:center; gap:1.5rem; margin-bottom:1.5rem;">
-                <a href="https://www.instagram.com/yutayarogai/" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://www.instagram.com/yutayarogai/" target="_blank" rel="noopener noreferrer" data-cursor="OPEN">Instagram</a>
                 <span style="color:#333;">|</span>
-                <a href="https://youtrust.jp/users/yutagoto?source=qr" target="_blank" rel="noopener noreferrer">YOUTRUST</a>
+                <a href="https://youtrust.jp/users/yutagoto?source=qr" target="_blank" rel="noopener noreferrer" data-cursor="OPEN">YOUTRUST</a>
                 <span style="color:#333;">|</span>
-                <a href="https://www.facebook.com/profile.php?id=61575688434111" target="_blank" rel="noopener noreferrer">Facebook</a>
+                <a href="https://www.facebook.com/profile.php?id=61575688434111" target="_blank" rel="noopener noreferrer" data-cursor="OPEN">Facebook</a>
             </div>
             <p>&copy; 2026 Yuta Goto. All rights reserved.</p>
         </div>
@@ -1519,7 +1592,7 @@
     </div>
 
     <!-- Back to Top Button -->
-    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+    <button id="backToTop" class="back-to-top" aria-label="Back to top" data-cursor="TOP">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="18 15 12 9 6 15"></polyline>
         </svg>
@@ -1527,7 +1600,7 @@
     </button>
 
     <!-- Floating Contact Button (From Uiverse.io by barisdogansutcu) -->
-    <a href="contact.html" class="floating-contact-btn group/btn-slide">
+    <a href="contact.html" class="floating-contact-btn group/btn-slide" data-cursor="MAIL">
         <div class="relative flex items-center justify-center min-w-[120px]">
             <!-- Initial State -->
             <span class="flex items-center gap-2 transition-all duration-500 group-hover/btn-slide:-translate-x-[120%] group-hover/btn-slide:opacity-0 whitespace-nowrap">
@@ -1544,9 +1617,58 @@
     </a>
 
     <!-- UX Enhancement Scripts -->
+    <!-- Consolidated UX Enhancement & Interaction Scripts -->
     <script>
     document.addEventListener("DOMContentLoaded", () => {
-        // === 1. Scroll Reveal ===
+        
+        // === 1. Page Transition & Entrance ===
+        const pageTransition = document.getElementById('pageTransition');
+        if (pageTransition) {
+            window.addEventListener('load', () => pageTransition.classList.add('done'));
+            // Safety timeout: ensure the transition finishes even if window.load is slow
+            setTimeout(() => pageTransition.classList.add('done'), 2000);
+        }
+        
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a[href]');
+            if (!link) return;
+            const href = link.getAttribute('href');
+            if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('javascript:')) return;
+            e.preventDefault();
+            if (pageTransition) {
+                pageTransition.classList.remove('done');
+                setTimeout(() => { window.location.href = href; }, 500);
+            } else {
+                window.location.href = href;
+            }
+        });
+
+        // === 2. Scroll Reveal & Indicators ===
+        const bar = document.getElementById('ultimateScrollIndicator');
+        const pct = document.getElementById('scrollPercentage');
+        const backToTopBtn = document.getElementById('backToTop');
+        const photoCont = document.querySelector('.parallax-photo') || document.querySelector('#about .aspect-\\[4\\/5\\]');
+        if (photoCont && !photoCont.classList.contains('parallax-photo')) photoCont.classList.add('parallax-photo');
+
+        function updateScroll() {
+            const scrollPos = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = docHeight > 0 ? scrollPos / docHeight : 0;
+
+            if (bar) bar.style.transform = `scaleX(${scrolled})`;
+            if (pct) pct.textContent = Math.round(scrolled * 100) + '%';
+            
+            if (backToTopBtn) {
+                backToTopBtn.classList.toggle('visible', scrollPos > 600);
+            }
+            
+            if (photoCont) {
+                photoCont.style.transform = `translateY(${scrollPos * 0.1}px)`;
+            }
+            requestAnimationFrame(updateScroll);
+        }
+        updateScroll();
+
         const revealEls = [
             ...document.querySelectorAll('#about .scroll-reveal'),
             document.querySelector('#works > div:first-child'),
@@ -1554,7 +1676,7 @@
             document.querySelector('#journey > div:first-child'),
             ...document.querySelectorAll('#journey .border-l > div'),
             document.querySelector('#awards > div:first-child'),
-            ...document.querySelectorAll('#awards .gap-4 > div'),
+            ...document.querySelectorAll('#awards .gap-4 > div')
         ].filter(Boolean);
 
         const revealObs = new IntersectionObserver((entries) => {
@@ -1566,14 +1688,56 @@
             });
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-        revealEls.forEach(el => {
-            if (el.getBoundingClientRect().top > window.innerHeight) {
-                el.classList.add('scroll-reveal');
-                revealObs.observe(el);
-            }
+        revealEls.forEach(el => revealObs.observe(el));
+
+        if (backToTopBtn) {
+            backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        }
+
+        // === 3. Mobile Menu Toggle ===
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuLinks = mobileMenu ? mobileMenu.querySelectorAll('a') : [];
+        
+        function toggleMenu() {
+            if (!menuToggle || !mobileMenu) return;
+            const isOpen = menuToggle.classList.contains('open');
+            menuToggle.classList.toggle('open');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = isOpen ? '' : 'hidden';
+        }
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleMenu();
+            });
+        }
+
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (menuToggle) menuToggle.classList.remove('open');
+                if (mobileMenu) mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
         });
 
-        // === 3. Work Details Modal ===
+        // Current Section Observer for Menu
+        const sections = ['about', 'works', 'journey', 'awards'];
+        const sectionEls = sections.map(id => document.getElementById(id)).filter(Boolean);
+        const sectionObs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    menuLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                    });
+                }
+            });
+        }, { rootMargin: '-20% 0px -70% 0px' });
+        sectionEls.forEach(el => sectionObs.observe(el));
+
+        // === 4. Work Details Modal & Carousel ===
         const workModal = document.getElementById('workModal');
         const modalImg = document.getElementById('modalImg');
         const modalTitle = document.getElementById('modalTitle');
@@ -1581,216 +1745,162 @@
         const modalChallenge = document.getElementById('modalChallenge');
         const modalProcess = document.getElementById('modalProcess');
         const workItems = document.querySelectorAll('.work-item-container');
-        const closeStoryBtn = document.getElementById('closeStoryBtn');
 
-        function openWorkModal(el) {
+        function openWork(el) {
+            if (!workModal || !modalImg) return;
             modalImg.src = el.dataset.img;
             modalTitle.innerText = el.dataset.title;
             modalCat.innerText = el.dataset.cat;
             modalChallenge.innerText = el.dataset.challenge;
             modalProcess.innerText = el.dataset.process;
-            
             workModal.classList.add('active');
             document.body.style.overflow = 'hidden';
-            lucide.createIcons(); // 閉じるボタンの再描画
+            if (typeof lucide !== 'undefined') lucide.createIcons();
         }
 
-        function closeWorkModal() {
-            workModal.classList.remove('active');
+        function closeWork() {
+            if (workModal) workModal.classList.remove('active');
             document.body.style.overflow = '';
         }
 
-        workItems.forEach(item => {
-            item.addEventListener('click', () => openWorkModal(item));
-        });
-
-        // モーダル内のボタンにもイベントを登録
-        if (closeStoryBtn) closeStoryBtn.addEventListener('click', closeWorkModal);
-        document.getElementById('modalClose').addEventListener('click', closeWorkModal);
-
-        workModal.addEventListener('click', (e) => {
-            if (e.target === workModal) closeWorkModal();
-        });
-
-        // === 14. Lightbox Gallery (Removed works images to prevent conflict) ===
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightboxImg');
-        const lbCounter = document.getElementById('lbCounter');
-        // 他のギャラリーがあればここに追加可能
-        const galleryImages = []; 
-        let lbIndex = 0;
-
-        function showLightbox(idx) {
-            if (galleryImages.length === 0) return;
-            lbIndex = idx;
-            lightboxImg.src = galleryImages[idx].src;
-            lightboxImg.alt = galleryImages[idx].alt;
-            lbCounter.textContent = (idx + 1) + ' / ' + galleryImages.length;
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
+        workItems.forEach(item => item.addEventListener('click', () => openWork(item)));
+        
+        const closeBtns = document.querySelectorAll('#modalClose, #closeStoryBtn');
+        closeBtns.forEach(btn => btn.addEventListener('click', closeWork));
+        if (workModal) {
+            workModal.addEventListener('click', (e) => { if (e.target === workModal) closeWork(); });
         }
 
-        galleryImages.forEach((img, i) => img.addEventListener('click', () => showLightbox(i)));
+        const carousel = document.querySelector('.carousel-container');
+        const dots = document.querySelectorAll('#carouselDots button');
+        let autoTimer;
 
-        const closeLightbox = () => {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
-        };
-
-        document.getElementById('lbPrev').addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (galleryImages.length > 0) showLightbox((lbIndex - 1 + galleryImages.length) % galleryImages.length);
-        });
-        document.getElementById('lbNext').addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (galleryImages.length > 0) showLightbox((lbIndex + 1) % galleryImages.length);
-        });
-
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox || e.target.closest('.lightbox-close')) closeLightbox();
-        });
-        document.addEventListener('keydown', (e) => {
-            if (!lightbox.classList.contains('active')) return;
-            if (e.key === 'Escape') closeLightbox();
-            if (e.key === 'ArrowLeft') showLightbox((lbIndex - 1 + galleryImages.length) % galleryImages.length);
-            if (e.key === 'ArrowRight') showLightbox((lbIndex + 1) % galleryImages.length);
-        });
-
-        // === 4. Back to Top ===
-        const backToTopBtn = document.getElementById('backToTop');
-        if (backToTopBtn) {
-            backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-        }
-
-        // === 10. Intro Animation ===
-        const photoContainer = document.querySelector('#about .aspect-\\[4\\/5\\]');
-        if (photoContainer) photoContainer.classList.add('parallax-photo');
-
-        // === 11. Carousel Slide Highlighting ===
-        function updateDots() {
+        function updateCarousel() {
             if (!carousel) return;
             const idx = Math.round(carousel.scrollLeft / carousel.clientWidth);
             dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-            
-            // Add 'active' class to current slide for overlay transition
-            const slides = carousel.querySelectorAll('.snap-center');
-            slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+            carousel.querySelectorAll('.snap-center').forEach((s, i) => s.classList.toggle('active', i === idx));
         }
 
         if (carousel) {
-            carousel.addEventListener('scroll', updateDots, { passive: true });
+            carousel.addEventListener('scroll', updateCarousel, { passive: true });
             dots.forEach((dot, i) => {
                 dot.addEventListener('click', () => {
                     carousel.scrollTo({ left: i * carousel.clientWidth, behavior: 'smooth' });
-                    resetAutoPlay();
+                    resetAuto();
                 });
             });
+            function auto() {
+                const idx = Math.round(carousel.scrollLeft / carousel.clientWidth);
+                carousel.scrollTo({ left: ((idx + 1) % dots.length) * carousel.clientWidth, behavior: 'smooth' });
+            }
+            function resetAuto() { clearInterval(autoTimer); autoTimer = setInterval(auto, 5000); }
+            resetAuto();
         }
 
-        function autoPlay() {
-            if (!carousel) return;
-            const idx = Math.round(carousel.scrollLeft / carousel.clientWidth);
-            const next = (idx + 1) % 3;
-            carousel.scrollTo({ left: next * carousel.clientWidth, behavior: 'smooth' });
+        // === 5. Premium Cursor & Magnetic Effects ===
+        const dot = document.getElementById('cursorDot');
+        const circle = document.getElementById('cursorCircle');
+        const circleSpan = circle ? circle.querySelector('span') : null;
+        if (dot && circle) {
+            let mX = 0, mY = 0, cX = 0, cY = 0;
+            document.addEventListener('mousemove', (e) => {
+                mX = e.clientX; mY = e.clientY;
+                dot.style.opacity = circle.style.opacity = '1';
+                dot.style.transform = `translate(${mX - 6}px, ${mY - 6}px)`;
+            });
+            function anim() {
+                cX += (mX - cX) * 0.15; cY += (mY - cY) * 0.15;
+                const r = circle.classList.contains('cursor-text') ? 40 : 22;
+                circle.style.transform = `translate(${cX - r}px, ${cY - r}px)`;
+                requestAnimationFrame(anim);
+            }
+            anim();
+
+            document.querySelectorAll('[data-cursor]').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    if (circleSpan) circleSpan.textContent = el.dataset.cursor;
+                    circle.classList.add('cursor-text');
+                });
+                el.addEventListener('mouseleave', () => circle.classList.remove('cursor-text'));
+            });
+
+            document.querySelectorAll('a:not([data-cursor]), button:not([data-cursor]), .menu-toggle:not([data-cursor])').forEach(el => {
+                el.addEventListener('mouseenter', () => circle.classList.add('cursor-active'));
+                el.addEventListener('mouseleave', () => circle.classList.remove('cursor-active'));
+            });
+
+            const magnets = document.querySelectorAll('.btn2, .floating-contact-btn, .iso-pro, #menuToggle, .back-to-top, #carouselDots button');
+            magnets.forEach(m => {
+                m.addEventListener('mousemove', (e) => {
+                    const r = m.getBoundingClientRect();
+                    const x = e.clientX - r.left - r.width / 2;
+                    const y = e.clientY - r.top - r.height / 2;
+                    m.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.05)`;
+                });
+                m.addEventListener('mouseleave', () => m.style.transform = '');
+            });
         }
-
-        function resetAutoPlay() {
-            clearInterval(autoPlayTimer);
-            autoPlayTimer = setInterval(autoPlay, 5000);
-        }
-        resetAutoPlay();
-
-        // === 14. Theme Logic Removed (Always Dark Mode) ===
-        // body.classList.remove('light-mode'); // No action needed as default is dark
-
-        // === 15. Custom Cursor Logic ===
-        const cursorDot = document.getElementById('cursorDot');
-        const cursorCircle = document.getElementById('cursorCircle');
         
-        let mouseX = 0, mouseY = 0;
-        let circleX = 0, circleY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            cursorDot.style.opacity = '1';
-            cursorCircle.style.opacity = '1';
-            cursorDot.style.transform = `translate(${mouseX - 3}px, ${mouseY - 3}px)`;
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') { closeWork(); if(mobileMenu) mobileMenu.classList.remove('active'); document.body.style.overflow = ''; }
         });
-
-        function animateCursor() {
-            circleX += (mouseX - circleX) * 0.15;
-            circleY += (mouseY - circleY) * 0.15;
-            cursorCircle.style.transform = `translate(${circleX - 22}px, ${circleY - 22}px)`;
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-
-        // Cursor hover effect for all links and buttons
-        const interactables = document.querySelectorAll('a, button, .work-item-container, .iso-pro');
-        interactables.forEach(el => {
-            el.addEventListener('mouseenter', () => cursorCircle.classList.add('cursor-active'));
-            el.addEventListener('mouseleave', () => cursorCircle.classList.remove('cursor-active'));
-        });
-
-        // === 16. Magnetic Button Effect ===
-        const magnets = document.querySelectorAll('.btn2, .floating-contact-btn, .canva-badge, .back-to-top');
-        magnets.forEach((m) => {
-            m.addEventListener('mousemove', (e) => {
-                const rect = m.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                m.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px) scale(1.05)`;
-            });
-            m.addEventListener('mouseleave', () => {
-                m.style.transform = '';
-            });
-        });
-
-        // Back to Top Visibility
-        const bttBtn = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            const scrollPos = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-            if (bttBtn) {
-                if (scrollPos > 600) {
-                    bttBtn.classList.add('visible');
-                } else {
-                    bttBtn.classList.remove('visible');
-                }
-            }
-
-            // Parallax Photo Animation
-            const photoCont = document.querySelector('.parallax-photo');
-            if (photoCont) {
-                const speed = 0.15;
-                photoCont.style.transform = `translateY(${scrollPos * speed}px)`;
-            }
-        }, { passive: true });
     });
     </script>
 
-    <!-- CRITICAL: Stand-alone Scroll Progress Script (Isolated from main errors) -->
+    <!-- ROBUST INDEPENDENT MOBILE MENU LOGIC (Isolated from main errors) -->
     <script>
     (function() {
-        const bar = document.getElementById('ultimateScrollIndicator');
-        const pct = document.getElementById('scrollPercentage');
-        
-        function updateScroll() {
-            const scrollPos = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = docHeight > 0 ? scrollPos / docHeight : 0;
+        const toggle = document.getElementById('menuToggle');
+        const menu = document.getElementById('mobileMenu');
+        if (!toggle || !menu) return;
 
-            // Update Progress Line
-            if (bar) bar.style.transform = `scaleX(${scrolled})`;
-            
-            // Update Percentage Text
-            if (pct) pct.textContent = Math.round(scrolled * 100) + '%';
-            
-            requestAnimationFrame(updateScroll);
+        function doToggle(e) {
+            if (e) e.preventDefault();
+            const isOpen = toggle.classList.contains('open');
+            toggle.classList.toggle('open');
+            menu.classList.toggle('active');
+            document.body.style.overflow = isOpen ? '' : 'hidden';
         }
+
+        // Attach to BOTH click and touchstart for absolute responsiveness
+        toggle.addEventListener('click', doToggle);
         
-        // Use AnimationFrame for ultra-smooth performance and guaranteed recovery
-        updateScroll();
+        // Handle links
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                toggle.classList.remove('open');
+                menu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Close on background click (Click outside to close)
+        menu.addEventListener('click', (e) => {
+            if (e.target === menu) {
+                toggle.classList.remove('open');
+                menu.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Current Section Sync
+        const sections = ['about', 'works', 'journey', 'awards'];
+        const sectionEls = sections.map(id => document.getElementById(id)).filter(Boolean);
+        const navLinks = menu.querySelectorAll('a');
+        
+        window.addEventListener('scroll', () => {
+            let current = "";
+            sectionEls.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+            });
+        }, { passive: true });
     })();
     </script>
 

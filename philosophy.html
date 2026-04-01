@@ -81,6 +81,14 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             transition: background-color 0.3s, color 0.3s;
+            cursor: none;
+        }
+
+        a, button, .glow-text-card, .agenda-btn, .glass-card { cursor: none !important; }
+
+        @media (hover: none) {
+            body { cursor: auto; }
+            a, button, .glow-text-card, .agenda-btn, .glass-card { cursor: auto !important; }
         }
 
         ::selection {
@@ -254,6 +262,11 @@
             will-change: transform;
         }
 
+        @keyframes rotate-ccw {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+
         /* Custom Cursor (Matched with index.html) */
         .cursor-dot, .cursor-circle {
             pointer-events: none;
@@ -264,14 +277,96 @@
             opacity: 0;
             transition: opacity 0.3s, transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
         }
-        .cursor-dot { width: 6px; height: 6px; background: var(--accent-color); }
+        .cursor-dot { width: 12px; height: 12px; background: var(--accent-color); }
         .cursor-circle { 
             width: 44px; height: 44px; 
             border: 1px solid var(--accent-color); 
             mix-blend-mode: difference;
         }
+        .cursor-circle::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: repeating-conic-gradient(
+                var(--accent-color) 0deg 15deg,
+                transparent 15deg 35deg
+            );
+            mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px + 1px));
+            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px + 1px));
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
         body.light-mode .cursor-circle { border-color: rgba(0,0,0,0.5); }
         .cursor-active { transform: scale(1.5); background: rgba(255, 204, 0, 0.1); border-color: var(--accent-color); }
+
+        /* Cursor text label */
+        .cursor-circle span {
+            opacity: 0; font-size: 9px; font-weight: 900;
+            letter-spacing: 0.2em; color: var(--accent-color);
+            transition: opacity 0.2s, transform 0.2s;
+            pointer-events: none;
+            transform: translate(18px, -18px);
+        }
+        .cursor-text {
+            width: 80px !important; height: 80px !important;
+            background: rgba(255, 204, 0, 0.08) !important;
+            border-color: transparent !important;
+            display: flex; align-items: center; justify-content: center;
+            mix-blend-mode: normal !important;
+        }
+        .cursor-text::before {
+            opacity: 1;
+            animation: rotate-ccw 6s linear infinite;
+        }
+        .cursor-text span { opacity: 1; }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: flex; flex-direction: column; gap: 6px;
+            background: none; border: none; padding: 12px; cursor: pointer; z-index: 99999;
+            margin: -8px; /* Offset the padding to keep visual alignment */
+        }
+        .menu-toggle span {
+            width: 26px; height: 3px; background: #fff;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .menu-toggle.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); background: #ffcc00; }
+        .menu-toggle.open span:nth-child(2) { opacity: 0; }
+        .menu-toggle.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background: #ffcc00; }
+
+        /* Mobile Menu Overlay & Staggered Animation */
+        #mobileMenu {
+            position: fixed; inset: 0; background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(30px); z-index: 99998;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 3.5rem; opacity: 0; pointer-events: none;
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            transform: translateY(-20px);
+        }
+        #mobileMenu.active { opacity: 1; pointer-events: auto; transform: translateY(0); }
+        #mobileMenu a {
+            font-size: 2.8rem; font-weight: 700; letter-spacing: 0.15em;
+            color: #fff; text-decoration: none; transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            position: relative;
+            transform: translateY(40px); opacity: 0;
+            line-height: 1.2;
+        }
+        #mobileMenu.active a { transform: translateY(0); opacity: 1; }
+        #mobileMenu a.active { color: var(--accent-color); }
+        #mobileMenu a::after {
+            content: ""; position: absolute; bottom: -12px; left: 0; width: 0; height: 4px;
+            background: #ffcc00; transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        #mobileMenu a.active::after { width: 100%; }
+
+        /* Stagger Delays */
+        #mobileMenu.active a:nth-child(1) { transition-delay: 0.1s; }
+        #mobileMenu.active a:nth-child(2) { transition-delay: 0.2s; }
+        #mobileMenu.active a:nth-child(3) { transition-delay: 0.3s; }
+        #mobileMenu.active a:nth-child(4) { transition-delay: 0.4s; }
+        #mobileMenu.active a:nth-child(5) { transition-delay: 0.5s; }
 
         @media (hover: none) {
             .cursor-dot, .cursor-circle { display: none !important; }
@@ -487,14 +582,28 @@
             border-radius: 50%;
             transition: all 0.3s;
         }
+
+        /* Page Transition Overlay */
+        .page-transition {
+            position: fixed; inset: 0;
+            background: #0a0a0a;
+            z-index: 99998;
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+        .page-transition.done { opacity: 0; }
     </style>
 </head>
 
 <body class="min-h-screen font-sans selection:bg-accent selection:text-black overflow-x-hidden pb-24 text-white">
 
+    <!-- Page Transition Overlay -->
+    <div class="page-transition" id="pageTransition"></div>
+
     <!-- Custom Cursor Elements -->
     <div class="cursor-dot" id="cursorDot"></div>
-    <div class="cursor-circle" id="cursorCircle"></div>
+    <div class="cursor-circle" id="cursorCircle"><span></span></div>
 
     <!-- Background -->
     <div class="fixed inset-0 w-screen h-screen -z-50 m-0 bg-[#0a0a0a]">
@@ -512,19 +621,32 @@
         <div id="ultimateScrollIndicator" class="absolute bottom-0 left-0 h-[3px] bg-yellow-400 z-[1001] w-full origin-left scale-x-0"></div>
         <div class="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
             <a href="index.html"
-                class="text-lg md:text-2xl font-black text-white tracking-widest hover:text-accent transition-colors">
+                class="text-lg md:text-2xl font-black text-white tracking-widest hover:text-accent transition-colors" data-cursor="BACK">
                 YUTA GOTO
             </a>
-            <nav>
+            <nav class="hidden md:block">
                 <ul class="flex items-center gap-2 md:gap-4 font-bold tracking-wider">
-                    <li><a href="index.html#about" class="btn2"><span class="spn2">ABOUT</span></a></li>
-                    <li><a href="index.html#works" class="btn2"><span class="spn2">WORKS</span></a></li>
-                    <li><a href="philosophy.html" class="btn2 active"><span class="spn2">PHILOSOPHY</span></a></li>
-                    <li><a href="index.html#journey" class="btn2"><span class="spn2">JOURNEY</span></a></li>
+                    <li><a href="index.html#about" class="btn2" data-cursor="GO"><span class="spn2">ABOUT</span></a></li>
+                    <li><a href="index.html#works" class="btn2" data-cursor="GO"><span class="spn2">WORKS</span></a></li>
+                    <li><a href="philosophy.html" class="btn2 active" data-cursor="READ"><span class="spn2">PHILOSOPHY</span></a></li>
+                    <li><a href="index.html#journey" class="btn2" data-cursor="GO"><span class="spn2">JOURNEY</span></a></li>
                 </ul>
             </nav>
+            <!-- Mobile Menu Toggle Button -->
+            <button class="menu-toggle md:hidden" id="menuToggle" aria-label="Toggle Menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </header>
+
+    <!-- MOBILE MENU OVERLAY -->
+    <div id="mobileMenu">
+        <a href="index.html#about" data-cursor="GO">ABOUT</a>
+        <a href="index.html#works" data-cursor="GO">WORKS</a>
+        <a href="index.html#journey" data-cursor="GO">JOURNEY</a>
+        <a href="index.html#awards" data-cursor="GO">AWARDS</a>
+        <a href="philosophy.html" class="active" data-cursor="READ">PHILOSOPHY</a>
+    </div>
 
     <!-- HERO SECTION -->
     <section class="relative w-full min-h-[90vh] flex items-center justify-center pt-24 px-6 overflow-hidden">
@@ -824,46 +946,46 @@
     <!-- BACK TO HOME -->
     <div class="back-to-home">
         <a href="index.html"
-            class="flex items-center gap-3 text-accent font-bold tracking-widest text-xs hover:gap-5 transition-all">
+            class="flex items-center gap-3 text-accent font-bold tracking-widest text-xs hover:gap-5 transition-all" data-cursor="BACK">
             <i data-lucide="arrow-left" class="w-4 h-4"></i> BACK TO HOME
         </a>
     </div>
 
     <!-- AGENDA / TOC -->
     <div class="agenda-container" id="agendaContainer">
-        <button class="agenda-btn" id="agendaToggle" aria-label="Toggle Agenda">
+        <button class="agenda-btn" id="agendaToggle" aria-label="Toggle Agenda" data-cursor="OPEN">
             <i data-lucide="list"></i>
         </button>
         <div class="agenda-menu" id="agendaMenu">
             <div class="agenda-header">CONTENTS</div>
             <ul class="agenda-list">
                 <li class="agenda-item">
-                    <a href="#introduction" class="agenda-link">
+                    <a href="#introduction" class="agenda-link" data-cursor="GO">
                         <span class="agenda-dot"></span> INTRODUCTION
                     </a>
                 </li>
                 <li class="agenda-item">
-                    <a href="#core" class="agenda-link">
+                    <a href="#core" class="agenda-link" data-cursor="GO">
                         <span class="agenda-dot"></span> THE CORE
                     </a>
                 </li>
                 <li class="agenda-item">
-                    <a href="#dynamics" class="agenda-link">
+                    <a href="#dynamics" class="agenda-link" data-cursor="GO">
                         <span class="agenda-dot"></span> ENERGY DYNAMICS
                     </a>
                 </li>
                 <li class="agenda-item">
-                    <a href="#paradox" class="agenda-link">
+                    <a href="#paradox" class="agenda-link" data-cursor="GO">
                         <span class="agenda-dot"></span> PARADOX & HARMONY
                     </a>
                 </li>
                 <li class="agenda-item">
-                    <a href="#dive" class="agenda-link">
+                    <a href="#dive" class="agenda-link" data-cursor="GO">
                         <span class="agenda-dot"></span> DEEP DIVE
                     </a>
                 </li>
                 <li class="agenda-item">
-                    <a href="#references" class="agenda-link">
+                    <a href="#references" class="agenda-link" data-cursor="GO">
                         <span class="agenda-dot"></span> REFERENCES
                     </a>
                 </li>
@@ -921,9 +1043,11 @@
                 });
             }, { passive: true });
 
-            // === 6. Custom Cursor Logic ===
+            // === 6. Custom Cursor Logic (Unified with index.html) ===
             const cursorDot = document.getElementById('cursorDot');
             const cursorCircle = document.getElementById('cursorCircle');
+            const circleSpan = cursorCircle.querySelector('span');
+            
             let mouseX = 0, mouseY = 0;
             let circleX = 0, circleY = 0;
 
@@ -932,25 +1056,38 @@
                 mouseY = e.clientY;
                 cursorDot.style.opacity = '1';
                 cursorCircle.style.opacity = '1';
-                cursorDot.style.transform = `translate(${mouseX - 3}px, ${mouseY - 3}px)`;
+                cursorDot.style.transform = `translate(${mouseX - 6}px, ${mouseY - 6}px)`;
             });
 
             function animateCursor() {
                 circleX += (mouseX - circleX) * 0.15;
                 circleY += (mouseY - circleY) * 0.15;
-                cursorCircle.style.transform = `translate(${circleX - 22}px, ${circleY - 22}px)`;
+                const r = cursorCircle.classList.contains('cursor-text') ? 40 : 22;
+                cursorCircle.style.transform = `translate(${circleX - r}px, ${circleY - r}px)`;
                 requestAnimationFrame(animateCursor);
             }
             animateCursor();
 
-            const interactables = document.querySelectorAll('a, button, .glow-text-card, .agenda-btn');
-            interactables.forEach(el => {
+            // Hover effect on all elements with data-cursor
+            document.querySelectorAll('[data-cursor]').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    if (circleSpan) circleSpan.textContent = el.dataset.cursor;
+                    cursorCircle.classList.add('cursor-text');
+                    cursorCircle.classList.remove('cursor-active');
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursorCircle.classList.remove('cursor-text');
+                });
+            });
+
+            // Default hover effect for other interactive elements
+            document.querySelectorAll('a:not([data-cursor]), button:not([data-cursor]), .agenda-btn:not([data-cursor])').forEach(el => {
                 el.addEventListener('mouseenter', () => cursorCircle.classList.add('cursor-active'));
                 el.addEventListener('mouseleave', () => cursorCircle.classList.remove('cursor-active'));
             });
 
             // === 7. Magnetic Buttons ===
-            const magnets = document.querySelectorAll('.btn2, .agenda-btn, #themeToggle, .back-to-home a');
+            const magnets = document.querySelectorAll('.btn2, .agenda-btn, #themeToggle, .back-to-home a, #menuToggle');
             magnets.forEach((m) => {
                 m.addEventListener('mousemove', (e) => {
                     const rect = m.getBoundingClientRect();
@@ -1024,6 +1161,79 @@
         // Use AnimationFrame for ultra-smooth performance and guaranteed recovery
         updateScroll();
     })();
+    </script>
+
+    <!-- Page Transition Script -->
+    <script>
+    (function() {
+        window.addEventListener('load', () => {
+            document.getElementById('pageTransition').classList.add('done');
+        });
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a[href]');
+            if (!link) return;
+            const href = link.getAttribute('href');
+            if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('javascript:')) return;
+            e.preventDefault();
+            const overlay = document.getElementById('pageTransition');
+            overlay.classList.remove('done');
+            setTimeout(() => { window.location.href = href; }, 500);
+        });
+    })();
+    </script>
+
+    <!-- Mobile Menu & Premium Interaction Script -->
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (!menuToggle || !mobileMenu) return;
+
+        const menuLinks = mobileMenu.querySelectorAll('a');
+        
+        function toggleMenu() {
+            const isOpen = menuToggle.classList.contains('open');
+            if (isOpen) {
+                menuToggle.classList.remove('open');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            } else {
+                menuToggle.classList.add('open');
+                mobileMenu.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMenu();
+        });
+
+        // Close menu on link click
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('open');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Close on background click (Touch outside to close)
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) {
+                toggleMenu();
+            }
+        });
+        
+        // Active link highlighting
+        const currentPath = window.location.pathname;
+        menuLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === 'philosophy.html' || (currentPath.endsWith('philosophy.html') && href.includes('philosophy.html'))) {
+                link.classList.add('active');
+            }
+        });
+    });
     </script>
 
 </body>
