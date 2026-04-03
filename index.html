@@ -160,7 +160,8 @@
             text-transform: uppercase;
             letter-spacing: 0.8px;
             color: #ffcc00;
-            background-color: #1a1c23; /* Dark background */
+            background-color: #1a1c23;
+            /* Dark background */
             border: 1px solid rgba(255, 204, 0, 0.3);
             border-radius: 40px;
             padding: 16px 24px 16px 28px;
@@ -169,7 +170,8 @@
             box-shadow: -4px -2px 16px 0px rgba(255, 255, 255, 0.05), 4px 2px 16px 0px rgba(0, 0, 0, 0.8);
             z-index: 100;
             text-decoration: none;
-            overflow: hidden; /* Added for slider */
+            overflow: hidden;
+            /* Added for slider */
         }
 
         .floating-contact-btn:hover {
@@ -259,19 +261,57 @@
         }
 
         /* Brand Colors */
-        .sns-iso-card .iso-pro.inst:hover a { color: #E1306C; border-color: #E1306C; background: rgba(225, 48, 108, 0.1); }
-        .sns-iso-card .iso-pro.inst span { border-color: #E1306C; box-shadow: inset 0 0 15px rgba(225, 48, 108, 0.4); }
+        .sns-iso-card .iso-pro.inst:hover a {
+            color: #e22e6a;
+            border-color: #E1306C;
+            background: rgba(225, 48, 108, 0.1);
+        }
 
-        .sns-iso-card .iso-pro.you:hover a { color: #407BFF; border-color: #407BFF; background: rgba(64, 123, 255, 0.1); }
-        .sns-iso-card .iso-pro.you span { border-color: #407BFF; box-shadow: inset 0 0 15px rgba(64, 123, 255, 0.4); }
+        .sns-iso-card .iso-pro.inst span {
+            border-color: #E1306C;
+            box-shadow: inset 0 0 15px rgba(225, 48, 108, 0.4);
+        }
 
-        .sns-iso-card .iso-pro.face:hover a { color: #1877F2; border-color: #1877F2; background: rgba(24, 119, 242, 0.1); }
-        .sns-iso-card .iso-pro.face span { border-color: #1877F2; box-shadow: inset 0 0 15px rgba(24, 119, 242, 0.4); }
+        .sns-iso-card .iso-pro.you:hover a {
+            color: #407BFF;
+            border-color: #407BFF;
+            background: rgba(64, 123, 255, 0.1);
+        }
 
-        .sns-iso-card .iso-pro:hover span { opacity: 1; }
-        .sns-iso-card .iso-pro:hover span:nth-child(1) { opacity: 0.2; transform: translate(3px, -3px); }
-        .sns-iso-card .iso-pro:hover span:nth-child(2) { opacity: 0.4; transform: translate(6px, -6px); }
-        .sns-iso-card .iso-pro:hover span:nth-child(3) { opacity: 0.6; transform: translate(9px, -9px); }
+        .sns-iso-card .iso-pro.you span {
+            border-color: #407BFF;
+            box-shadow: inset 0 0 15px rgba(64, 123, 255, 0.4);
+        }
+
+        .sns-iso-card .iso-pro.face:hover a {
+            color: #1877F2;
+            border-color: #1877F2;
+            background: rgba(24, 119, 242, 0.1);
+        }
+
+        .sns-iso-card .iso-pro.face span {
+            border-color: #1877F2;
+            box-shadow: inset 0 0 15px rgba(24, 119, 242, 0.4);
+        }
+
+        .sns-iso-card .iso-pro:hover span {
+            opacity: 1;
+        }
+
+        .sns-iso-card .iso-pro:hover span:nth-child(1) {
+            opacity: 0.2;
+            transform: translate(3px, -3px);
+        }
+
+        .sns-iso-card .iso-pro:hover span:nth-child(2) {
+            opacity: 0.4;
+            transform: translate(6px, -6px);
+        }
+
+        .sns-iso-card .iso-pro:hover span:nth-child(3) {
+            opacity: 0.6;
+            transform: translate(9px, -9px);
+        }
 
         /* Animated Glowing Text Card - Adapted from Uiverse.io by ElSombrero2 */
         .glow-text-card {
@@ -279,16 +319,18 @@
             background: #171717;
             position: relative;
             border-radius: 10px;
-            padding: 2px; /* Border thickness for neon effect */
+            padding: 2px;
+            /* Border thickness for neon effect */
             transition: transform 0.3s;
             overflow: hidden;
             display: flex;
-            box-shadow: 0px 5px 15px rgba(0,0,0,0.5);
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
         }
 
         .glow-text-card .content {
             border-radius: 8px;
-            background: var(--bg-color); /* Use theme bg color to mask internal rotation */
+            background: var(--bg-color);
+            /* Use theme bg color to mask internal rotation */
             width: 100%;
             z-index: 10;
             position: relative;
@@ -296,13 +338,13 @@
             /* Remove backdrop-filter to prevent light bleed inside */
         }
 
-        .glow-text-card::before {    
+        .glow-text-card::before {
             content: " ";
             position: absolute;
             top: 50%;
             left: 50%;
             width: 15rem;
-            height: 250%; 
+            height: 250%;
             background: linear-gradient(#ff2288, #387ef0);
             transform: translate(-50%, -50%) rotate(0deg);
             transform-origin: center;
@@ -327,8 +369,13 @@
         }
 
         @keyframes rotation_9018 {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
         }
 
         .glow-text-card .content::before {
@@ -348,15 +395,18 @@
             z-index: 2;
         }
 
-        .glow-text-card:hover .content::before { opacity: 1; }
+        .glow-text-card:hover .content::before {
+            opacity: 1;
+        }
 
-        .glow-text-card::before {    
+        .glow-text-card::before {
             content: " ";
             position: absolute;
             top: 50%;
             left: 50%;
             width: 12rem;
-            height: 250%; /* Reaches corners during rotation */
+            height: 250%;
+            /* Reaches corners during rotation */
             background: linear-gradient(#ff2288, #387ef0);
             transform: translate(-50%, -50%) rotate(0deg);
             transform-origin: center;
@@ -382,8 +432,13 @@
         }
 
         @keyframes rotation_9018 {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
         }
 
         /* Header Hover UI - From Uiverse.io by TISEPSE */
@@ -448,7 +503,7 @@
             background-color: transparent;
             transition: color 0.3s;
         }
-        
+
         .btn2:hover .spn2 {
             color: #ffcc00;
         }
@@ -459,6 +514,7 @@
             transform: translateY(30px);
             transition: opacity 0.7s ease-out, transform 0.7s ease-out;
         }
+
         .scroll-reveal.revealed {
             opacity: 1;
             transform: translateY(0);
@@ -466,99 +522,193 @@
 
         /* Lightbox */
         .lightbox-overlay {
-            position: fixed; inset: 0;
+            position: fixed;
+            inset: 0;
             background: rgba(0, 0, 0, 0.93);
             backdrop-filter: blur(10px);
             z-index: 9998;
-            display: flex; align-items: center; justify-content: center;
-            opacity: 0; pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
             transition: opacity 0.3s;
             cursor: zoom-out;
         }
-        .lightbox-overlay.active { opacity: 1; pointer-events: auto; }
+
+        .lightbox-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
         .lightbox-overlay img {
-            max-width: 90vw; max-height: 85vh;
-            object-fit: contain; border-radius: 6px;
-            box-shadow: 0 25px 80px rgba(0,0,0,0.7);
-            transform: scale(0.92); transition: transform 0.3s ease-out;
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 6px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.7);
+            transform: scale(0.92);
+            transition: transform 0.3s ease-out;
             cursor: default;
         }
-        .lightbox-overlay.active img { transform: scale(1); }
-        .lightbox-close {
-            position: absolute; top: 20px; right: 24px;
-            width: 44px; height: 44px;
-            border: 1px solid rgba(255,255,255,0.3); border-radius: 50%;
-            background: rgba(255,255,255,0.05); color: #fff;
-            font-size: 22px; display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: all 0.2s;
+
+        .lightbox-overlay.active img {
+            transform: scale(1);
         }
-        .lightbox-close:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.6); }
-        #works .rounded-xl img { cursor: zoom-in; }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        #works .rounded-xl img {
+            cursor: zoom-in;
+        }
 
         /* Back to Top */
         .back-to-top {
-            position: fixed; bottom: 30px; left: 30px;
-            width: 50px; height: 50px; border-radius: 50%;
-            background: #1a1c23; border: 1px solid rgba(255,204,0,0.5);
-            color: #ffcc00; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            cursor: pointer; opacity: 0; pointer-events: none;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 100;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #1a1c23;
+            border: 1px solid rgba(255, 204, 0, 0.5);
+            color: #ffcc00;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 100;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
         }
-        .back-to-top.visible { opacity: 1; pointer-events: auto; }
-        .back-to-top:hover { 
-            background: #ffcc00; color: #000; border-color: #ffcc00; 
-            transform: translateY(-5px); 
-            box-shadow: 0 15px 30px rgba(255,204,0,0.3);
+
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
         }
+
+        .back-to-top:hover {
+            background: #ffcc00;
+            color: #000;
+            border-color: #ffcc00;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 204, 0, 0.3);
+        }
+
         .back-to-top span {
-            font-size: 8px; font-weight: 900; margin-top: -2px; letter-spacing: 0.05em;
+            font-size: 8px;
+            font-weight: 900;
+            margin-top: -2px;
+            letter-spacing: 0.05em;
         }
 
         /* Active Nav */
-        .btn2.active .spn2 { color: #ffcc00; }
+        .btn2.active .spn2 {
+            color: #ffcc00;
+        }
 
         /* Footer */
         .site-footer {
-            border-top: 1px solid rgba(255,255,255,0.08);
-            padding: 3rem 1.5rem; text-align: center;
-            color: #666; font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 3rem 1.5rem;
+            text-align: center;
+            color: #666;
+            font-size: 0.85rem;
         }
-        .site-footer a { color: #888; text-decoration: none; transition: color 0.2s; }
-        .site-footer a:hover { color: #ffcc00; }
+
+        .site-footer a {
+            color: #888;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .site-footer a:hover {
+            color: #ffcc00;
+        }
 
         /* Carousel Dot Indicators */
         .carousel-dots {
-            display: flex; justify-content: center; gap: 8px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
             margin-top: 12px;
         }
+
         .carousel-dots button {
-            width: 10px; height: 10px; border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
             border: 1.5px solid rgba(255, 204, 0, 0.5);
-            background: transparent; cursor: pointer;
-            transition: all 0.3s; padding: 0;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 0;
         }
+
         .carousel-dots button.active {
-            background: #ffcc00; border-color: #ffcc00;
+            background: #ffcc00;
+            border-color: #ffcc00;
             box-shadow: 0 0 8px rgba(255, 204, 0, 0.5);
         }
-        .carousel-dots button:hover { border-color: #ffcc00; }
+
+        .carousel-dots button:hover {
+            border-color: #ffcc00;
+        }
 
         /* 3D Tilt on Work Images */
         .work-tilt {
             transition: transform 0.15s ease-out, box-shadow 0.3s;
             transform-style: preserve-3d;
         }
+
         .work-tilt:hover {
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px rgba(255,204,0,0.15) !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 204, 0, 0.15) !important;
         }
 
         /* Staggered Scroll Reveal */
-        .scroll-reveal.stagger-1 { transition-delay: 0.1s; }
-        .scroll-reveal.stagger-2 { transition-delay: 0.2s; }
-        .scroll-reveal.stagger-3 { transition-delay: 0.3s; }
-        .scroll-reveal.stagger-4 { transition-delay: 0.4s; }
-        .scroll-reveal.stagger-5 { transition-delay: 0.5s; }
+        .scroll-reveal.stagger-1 {
+            transition-delay: 0.1s;
+        }
+
+        .scroll-reveal.stagger-2 {
+            transition-delay: 0.2s;
+        }
+
+        .scroll-reveal.stagger-3 {
+            transition-delay: 0.3s;
+        }
+
+        .scroll-reveal.stagger-4 {
+            transition-delay: 0.4s;
+        }
+
+        .scroll-reveal.stagger-5 {
+            transition-delay: 0.5s;
+        }
 
         /* Optimized Scroll Indicator (scaleX) */
         #ultimateScrollIndicator {
@@ -568,96 +718,209 @@
 
         /* Lightbox Gallery Navigation */
         .lightbox-nav {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            width: 48px; height: 48px; border-radius: 50%;
-            border: 1px solid rgba(255,255,255,0.25);
-            background: rgba(255,255,255,0.05); color: #fff;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: all 0.2s; z-index: 10;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            z-index: 10;
             backdrop-filter: blur(4px);
         }
-        .lightbox-nav:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.6); }
-        .lightbox-nav.prev { left: 20px; }
-        .lightbox-nav.next { right: 20px; }
+
+        .lightbox-nav:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .lightbox-nav.prev {
+            left: 20px;
+        }
+
+        .lightbox-nav.next {
+            right: 20px;
+        }
+
         .lightbox-counter {
-            position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
-            color: rgba(255,255,255,0.5); font-size: 13px; font-family: 'Inter', monospace;
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 13px;
+            font-family: 'Inter', monospace;
             letter-spacing: 3px;
         }
 
         /* Mobile Menu Toggle */
         .menu-toggle {
-            display: flex; flex-direction: column; gap: 6px;
-            background: none; border: none; padding: 12px; cursor: pointer; z-index: 99999;
-            margin: -8px; /* Offset the padding to keep visual alignment */
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            z-index: 99999;
+            margin: -8px;
+            /* Offset the padding to keep visual alignment */
         }
+
         .menu-toggle span {
-            width: 26px; height: 3px; background: #fff;
+            width: 26px;
+            height: 3px;
+            background: #fff;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .menu-toggle.open span:nth-child(1) { width: 30px; transform: translateY(9px) rotate(45deg); background: #ffcc00; }
-        .menu-toggle.open span:nth-child(2) { opacity: 0; }
-        .menu-toggle.open span:nth-child(3) { width: 30px; transform: translateY(-9px) rotate(-45deg); background: #ffcc00; }
+
+        .menu-toggle.open span:nth-child(1) {
+            width: 30px;
+            transform: translateY(9px) rotate(45deg);
+            background: #ffcc00;
+        }
+
+        .menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.open span:nth-child(3) {
+            width: 30px;
+            transform: translateY(-9px) rotate(-45deg);
+            background: #ffcc00;
+        }
 
         /* Mobile Menu Overlay & Staggered Animation */
         #mobileMenu {
-            position: fixed; inset: 0; background: rgba(10, 10, 10, 0.98);
-            backdrop-filter: blur(30px); z-index: 99998;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            gap: 3.5rem; opacity: 0; pointer-events: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(30px);
+            z-index: 99998;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3.5rem;
+            opacity: 0;
+            pointer-events: none;
             transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
             transform: translateY(-20px);
         }
-        #mobileMenu.active { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+        #mobileMenu.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
         #mobileMenu a {
-            font-size: 2.8rem; font-weight: 700; letter-spacing: 0.15em;
-            color: #fff; text-decoration: none; transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-            position: relative; line-height: 1.2;
-            transform: translateY(40px); opacity: 0;
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            position: relative;
+            line-height: 1.2;
+            transform: translateY(40px);
+            opacity: 0;
         }
-        #mobileMenu.active a { transform: translateY(0); opacity: 1; }
-        #mobileMenu a.active { color: var(--accent-color); }
+
+        #mobileMenu.active a {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        #mobileMenu a.active {
+            color: var(--accent-color);
+        }
+
         #mobileMenu a::after {
-            content: ""; position: absolute; bottom: -12px; left: 0; width: 0; height: 4px;
-            background: var(--accent-color); transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            content: "";
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 0;
+            height: 4px;
+            background: var(--accent-color);
+            transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1);
         }
-        #mobileMenu a.active::after { width: 100%; }
+
+        #mobileMenu a.active::after {
+            width: 100%;
+        }
 
         /* Stagger Delays */
-        #mobileMenu.active a:nth-child(1) { transition-delay: 0.1s; }
-        #mobileMenu.active a:nth-child(2) { transition-delay: 0.2s; }
-        #mobileMenu.active a:nth-child(3) { transition-delay: 0.3s; }
-        #mobileMenu.active a:nth-child(4) { transition-delay: 0.4s; }
-        #mobileMenu.active a:nth-child(5) { transition-delay: 0.5s; }
+        #mobileMenu.active a:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        #mobileMenu.active a:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        #mobileMenu.active a:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        #mobileMenu.active a:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+
+        #mobileMenu.active a:nth-child(5) {
+            transition-delay: 0.5s;
+        }
+
         @keyframes rotate-ccw {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(-360deg); }
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(-360deg);
+            }
         }
 
         /* Custom Cursor */
-        .cursor-dot, .cursor-circle {
+        .cursor-dot,
+        .cursor-circle {
             pointer-events: none;
             position: fixed;
-            top: 0; left: 0;
+            top: 0;
+            left: 0;
             border-radius: 50%;
             z-index: 100000;
             opacity: 0;
             transition: opacity 0.3s, transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
         }
-        .cursor-dot { width: 12px; height: 12px; background: var(--accent-color); }
-        .cursor-circle { 
-            width: 44px; height: 44px; 
-            border: 1px solid var(--accent-color); 
+
+        .cursor-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--accent-color);
+        }
+
+        .cursor-circle {
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--accent-color);
             mix-blend-mode: difference;
         }
+
         .cursor-circle::before {
             content: '';
             position: absolute;
             inset: -2px;
-            background: repeating-conic-gradient(
-                var(--accent-color) 0deg 15deg,
-                transparent 15deg 35deg
-            );
+            background: repeating-conic-gradient(var(--accent-color) 0deg 15deg,
+                    transparent 15deg 35deg);
             mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px + 1px));
             -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px + 1px));
             border-radius: 50%;
@@ -665,42 +928,92 @@
             transition: opacity 0.3s;
             pointer-events: none;
         }
-        .cursor-active { transform: scale(1.5); background: rgba(255, 204, 0, 0.1); border-color: var(--accent-color); }
+
+        .cursor-active {
+            transform: scale(1.5);
+            background: rgba(255, 204, 0, 0.1);
+            border-color: var(--accent-color);
+        }
 
         /* Cursor text label (VIEW) */
         .cursor-circle span {
-            opacity: 0; font-size: 9px; font-weight: 900;
-            letter-spacing: 0.2em; color: var(--accent-color);
+            opacity: 0;
+            font-size: 9px;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            color: var(--accent-color);
             transition: opacity 0.2s, transform 0.2s;
             pointer-events: none;
             transform: translate(18px, -18px);
         }
+
         .cursor-text {
-            width: 80px !important; height: 80px !important;
+            width: 80px !important;
+            height: 80px !important;
             background: rgba(255, 204, 0, 0.08) !important;
-            border-color: transparent !important; 
-            display: flex; align-items: center; justify-content: center;
+            border-color: transparent !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             mix-blend-mode: normal !important;
         }
+
         .cursor-text::before {
             opacity: 1;
             animation: rotate-ccw 6s linear infinite;
         }
-        .cursor-text span { opacity: 1; }
+
+        .cursor-text span {
+            opacity: 1;
+        }
 
         /* Hide default cursor */
-        body { cursor: none; }
-        a, button, .work-item-container, .iso-pro, .work-card, .menu-toggle { cursor: none !important; }
+        body {
+            cursor: none;
+        }
+
+        a,
+        button,
+        .work-item-container,
+        .iso-pro,
+        .work-card,
+        .menu-toggle {
+            cursor: none !important;
+        }
 
         @media (hover: none) {
-            .cursor-dot, .cursor-circle { display: none !important; }
-            body { cursor: auto; }
-            a, button, .work-item-container, .iso-pro, .work-card, .menu-toggle { cursor: auto !important; }
+
+            .cursor-dot,
+            .cursor-circle {
+                display: none !important;
+            }
+
+            body {
+                cursor: auto;
+            }
+
+            a,
+            button,
+            .work-item-container,
+            .iso-pro,
+            .work-card,
+            .menu-toggle {
+                cursor: auto !important;
+            }
         }
 
         /* Magnetic Button Effect (JS applied) */
-        .magnetic-wrap { display: inline-block; }
-        .btn2, .floating-contact-btn, .canva-badge, .cta-btn, .back-to-top { transition: transform 0.2s linear; }
+        .magnetic-wrap {
+            display: inline-block;
+        }
+
+        .btn2,
+        .floating-contact-btn,
+        .canva-badge,
+        .cta-btn,
+        .back-to-top {
+            transition: transform 0.2s linear;
+        }
 
         /* Work Card Enhancements */
         .work-card {
@@ -708,6 +1021,7 @@
             position: relative;
             overflow: hidden;
         }
+
         .work-overlay {
             position: absolute;
             inset: 0;
@@ -722,13 +1036,17 @@
             z-index: 20;
             padding: 2rem;
             text-align: center;
-            pointer-events: none; /* Let parent handle click */
+            pointer-events: none;
+            /* Let parent handle click */
         }
+
         .work-card:hover .work-overlay {
             opacity: 1;
         }
+
         .canva-badge {
-            background: #00c4cc; /* Canva Brand Color */
+            background: #00c4cc;
+            /* Canva Brand Color */
             color: white;
             padding: 4px 12px;
             border-radius: 99px;
@@ -738,6 +1056,7 @@
             margin-bottom: 1rem;
             box-shadow: 0 0 15px rgba(0, 196, 204, 0.4);
         }
+
         .view-detail-text {
             color: #ffcc00;
             font-size: 12px;
@@ -759,18 +1078,29 @@
             overflow-y: auto;
             padding: 4rem 1.5rem;
         }
+
         .work-modal.active {
             display: block;
             animation: modalFadeIn 0.5s cubic-bezier(0.19, 1, 0.22, 1);
         }
+
         @keyframes modalFadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
+
         .modal-content {
             max-width: 900px;
             margin: 0 auto;
         }
+
         .modal-close {
             position: fixed;
             top: 2rem;
@@ -788,11 +1118,13 @@
             transition: all 0.3s;
             z-index: 10001;
         }
+
         .modal-close:hover {
             background: #ffcc00;
             color: #000;
             transform: rotate(90deg);
         }
+
         .modal-section-title {
             color: #666;
             font-size: 12px;
@@ -804,6 +1136,7 @@
             align-items: center;
             gap: 1rem;
         }
+
         .modal-section-title::after {
             content: "";
             height: 1px;
@@ -814,7 +1147,8 @@
         /* About Entrance Animation */
 
         .about-entrance.entered {
-            opacity: 1; transform: translateY(0);
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Parallax Photo */
@@ -825,14 +1159,18 @@
 
         /* Page Transition Overlay */
         .page-transition {
-            position: fixed; inset: 0;
+            position: fixed;
+            inset: 0;
             background: #0a0a0a;
             z-index: 99998;
             pointer-events: none;
             opacity: 1;
             transition: opacity 0.5s ease;
         }
-        .page-transition.done { opacity: 0; }
+
+        .page-transition.done {
+            opacity: 0;
+        }
     </style>
 </head>
 
@@ -848,7 +1186,9 @@
             class="text-3xl md:text-5xl font-mono font-bold text-white tracking-[0.5em] md:tracking-[1em] pl-[0.5em] md:pl-[1em] opacity-0 transition-all duration-1000 transform scale-95 pointer-events-none">
             WELCOME
         </div>
-        <div id="welcomeLine" class="h-[2px] bg-accent w-0 transition-all duration-1000 mt-6 shadow-[0_0_15px_rgba(255,204,0,0.8)] pointer-events-none"></div>
+        <div id="welcomeLine"
+            class="h-[2px] bg-accent w-0 transition-all duration-1000 mt-6 shadow-[0_0_15px_rgba(255,204,0,0.8)] pointer-events-none">
+        </div>
     </div>
 
     <!-- Background From Uiverse.io by chase2k25 -->
@@ -869,8 +1209,9 @@
     <!-- HEADER NAVIGATION -->
     <header
         class="fixed top-0 left-0 w-full z-[99999] bg-black backdrop-blur-md border-b border-white/10 transition-all duration-300">
-        
-        <div id="ultimateScrollIndicator" class="absolute bottom-0 left-0 h-[3px] bg-yellow-400 z-[1001] w-full origin-left scale-x-0"></div>
+
+        <div id="ultimateScrollIndicator"
+            class="absolute bottom-0 left-0 h-[3px] bg-yellow-400 z-[1001] w-full origin-left scale-x-0"></div>
 
         <div class="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
             <a href="#about"
@@ -884,7 +1225,8 @@
                     <li><a href="#works" class="btn2" data-cursor="GO"><span class="spn2">WORKS</span></a></li>
                     <li><a href="#journey" class="btn2" data-cursor="GO"><span class="spn2">JOURNEY</span></a></li>
                     <li><a href="#awards" class="btn2" data-cursor="GO"><span class="spn2">AWARDS</span></a></li>
-                    <li><a href="philosophy.html" class="btn2" data-cursor="READ"><span class="spn2">PHILOSOPHY</span></a></li>
+                    <li><a href="philosophy.html" class="btn2" data-cursor="READ"><span
+                                class="spn2">PHILOSOPHY</span></a></li>
                 </ul>
             </nav>
             <!-- Mobile Menu Toggle Button -->
@@ -892,7 +1234,9 @@
                 <span></span><span></span><span></span>
             </button>
             <!-- Numerical percentage indicator -->
-            <div id="scrollPercentage" class="hidden sm:block text-accent font-mono text-[10px] md:text-xs opacity-60 ml-4 min-w-[40px] text-right">0%</div>
+            <div id="scrollPercentage"
+                class="hidden sm:block text-accent font-mono text-[10px] md:text-xs opacity-60 ml-4 min-w-[40px] text-right">
+                0%</div>
         </div>
     </header>
 
@@ -919,20 +1263,25 @@
                         <div class="w-full h-full flex-shrink-0 snap-center relative group/photo active">
                             <img src="./assets/photo2-profile.jpg" alt="Yuta Goto"
                                 class="absolute inset-0 w-full h-full object-cover group-hover/photo:scale-105 transition-transform duration-700 pointer-events-none" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-10"></div>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-10">
+                            </div>
                             <div class="absolute bottom-10 left-10 z-20 flex flex-col gap-4">
                                 <div>
-                                    <span class="text-accent font-mono text-xs tracking-widest font-bold block mb-1">01 / 03</span>
+                                    <span class="text-accent font-mono text-xs tracking-widest font-bold block mb-1">01
+                                        / 03</span>
                                     <span class="text-white font-bold tracking-widest text-lg">Profile</span>
                                 </div>
                                 <a href="philosophy.html" data-cursor="READ"
-                                   class="group/btn-slide relative inline-flex items-center justify-center px-6 py-2.5 bg-accent text-black font-bold text-[10px] tracking-[0.2em] rounded-full overflow-hidden hover:bg-white transition-all hover:scale-105 shadow-glow min-w-[200px]">
+                                    class="group/btn-slide relative inline-flex items-center justify-center px-6 py-2.5 bg-accent text-black font-bold text-[10px] tracking-[0.2em] rounded-full overflow-hidden hover:bg-white transition-all hover:scale-105 shadow-glow min-w-[200px]">
                                     <!-- Initial State -->
-                                    <span class="flex items-center transition-all duration-500 group-hover/btn-slide:-translate-x-[120%] group-hover/btn-slide:opacity-0 whitespace-nowrap">
+                                    <span
+                                        class="flex items-center transition-all duration-500 group-hover/btn-slide:-translate-x-[120%] group-hover/btn-slide:opacity-0 whitespace-nowrap">
                                         READ PHILOSOPHY
                                     </span>
                                     <!-- Hover State -->
-                                    <span class="absolute inset-0 flex items-center justify-center gap-2 translate-x-[120%] opacity-0 transition-all duration-500 group-hover/btn-slide:translate-x-0 group-hover/btn-slide:opacity-100 whitespace-nowrap text-black font-black text-[10px]">
+                                    <span
+                                        class="absolute inset-0 flex items-center justify-center gap-2 translate-x-[120%] opacity-0 transition-all duration-500 group-hover/btn-slide:translate-x-0 group-hover/btn-slide:opacity-100 whitespace-nowrap text-black font-black text-[10px]">
                                         僕の考えをお伝えします！ <i data-lucide="book-open" class="w-3 h-3"></i>
                                     </span>
                                 </a>
@@ -943,9 +1292,12 @@
                         <div class="w-full h-full flex-shrink-0 snap-center relative group/photo">
                             <img src="./assets/photo1-trombone.jpg" alt="Brassband" loading="lazy"
                                 class="absolute inset-0 w-full h-full object-cover group-hover/photo:scale-105 transition-transform duration-700 pointer-events-none" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-10"></div>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-10">
+                            </div>
                             <div class="absolute bottom-10 left-10 z-20">
-                                <span class="text-accent font-mono text-xs tracking-widest font-bold block mb-1">02 / 03</span>
+                                <span class="text-accent font-mono text-xs tracking-widest font-bold block mb-1">02 /
+                                    03</span>
                                 <span class="text-white font-bold tracking-widest text-lg">Brassband</span>
                             </div>
                         </div>
@@ -954,9 +1306,12 @@
                         <div class="w-full h-full flex-shrink-0 snap-center relative group/photo">
                             <img src="./assets/photo3-choir.png" alt="Choir" loading="lazy"
                                 class="absolute inset-0 w-full h-full object-cover group-hover/photo:scale-105 transition-transform duration-700 pointer-events-none" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-10"></div>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-10">
+                            </div>
                             <div class="absolute bottom-10 left-10 z-20">
-                                <span class="text-accent font-mono text-xs tracking-widest font-bold block mb-1">03 / 03</span>
+                                <span class="text-accent font-mono text-xs tracking-widest font-bold block mb-1">03 /
+                                    03</span>
                                 <span class="text-white font-bold tracking-widest text-lg">Choir</span>
                             </div>
                         </div>
@@ -984,94 +1339,112 @@
                 </div>
             </div>
 
-                    <div class="w-full md:w-7/12 space-y-8">
-                        <div class="scroll-reveal">
-                            <h2 class="text-4xl md:text-6xl font-bold text-white mb-2">ABOUT ME</h2>
-                            <div class="w-20 h-1 bg-accent mb-6"></div>
-                            <p class="text-xl font-medium text-accent">同志社大学 法学部 法律学科</p>
-                            <h1 class="text-3xl font-bold text-white mt-1">後藤 優太 <span class="text-gray-500 text-sm font-normal tracking-widest pl-2">YUTA GOTO</span></h1>
-                        </div>
+            <div class="w-full md:w-7/12 space-y-8">
+                <div class="scroll-reveal">
+                    <h2 class="text-4xl md:text-6xl font-bold text-white mb-2">ABOUT ME</h2>
+                    <div class="w-20 h-1 bg-accent mb-6"></div>
+                    <p class="text-xl font-medium text-accent">同志社大学 法学部 法律学科</p>
+                    <h1 class="text-3xl font-bold text-white mt-1">後藤 優太 <span
+                            class="text-gray-500 text-sm font-normal tracking-widest pl-2">YUTA GOTO</span></h1>
+                </div>
 
-                        <div class="glow-text-card mt-8 scroll-reveal">
-                            <div class="content space-y-4 font-light leading-relaxed text-gray-300">
-                                <p>私は現在、国際法模擬裁判で緻密な論理的思考力を強化する一方で、全国レベルでの合唱や吹奏楽、AIを活用した作業自動化やビジコンの運営など、一見するとバラバラな領域で活動しています。</p>
-                                <p>このように多岐にわたる分野に足を踏み入れているのには、明確な理由があります。それは、複数の領域を横断することで、日常に潜む「普遍的な論理」や、異なる要素が結びつく「相乗効果」を発見できるからです。</p>
-                                <p>そうした物事は本や伝聞で得られるものではなく、自ら体験することでしか得られません。だからこそ私は常に自分の感覚を更新し続けるため挑戦を止めません。</p>
-                            </div>
-                        </div>
+                <div class="glow-text-card mt-8 scroll-reveal">
+                    <div class="content space-y-4 font-light leading-relaxed text-gray-300">
+                        <p>私は現在、国際法模擬裁判で緻密な論理的思考力を強化する一方で、全国レベルでの合唱や吹奏楽、AIを活用した作業自動化やビジコンの運営など、一見するとバラバラな領域で活動しています。</p>
+                        <p>このように多岐にわたる分野に足を踏み入れているのには、明確な理由があります。それは、複数の領域を横断することで、日常に潜む「普遍的な論理」や、異なる要素が結びつく「相乗効果」を発見できるからです。
+                        </p>
+                        <p>そうした物事は本や伝聞で得られるものではなく、自ら体験することでしか得られません。だからこそ私は常に自分の感覚を更新し続けるため挑戦を止めません。</p>
+                    </div>
+                </div>
 
-                        <div class="glow-text-card scroll-reveal">
-                            <div class="content">
-                                <h4 class="text-white font-bold mb-3 flex items-center gap-2">Future Vision</h4>
-                                <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                                    将来はこうした経験を生かして起業することを考えています。この思いに共感してくださる方、ぜひ1on1でお話ししましょう！🔥<br>(趣味: 野球観戦, 吹奏楽, 合唱, ポスター・ビラ・動画制作 / USJクルー経験あり)
-                                </p>
-                                <a href="contact.html" data-cursor="MAIL"
-                                   class="group/btn-slide relative inline-flex items-center justify-center px-8 py-3 bg-accent text-black font-black text-[10px] md:text-xs tracking-widest rounded-full overflow-hidden hover:bg-white transition-all hover:scale-105 active:scale-95 shadow-glow min-w-[240px]">
-                                    <!-- Initial State -->
-                                    <span class="flex items-center gap-2 transition-all duration-500 group-hover/btn-slide:-translate-x-[120%] group-hover/btn-slide:opacity-0 whitespace-nowrap">
-                                        まずは気軽に面談しませんか？ <i data-lucide="mail" class="w-4 h-4"></i>
-                                    </span>
-                                    <!-- Hover State -->
-                                    <span class="absolute inset-0 flex items-center justify-center gap-2 translate-x-[120%] opacity-0 transition-all duration-500 group-hover/btn-slide:translate-x-0 group-hover/btn-slide:opacity-100 whitespace-nowrap text-black font-black">
-                                        問い合わせページへ <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
+                <div class="glow-text-card scroll-reveal">
+                    <div class="content">
+                        <h4 class="text-white font-bold mb-3 flex items-center gap-2">Future Vision</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            現在、ポスターやビラ、バナー、ホームページ作成を受け付けています！発注は以下のフォームよりご連絡ください！過去作品は下記に掲載しております。<br><br>また将来はこうした経験を生かして起業することを考えています。この思いに共感してくださる方、ぜひ1on1でお話ししましょう！🔥<br>(趣味:
+                            野球観戦, 吹奏楽, 合唱, ポスター・ビラ・動画制作 / USJクルー経験あり)
+                        </p>
+                        <a href="contact.html" data-cursor="MAIL"
+                            class="group/btn-slide relative inline-flex items-center justify-center px-8 py-3 bg-accent text-black font-black text-[10px] md:text-xs tracking-widest rounded-full overflow-hidden hover:bg-white transition-all hover:scale-105 active:scale-95 shadow-glow min-w-[240px]">
+                            <!-- Initial State -->
+                            <span
+                                class="flex items-center gap-2 transition-all duration-500 group-hover/btn-slide:-translate-x-[120%] group-hover/btn-slide:opacity-0 whitespace-nowrap">
+                                まずは気軽に面談しませんか？ <i data-lucide="mail" class="w-4 h-4"></i>
+                            </span>
+                            <!-- Hover State -->
+                            <span
+                                class="absolute inset-0 flex items-center justify-center gap-2 translate-x-[120%] opacity-0 transition-all duration-500 group-hover/btn-slide:translate-x-0 group-hover/btn-slide:opacity-100 whitespace-nowrap text-black font-black">
+                                問い合わせページへ <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
 
                 <div class="mt-12 scroll-reveal">
-                    <span class="text-accent font-mono text-[10px] tracking-[0.3em] uppercase mb-4 block opacity-80 font-bold">Interest</span>
+                    <span
+                        class="text-accent font-mono text-[20px] tracking-[0.3em] uppercase mb-4 block opacity-80 font-bold">Interest</span>
                     <div class="flex flex-wrap gap-2 text-sm text-[#ddd]">
-                    <span
-                        class="px-4 py-1.5 bg-gray-900 text-gray-300 rounded-full border border-gray-700 hover:text-accent hover:border-accent transition-colors">AI
-                        / DX</span>
-                    <span
-                        class="px-4 py-1.5 bg-gray-900 text-gray-300 rounded-full border border-gray-700 hover:text-accent hover:border-accent transition-colors">Startup</span>
-                    <span
-                        class="px-4 py-1.5 bg-gray-900 text-gray-300 rounded-full border border-gray-700 hover:text-accent hover:border-accent transition-colors">Design
-                        & Video</span>
-                    <span
-                        class="px-4 py-1.5 bg-gray-900 text-gray-300 rounded-full border border-gray-700 hover:text-accent hover:border-accent transition-colors">Music
-                        Performance</span>
-                </div>
+                        <span
+                            class="px-4 py-1.5 bg-gray-900 text-gray-300 rounded-full border border-gray-700 hover:text-accent hover:border-accent transition-colors">AI
+                            / DX</span>
+                        <span
+                            class="px-4 py-1.5 bg-gray-900 text-gray-300 rounded-full border border-gray-700 hover:text-accent hover:border-accent transition-colors">Startup</span>
+                        <span
+                            class="px-4 py-1.5 bg-gray-900 text-gray-300 rounded-full border border-gray-700 hover:text-accent hover:border-accent transition-colors">Design
+                            & Video</span>
+                        <span
+                            class="px-4 py-1.5 bg-gray-900 text-gray-300 rounded-full border border-gray-700 hover:text-accent hover:border-accent transition-colors">Music
+                            Performance</span>
+                    </div>
 
-                <!-- Social Profile Links for SEO & Contact (Isometric Gimmick) -->
-                <div class="pt-12 border-t border-gray-800 scroll-reveal">
-                    <span class="text-accent font-mono text-[10px] tracking-[0.3em] uppercase mb-6 block opacity-80 font-bold">SNS</span>
-                    <ul class="sns-iso-card">
-                        <!-- Instagram -->
-                        <li class="iso-pro inst">
-                            <span></span><span></span><span></span>
-                            <a href="https://www.instagram.com/yutayarogai/" target="_blank" rel="noopener noreferrer" data-cursor="OPEN">
-                                <svg class="w-6 h-6 fill-current" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path>
-                                </svg>
-                            </a>
-                            <div class="text">Instagram</div>
-                        </li>
-                        <!-- Youtrust -->
-                        <li class="iso-pro you">
-                            <span></span><span></span><span></span>
-                            <a href="https://youtrust.jp/users/yutagoto?source=qr" target="_blank" rel="noopener noreferrer" data-cursor="OPEN">
-                                <img src="./assets/youtrust.png" alt="YOUTRUST" class="w-6 h-6 object-contain" style="filter: brightness(0) invert(1);" onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22white%22 stroke-width=%222%22><circle cx=%2212%22 cy=%2212%22 r=%2210%22/><text x=%2212%22 y=%2216%22 font-family=%22sans-serif%22 font-size=%2212%22 text-anchor=%22middle%22 fill=%22white%22 stroke=%22none%22>Y</text></svg>';">
-                            </a>
-                            <div class="text">YOUTRUST</div>
-                        </li>
-                        <!-- Facebook -->
-                        <li class="iso-pro face">
-                            <span></span><span></span><span></span>
-                            <a href="https://www.facebook.com/profile.php?id=61575688434111" target="_blank" rel="noopener noreferrer" data-cursor="OPEN">
-                                <svg class="w-6 h-6 fill-current" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"></path>
-                                </svg>
-                            </a>
-                            <div class="text">Facebook</div>
-                        </li>
-                    </ul>
+                    <!-- Social Profile Links for SEO & Contact (Isometric Gimmick) -->
+                    <div class="pt-12 border-t border-gray-800 scroll-reveal">
+                        <span
+                            class="text-accent font-mono text-[20px] tracking-[0.3em] uppercase mb-6 block opacity-80 font-bold">SNS</span>
+                        <ul class="sns-iso-card">
+                            <!-- Instagram -->
+                            <li class="iso-pro inst">
+                                <span></span><span></span><span></span>
+                                <a href="https://www.instagram.com/yutayarogai/" target="_blank"
+                                    rel="noopener noreferrer" data-cursor="OPEN">
+                                    <svg class="w-6 h-6 fill-current" viewBox="0 0 448 512"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z">
+                                        </path>
+                                    </svg>
+                                </a>
+                                <div class="text">Instagram</div>
+                            </li>
+                            <!-- Youtrust -->
+                            <li class="iso-pro you">
+                                <span></span><span></span><span></span>
+                                <a href="https://youtrust.jp/users/yutagoto?source=qr" target="_blank"
+                                    rel="noopener noreferrer" data-cursor="OPEN">
+                                    <img src="./assets/youtrust.png" alt="YOUTRUST" class="w-6 h-6 object-contain"
+                                        style="filter: brightness(0) invert(1);"
+                                        onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22white%22 stroke-width=%222%22><circle cx=%2212%22 cy=%2212%22 r=%2210%22/><text x=%2212%22 y=%2216%22 font-family=%22sans-serif%22 font-size=%2212%22 text-anchor=%22middle%22 fill=%22white%22 stroke=%22none%22>Y</text></svg>';">
+                                </a>
+                                <div class="text">YOUTRUST</div>
+                            </li>
+                            <!-- Facebook -->
+                            <li class="iso-pro face">
+                                <span></span><span></span><span></span>
+                                <a href="https://www.facebook.com/profile.php?id=61575688434111" target="_blank"
+                                    rel="noopener noreferrer" data-cursor="OPEN">
+                                    <svg class="w-6 h-6 fill-current" viewBox="0 0 320 512"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z">
+                                        </path>
+                                    </svg>
+                                </a>
+                                <div class="text">Facebook</div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
     </section>
 
     <!-- WORKS SECTION -->
@@ -1086,17 +1459,17 @@
         <div class="flex flex-col gap-32">
             <!-- Work 1 (Left Text, Right Image) -->
             <div class="flex flex-col md:flex-row items-center gap-12 group work-item-container scroll-reveal"
-                 data-title="JAPAN CUP 2026" 
-                 data-cat="Seminar Flyer"
-                 data-challenge="初学者でも手を止めて内容を確認したくなるような、圧倒的な視覚的インパクトの追求。"
-                 data-process="「論理を象徴する直線」と「情熱を象徴する黄」を大胆に組み合わせ、ターゲット層に刺さるモダンなタイポグラフィを核としたレイアウトを構築。"
-                 data-img="./assets/work1-moot-court.jpg"
-                 data-cursor="VIEW">
+                data-title="JAPAN CUP 2026" data-cat="Seminar Flyer"
+                data-challenge="初学者でも手を止めて内容を確認したくなるような、圧倒的な視覚的インパクトの追求。"
+                data-process="「論理を象徴する直線」と「情熱を象徴する黄」を大胆に組み合わせ、ターゲット層に刺さるモダンなタイポグラフィを核としたレイアウトを構築。"
+                data-img="./assets/work1-moot-court.jpg" data-cursor="VIEW">
                 <div class="w-full md:w-1/2 space-y-4 order-2 md:order-1">
-                    <span class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold flex items-center gap-3">
+                    <span
+                        class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold flex items-center gap-3">
                         <span class="w-8 h-px bg-accent"></span>Seminar
                     </span>
-                    <h3 class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">
+                    <h3
+                        class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">
                         JAPAN CUP 2026</h3>
                     <div class="glow-text-card mt-4">
                         <div class="content !p-5">
@@ -1107,8 +1480,10 @@
                     </div>
                 </div>
                 <div class="w-full md:w-1/2 order-1 md:order-2">
-                    <div class="work-card relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
-                        <img src="./assets/work1-moot-court.jpg" alt="JAPAN CUP" loading="lazy" class="w-full h-auto object-contain bg-gray-900" />
+                    <div
+                        class="work-card relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
+                        <img src="./assets/work1-moot-court.jpg" alt="JAPAN CUP" loading="lazy"
+                            class="w-full h-auto object-contain bg-gray-900" />
                         <div class="work-overlay">
                             <div class="canva-badge">DESIGNED WITH CANVA</div>
                             <p class="text-white text-sm font-medium">論理と情熱の視覚化</p>
@@ -1120,15 +1495,15 @@
 
             <!-- Work 2 (Left Image, Right Text) -->
             <div class="flex flex-col md:flex-row items-center gap-12 group work-item-container scroll-reveal"
-                 data-title="WELL HUNTING"
-                 data-cat="Event Poster"
-                 data-challenge="「就活＝重苦しい」という先入観を払拭し、自分らしさを肯定できるポジティブな空間の演出。"
-                 data-process="感情の機微を表現する余白と、信頼感を与えるミニマルな配置を徹底。Canvaの素材をカスタマイズし、高級感のあるトーンに統一。"
-                 data-img="./assets/work2-well-hunting.jpg"
-                 data-cursor="VIEW">
+                data-title="WELL HUNTING" data-cat="Event Poster"
+                data-challenge="「就活＝重苦しい」という先入観を払拭し、自分らしさを肯定できるポジティブな空間の演出。"
+                data-process="感情の機微を表現する余白と、信頼感を与えるミニマルな配置を徹底。Canvaの素材をカスタマイズし、高級感のあるトーンに統一。"
+                data-img="./assets/work2-well-hunting.jpg" data-cursor="VIEW">
                 <div class="w-full md:w-1/2 order-1 md:order-1">
-                    <div class="work-card relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
-                        <img src="./assets/work2-well-hunting.jpg" alt="WELL HUNTING by Rubyin" loading="lazy" class="w-full h-auto object-contain bg-gray-900" />
+                    <div
+                        class="work-card relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
+                        <img src="./assets/work2-well-hunting.jpg" alt="WELL HUNTING by Rubyin" loading="lazy"
+                            class="w-full h-auto object-contain bg-gray-900" />
                         <div class="work-overlay">
                             <div class="canva-badge">DESIGNED WITH CANVA</div>
                             <p class="text-white text-sm font-medium">ありのままを魅せる就活</p>
@@ -1137,10 +1512,12 @@
                     </div>
                 </div>
                 <div class="w-full md:w-1/2 space-y-4 order-2 md:order-2">
-                    <span class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold flex items-center gap-3">
+                    <span
+                        class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold flex items-center gap-3">
                         <span class="w-8 h-px bg-accent"></span>Event
                     </span>
-                    <h3 class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">
+                    <h3
+                        class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">
                         WELL HUNTING</h3>
                     <div class="glow-text-card mt-4">
                         <div class="content !p-5">
@@ -1154,17 +1531,17 @@
 
             <!-- Work 3 (Left Text, Right Image) -->
             <div class="flex flex-col md:flex-row items-center gap-12 group work-item-container scroll-reveal"
-                 data-title="Business Contest WING"
-                 data-cat="Promotion Poster"
-                 data-challenge="挑戦者の「初めの一歩」を後押しする、躍動感とスケール感の共存。"
-                 data-process="「羽ばたく」というコンセプトに基づき、対角線上の構図と光の演出を多用。テキストと情報の優先順位を整理し、一瞬で概要が伝わる視認性を確保。"
-                 data-img="./assets/work3-wing.jpg"
-                 data-cursor="VIEW">
+                data-title="Business Contest WING" data-cat="Promotion Poster"
+                data-challenge="挑戦者の「初めの一歩」を後押しする、躍動感とスケール感の共存。"
+                data-process="「羽ばたく」というコンセプトに基づき、対角線上の構図と光の演出を多用。テキストと情報の優先順位を整理し、一瞬で概要が伝わる視認性を確保。"
+                data-img="./assets/work3-wing.jpg" data-cursor="VIEW">
                 <div class="w-full md:w-1/2 space-y-4 order-2 md:order-1">
-                    <span class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold flex items-center gap-3">
+                    <span
+                        class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold flex items-center gap-3">
                         <span class="w-8 h-px bg-accent"></span>Contest
                     </span>
-                    <h3 class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">
+                    <h3
+                        class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">
                         Business Contest WING</h3>
                     <div class="glow-text-card mt-4">
                         <div class="content !p-5">
@@ -1175,8 +1552,10 @@
                     </div>
                 </div>
                 <div class="w-full md:w-1/2 order-1 md:order-2">
-                    <div class="work-card relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
-                        <img src="./assets/work3-wing.jpg" alt="Business Contest WING" loading="lazy" class="w-full h-auto object-contain bg-gray-900" />
+                    <div
+                        class="work-card relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
+                        <img src="./assets/work3-wing.jpg" alt="Business Contest WING" loading="lazy"
+                            class="w-full h-auto object-contain bg-gray-900" />
                         <div class="work-overlay">
                             <div class="canva-badge">DESIGNED WITH CANVA</div>
                             <p class="text-white text-sm font-medium">未来へ羽ばたく情熱</p>
@@ -1188,15 +1567,15 @@
 
             <!-- Work 4 (Left Image, Right Text) -->
             <div class="flex flex-col md:flex-row items-center gap-12 group work-item-container scroll-reveal"
-                 data-title="同志社グリークラブ 団員募集"
-                 data-cat="Member Recruitment"
-                 data-challenge="120年の伝統と現代の感性の融合を、一目で感じさせる強烈なインパクト。"
-                 data-process="伝統に敬意を払い、力強い筆文字と洗練されたレイアウトを融合。合唱の「共鳴」をディテールの装飾（ドットやライン）で施し、多次元的な魅力を構築。"
-                 data-img="./assets/work4-glee-club.jpg"
-                 data-cursor="VIEW">
+                data-title="同志社グリークラブ 団員募集" data-cat="Member Recruitment"
+                data-challenge="120年の伝統と現代の感性の融合を、一目で感じさせる強烈なインパクト。"
+                data-process="伝統に敬意を払い、力強い筆文字と洗練されたレイアウトを融合。合唱の「共鳴」をディテールの装飾（ドットやライン）で施し、多次元的な魅力を構築。"
+                data-img="./assets/work4-glee-club.jpg" data-cursor="VIEW">
                 <div class="w-full md:w-1/2 order-1 md:order-1">
-                    <div class="work-card relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
-                        <img src="./assets/work4-glee-club.jpg" alt="同志社グリークラブ 団員大募集" loading="lazy" class="w-full h-auto object-contain bg-gray-900" />
+                    <div
+                        class="work-card relative w-full rounded-xl overflow-hidden border-2 border-transparent hover:border-accent transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(255,204,0,0.3)]">
+                        <img src="./assets/work4-glee-club.jpg" alt="同志社グリークラブ 団員大募集" loading="lazy"
+                            class="w-full h-auto object-contain bg-gray-900" />
                         <div class="work-overlay">
                             <div class="canva-badge">DESIGNED WITH CANVA</div>
                             <p class="text-white text-sm font-medium">伝統と革新のハーモニー</p>
@@ -1205,10 +1584,12 @@
                     </div>
                 </div>
                 <div class="w-full md:w-1/2 space-y-4 order-2 md:order-2">
-                    <span class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold flex items-center gap-3">
+                    <span
+                        class="text-accent font-mono text-sm tracking-widest uppercase mb-2 block font-semibold flex items-center gap-3">
                         <span class="w-8 h-px bg-accent"></span>Performance
                     </span>
-                    <h3 class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">
+                    <h3
+                        class="text-4xl md:text-5xl font-bold text-white group-hover:text-accent transition-colors mb-4">
                         同志社グリークラブ</h3>
                     <div class="glow-text-card mt-4">
                         <div class="content !p-5">
@@ -1299,17 +1680,24 @@
         </div>
 
         <div class="flex flex-col gap-4">
+            <!-- 2026 -->
+            <div
+                class="p-6 bg-gray-900/50 rounded-lg border border-gray-800 hover:border-accent transition-colors group">
+                <span class="text-accent text-sm font-mono mb-1 block group-hover:text-yellow-400">2026.02</span>
+                <h4 class="text-white font-bold text-lg mb-1">関西学生団体AWARD2025</h4>
+                <p class="text-gray-400 text-sm">イノベーション部門 ビジネスコンテストWING ノミネート</p>
+            </div>
             <!-- 2025 -->
             <div
                 class="p-6 bg-gray-900/50 rounded-lg border border-gray-800 hover:border-accent transition-colors group">
                 <span class="text-accent text-sm font-mono mb-1 block group-hover:text-yellow-400">2025.10</span>
-                <h4 class="text-white font-bold text-lg mb-1">全国合唱コンクール</h4>
+                <h4 class="text-white font-bold text-lg mb-1">全国 合唱コンクール</h4>
                 <p class="text-gray-400 text-sm">大学ユースの部 銀賞</p>
             </div>
             <div
                 class="p-6 bg-gray-900/50 rounded-lg border border-gray-800 hover:border-accent transition-colors group">
                 <span class="text-accent text-sm font-mono mb-1 block group-hover:text-yellow-400">2025.09</span>
-                <h4 class="text-white font-bold text-lg mb-1">関西合唱コンクール</h4>
+                <h4 class="text-white font-bold text-lg mb-1">関西 合唱コンクール</h4>
                 <p class="text-gray-400 text-sm">大学の部 金賞</p>
             </div>
             <div
@@ -1322,9 +1710,16 @@
             <div
                 class="p-6 bg-gray-900/50 rounded-lg border border-gray-800 hover:border-accent transition-colors group">
                 <span class="text-accent text-sm font-mono mb-1 block group-hover:text-yellow-400">2023.09</span>
-                <h4 class="text-white font-bold text-lg mb-1">関西/奈良県 吹奏楽コンクール</h4>
-                <p class="text-gray-400 text-sm">小編成の部 奈良県金賞代表 / 関西銀賞</p>
+                <h4 class="text-white font-bold text-lg mb-1">関西 吹奏楽コンクール</h4>
+                <p class="text-gray-400 text-sm">小編成の部 銀賞</p>
             </div>
+            <div
+                class="p-6 bg-gray-900/50 rounded-lg border border-gray-800 hover:border-accent transition-colors group">
+                <span class="text-accent text-sm font-mono mb-1 block group-hover:text-yellow-400">2023.08</span>
+                <h4 class="text-white font-bold text-lg mb-1">奈良県 吹奏楽コンクール</h4>
+                <p class="text-gray-400 text-sm">小編成の部 奈良県金賞代表</p>
+            </div>
+
             <div
                 class="p-6 bg-gray-900/50 rounded-lg border border-gray-800 hover:border-accent transition-colors group">
                 <span class="text-accent text-sm font-mono mb-1 block group-hover:text-yellow-400">2023.02</span>
@@ -1335,8 +1730,14 @@
             <div
                 class="p-6 bg-gray-900/50 rounded-lg border border-gray-800 hover:border-accent transition-colors group">
                 <span class="text-accent text-sm font-mono mb-1 block group-hover:text-yellow-400">2022.09</span>
-                <h4 class="text-white font-bold text-lg mb-1">関西/奈良県 吹奏楽コンクール</h4>
-                <p class="text-gray-400 text-sm">小編成の部 奈良県金賞代表 / 関西銀賞</p>
+                <h4 class="text-white font-bold text-lg mb-1">関西 吹奏楽コンクール</h4>
+                <p class="text-gray-400 text-sm">小編成の部 関西銀賞</p>
+            </div>
+            <div
+                class="p-6 bg-gray-900/50 rounded-lg border border-gray-800 hover:border-accent transition-colors group">
+                <span class="text-accent text-sm font-mono mb-1 block group-hover:text-yellow-400">2022.09</span>
+                <h4 class="text-white font-bold text-lg mb-1">奈良県 吹奏楽コンクール</h4>
+                <p class="text-gray-400 text-sm">小編成の部 奈良県金賞代表</p>
             </div>
         </div>
     </section>
@@ -1347,36 +1748,41 @@
             <div class="content !p-12 md:!p-20 space-y-10">
                 <div class="flex items-center justify-center gap-4 mb-4">
                     <span class="w-12 h-px bg-accent/30"></span>
-                    <span class="text-accent font-mono tracking-[0.4em] uppercase text-xs font-bold opacity-70">FUTURE VISION</span>
+                    <span class="text-accent font-mono tracking-[0.4em] uppercase text-xs font-bold opacity-70">FUTURE
+                        VISION</span>
                     <span class="w-12 h-px bg-accent/30"></span>
                 </div>
                 <h2 class="text-4xl md:text-7xl font-black tracking-tighter leading-none">
-                    LET'S SHAPE THE <br/> <span class="text-accent">LOGICAL FUTURE</span> TOGETHER.
+                    LET'S SHAPE THE <br /> <span class="text-accent">LOGICAL FUTURE</span> TOGETHER.
                 </h2>
                 <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
-                    論理と感性が交差する場所に、新しい価値が生まれます。<br/>
+                    論理と感性が交差する場所に、新しい価値が生まれます。<br />
                     1on1のご相談、プロジェクトへの参画、雑談まで、お気軽にご連絡ください。
                 </p>
                 <div class="flex flex-col md:flex-row items-center justify-center gap-6 pt-6">
                     <a href="contact.html" data-cursor="MAIL"
-                       class="group/btn-slide relative inline-flex items-center justify-center px-10 py-5 bg-accent text-black font-black text-lg rounded-full overflow-hidden hover:bg-white transition-all hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(255,204,0,0.3)] min-w-[320px]">
+                        class="group/btn-slide relative inline-flex items-center justify-center px-10 py-5 bg-accent text-black font-black text-lg rounded-full overflow-hidden hover:bg-white transition-all hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(255,204,0,0.3)] min-w-[320px]">
                         <!-- Initial State -->
-                        <span class="flex items-center gap-3 transition-all duration-500 group-hover/btn-slide:-translate-x-[120%] group-hover/btn-slide:opacity-0 whitespace-nowrap">
+                        <span
+                            class="flex items-center gap-3 transition-all duration-500 group-hover/btn-slide:-translate-x-[120%] group-hover/btn-slide:opacity-0 whitespace-nowrap">
                             CONTACT / お問い合わせ <i data-lucide="mail" class="w-5 h-5"></i>
                         </span>
                         <!-- Hover State -->
-                        <span class="absolute inset-0 flex items-center justify-center gap-2 translate-x-[120%] opacity-0 transition-all duration-500 group-hover/btn-slide:translate-x-0 group-hover/btn-slide:opacity-100 whitespace-nowrap text-black font-black text-lg">
+                        <span
+                            class="absolute inset-0 flex items-center justify-center gap-2 translate-x-[120%] opacity-0 transition-all duration-500 group-hover/btn-slide:translate-x-0 group-hover/btn-slide:opacity-100 whitespace-nowrap text-black font-black text-lg">
                             お問い合わせフォームへ <i data-lucide="send" class="w-5 h-5"></i>
                         </span>
                     </a>
                     <a href="philosophy.html" data-cursor="READ"
-                       class="group/btn-slide relative inline-flex items-center justify-center px-10 py-5 border border-white/20 text-white font-bold text-lg rounded-full overflow-hidden hover:bg-white transition-all min-w-[320px]">
+                        class="group/btn-slide relative inline-flex items-center justify-center px-10 py-5 border border-white/20 text-white font-bold text-lg rounded-full overflow-hidden hover:bg-white transition-all min-w-[320px]">
                         <!-- Initial State -->
-                        <span class="flex items-center transition-all duration-500 group-hover/btn-slide:-translate-x-[120%] group-hover/btn-slide:opacity-0 whitespace-nowrap">
+                        <span
+                            class="flex items-center transition-all duration-500 group-hover/btn-slide:-translate-x-[120%] group-hover/btn-slide:opacity-0 whitespace-nowrap">
                             READ PHILOSOPHY
                         </span>
                         <!-- Hover State -->
-                        <span class="absolute inset-0 flex items-center justify-center gap-2 translate-x-[120%] opacity-0 transition-all duration-500 group-hover/btn-slide:translate-x-0 group-hover/btn-slide:opacity-100 whitespace-nowrap text-black font-black text-lg">
+                        <span
+                            class="absolute inset-0 flex items-center justify-center gap-2 translate-x-[120%] opacity-0 transition-all duration-500 group-hover/btn-slide:translate-x-0 group-hover/btn-slide:opacity-100 whitespace-nowrap text-black font-black text-lg">
                             僕の考えをお伝えします！ <i data-lucide="book-open" class="w-5 h-5"></i>
                         </span>
                     </a>
@@ -1403,7 +1809,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const carousel = document.getElementById('photoCarousel');
             const dots = document.querySelectorAll('#carouselDots button');
-            
+
             if (carousel && dots.length) {
                 carousel.addEventListener('scroll', () => {
                     const index = Math.round(carousel.scrollLeft / carousel.clientWidth);
@@ -1425,7 +1831,7 @@
                     if (entry.isIntersecting) {
                         const id = entry.target.getAttribute('id');
                         const navLinks = document.querySelectorAll('nav a[href^="#"], #mobileMenu a[href^="#"]');
-                        
+
                         navLinks.forEach(link => {
                             const href = link.getAttribute('href');
                             if (href === `#${id}`) {
@@ -1479,7 +1885,7 @@
             document.body.classList.add('overflow-hidden');
             // すでにトップに戻しておく
             window.scrollTo(0, 0);
-            
+
             const splash = document.getElementById('splashScreen');
             const text = document.getElementById('welcomeText');
             const line = document.getElementById('welcomeLine');
@@ -1526,11 +1932,14 @@
     <footer class="site-footer">
         <div class="max-w-7xl mx-auto">
             <div style="display:flex; justify-content:center; gap:1.5rem; margin-bottom:1.5rem;">
-                <a href="https://www.instagram.com/yutayarogai/" target="_blank" rel="noopener noreferrer" data-cursor="OPEN">Instagram</a>
+                <a href="https://www.instagram.com/yutayarogai/" target="_blank" rel="noopener noreferrer"
+                    data-cursor="OPEN">Instagram</a>
                 <span style="color:#333;">|</span>
-                <a href="https://youtrust.jp/users/yutagoto?source=qr" target="_blank" rel="noopener noreferrer" data-cursor="OPEN">YOUTRUST</a>
+                <a href="https://youtrust.jp/users/yutagoto?source=qr" target="_blank" rel="noopener noreferrer"
+                    data-cursor="OPEN">YOUTRUST</a>
                 <span style="color:#333;">|</span>
-                <a href="https://www.facebook.com/profile.php?id=61575688434111" target="_blank" rel="noopener noreferrer" data-cursor="OPEN">Facebook</a>
+                <a href="https://www.facebook.com/profile.php?id=61575688434111" target="_blank"
+                    rel="noopener noreferrer" data-cursor="OPEN">Facebook</a>
             </div>
             <p>&copy; 2026 Yuta Goto. All rights reserved.</p>
         </div>
@@ -1545,7 +1954,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
                 <!-- Image Side -->
                 <div class="space-y-6">
-                    <img id="modalImg" src="" alt="" class="w-full h-auto rounded-2xl shadow-2xl border border-white/10">
+                    <img id="modalImg" src="" alt=""
+                        class="w-full h-auto rounded-2xl shadow-2xl border border-white/10">
                     <div class="flex items-center gap-4">
                         <div class="canva-badge">CANVA</div>
                         <span class="text-gray-500 text-xs font-mono uppercase tracking-widest" id="modalCat"></span>
@@ -1570,8 +1980,11 @@
                     </div>
 
                     <div class="pt-8 border-t border-white/5">
-                        <p class="text-xs text-gray-600 mb-4 italic">※当制作物はCanvaを用いて、思考のスピードを最大化しつつクオリティを追求し、すべて独力で制作したものです。</p>
-                        <button id="closeStoryBtn" class="px-8 py-3 bg-white/5 border border-white/20 text-white rounded-full text-xs font-bold tracking-widest hover:bg-accent hover:text-black hover:border-accent transition-all">CLOSE STORY</button>
+                        <p class="text-xs text-gray-600 mb-4 italic">
+                            ※当制作物はCanvaを用いて、思考のスピードを最大化しつつクオリティを追求し、すべて独力で制作したものです。</p>
+                        <button id="closeStoryBtn"
+                            class="px-8 py-3 bg-white/5 border border-white/20 text-white rounded-full text-xs font-bold tracking-widest hover:bg-accent hover:text-black hover:border-accent transition-all">CLOSE
+                            STORY</button>
                     </div>
                 </div>
             </div>
@@ -1582,18 +1995,25 @@
     <div id="lightbox" class="lightbox-overlay">
         <button class="lightbox-close" aria-label="Close">&times;</button>
         <button class="lightbox-nav prev" id="lbPrev" aria-label="Previous">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
         </button>
         <img id="lightboxImg" src="" alt="">
         <button class="lightbox-nav next" id="lbNext" aria-label="Next">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 6 15 12 9 18"></polyline>
+            </svg>
         </button>
         <div class="lightbox-counter" id="lbCounter"></div>
     </div>
 
     <!-- Back to Top Button -->
     <button id="backToTop" class="back-to-top" aria-label="Back to top" data-cursor="TOP">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round">
             <polyline points="18 15 12 9 6 15"></polyline>
         </svg>
         <span>TOP</span>
@@ -1603,14 +2023,13 @@
     <a href="contact.html" class="floating-contact-btn group/btn-slide" data-cursor="MAIL">
         <div class="relative flex items-center justify-center min-w-[120px]">
             <!-- Initial State -->
-            <span class="flex items-center gap-2 transition-all duration-500 group-hover/btn-slide:-translate-x-[120%] group-hover/btn-slide:opacity-0 whitespace-nowrap">
-                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                </svg> 
+            <span
+                class="flex items-center gap-2 transition-all duration-500 group-hover/btn-slide:-translate-x-[120%] group-hover/btn-slide:opacity-0 whitespace-nowrap">
                 CONTACT
             </span>
             <!-- Hover State -->
-            <span class="absolute inset-0 flex items-center justify-center gap-2 translate-x-[120%] opacity-0 transition-all duration-500 group-hover/btn-slide:translate-x-0 group-hover/btn-slide:opacity-100 whitespace-nowrap text-black font-bold">
+            <span
+                class="absolute inset-0 flex items-center justify-center gap-2 translate-x-[120%] opacity-0 transition-all duration-500 group-hover/btn-slide:translate-x-0 group-hover/btn-slide:opacity-100 whitespace-nowrap text-black font-bold">
                 お問い合わせフォームへ <i data-lucide="send" class="w-4 h-4"></i>
             </span>
         </div>
@@ -1619,289 +2038,289 @@
     <!-- UX Enhancement Scripts -->
     <!-- Consolidated UX Enhancement & Interaction Scripts -->
     <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        
-        // === 1. Page Transition & Entrance ===
-        const pageTransition = document.getElementById('pageTransition');
-        if (pageTransition) {
-            window.addEventListener('load', () => pageTransition.classList.add('done'));
-            // Safety timeout: ensure the transition finishes even if window.load is slow
-            setTimeout(() => pageTransition.classList.add('done'), 2000);
-        }
-        
-        document.addEventListener('click', (e) => {
-            const link = e.target.closest('a[href]');
-            if (!link) return;
-            const href = link.getAttribute('href');
-            if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('javascript:')) return;
-            e.preventDefault();
+        document.addEventListener("DOMContentLoaded", () => {
+
+            // === 1. Page Transition & Entrance ===
+            const pageTransition = document.getElementById('pageTransition');
             if (pageTransition) {
-                pageTransition.classList.remove('done');
-                setTimeout(() => { window.location.href = href; }, 500);
-            } else {
-                window.location.href = href;
+                window.addEventListener('load', () => pageTransition.classList.add('done'));
+                // Safety timeout: ensure the transition finishes even if window.load is slow
+                setTimeout(() => pageTransition.classList.add('done'), 2000);
             }
-        });
 
-        // === 2. Scroll Reveal & Indicators ===
-        const bar = document.getElementById('ultimateScrollIndicator');
-        const pct = document.getElementById('scrollPercentage');
-        const backToTopBtn = document.getElementById('backToTop');
-        const photoCont = document.querySelector('.parallax-photo') || document.querySelector('#about .aspect-\\[4\\/5\\]');
-        if (photoCont && !photoCont.classList.contains('parallax-photo')) photoCont.classList.add('parallax-photo');
+            document.addEventListener('click', (e) => {
+                const link = e.target.closest('a[href]');
+                if (!link) return;
+                const href = link.getAttribute('href');
+                if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('javascript:')) return;
+                e.preventDefault();
+                if (pageTransition) {
+                    pageTransition.classList.remove('done');
+                    setTimeout(() => { window.location.href = href; }, 500);
+                } else {
+                    window.location.href = href;
+                }
+            });
 
-        function updateScroll() {
-            const scrollPos = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = docHeight > 0 ? scrollPos / docHeight : 0;
+            // === 2. Scroll Reveal & Indicators ===
+            const bar = document.getElementById('ultimateScrollIndicator');
+            const pct = document.getElementById('scrollPercentage');
+            const backToTopBtn = document.getElementById('backToTop');
+            const photoCont = document.querySelector('.parallax-photo') || document.querySelector('#about .aspect-\\[4\\/5\\]');
+            if (photoCont && !photoCont.classList.contains('parallax-photo')) photoCont.classList.add('parallax-photo');
 
-            if (bar) bar.style.transform = `scaleX(${scrolled})`;
-            if (pct) pct.textContent = Math.round(scrolled * 100) + '%';
-            
+            function updateScroll() {
+                const scrollPos = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+                const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = docHeight > 0 ? scrollPos / docHeight : 0;
+
+                if (bar) bar.style.transform = `scaleX(${scrolled})`;
+                if (pct) pct.textContent = Math.round(scrolled * 100) + '%';
+
+                if (backToTopBtn) {
+                    backToTopBtn.classList.toggle('visible', scrollPos > 600);
+                }
+
+                if (photoCont) {
+                    photoCont.style.transform = `translateY(${scrollPos * 0.1}px)`;
+                }
+                requestAnimationFrame(updateScroll);
+            }
+            updateScroll();
+
+            const revealEls = [
+                ...document.querySelectorAll('#about .scroll-reveal'),
+                document.querySelector('#works > div:first-child'),
+                ...document.querySelectorAll('#works .gap-32 > div'),
+                document.querySelector('#journey > div:first-child'),
+                ...document.querySelectorAll('#journey .border-l > div'),
+                document.querySelector('#awards > div:first-child'),
+                ...document.querySelectorAll('#awards .gap-4 > div')
+            ].filter(Boolean);
+
+            const revealObs = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('revealed');
+                        revealObs.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            revealEls.forEach(el => revealObs.observe(el));
+
             if (backToTopBtn) {
-                backToTopBtn.classList.toggle('visible', scrollPos > 600);
+                backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
             }
-            
-            if (photoCont) {
-                photoCont.style.transform = `translateY(${scrollPos * 0.1}px)`;
+
+            // === 3. Mobile Menu Toggle ===
+            const menuToggle = document.getElementById('menuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuLinks = mobileMenu ? mobileMenu.querySelectorAll('a') : [];
+
+            function toggleMenu() {
+                if (!menuToggle || !mobileMenu) return;
+                const isOpen = menuToggle.classList.contains('open');
+                menuToggle.classList.toggle('open');
+                mobileMenu.classList.toggle('active');
+                document.body.style.overflow = isOpen ? '' : 'hidden';
             }
-            requestAnimationFrame(updateScroll);
-        }
-        updateScroll();
 
-        const revealEls = [
-            ...document.querySelectorAll('#about .scroll-reveal'),
-            document.querySelector('#works > div:first-child'),
-            ...document.querySelectorAll('#works .gap-32 > div'),
-            document.querySelector('#journey > div:first-child'),
-            ...document.querySelectorAll('#journey .border-l > div'),
-            document.querySelector('#awards > div:first-child'),
-            ...document.querySelectorAll('#awards .gap-4 > div')
-        ].filter(Boolean);
+            if (menuToggle) {
+                menuToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleMenu();
+                });
+            }
 
-        const revealObs = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.classList.add('revealed');
-                    revealObs.unobserve(e.target);
-                }
+            menuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (menuToggle) menuToggle.classList.remove('open');
+                    if (mobileMenu) mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-        revealEls.forEach(el => revealObs.observe(el));
+            // Current Section Observer for Menu
+            const sections = ['about', 'works', 'journey', 'awards'];
+            const sectionEls = sections.map(id => document.getElementById(id)).filter(Boolean);
+            const sectionObs = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        menuLinks.forEach(link => {
+                            link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                        });
+                    }
+                });
+            }, { rootMargin: '-20% 0px -70% 0px' });
+            sectionEls.forEach(el => sectionObs.observe(el));
 
-        if (backToTopBtn) {
-            backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-        }
+            // === 4. Work Details Modal & Carousel ===
+            const workModal = document.getElementById('workModal');
+            const modalImg = document.getElementById('modalImg');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalCat = document.getElementById('modalCat');
+            const modalChallenge = document.getElementById('modalChallenge');
+            const modalProcess = document.getElementById('modalProcess');
+            const workItems = document.querySelectorAll('.work-item-container');
 
-        // === 3. Mobile Menu Toggle ===
-        const menuToggle = document.getElementById('menuToggle');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const menuLinks = mobileMenu ? mobileMenu.querySelectorAll('a') : [];
-        
-        function toggleMenu() {
-            if (!menuToggle || !mobileMenu) return;
-            const isOpen = menuToggle.classList.contains('open');
-            menuToggle.classList.toggle('open');
-            mobileMenu.classList.toggle('active');
-            document.body.style.overflow = isOpen ? '' : 'hidden';
-        }
+            function openWork(el) {
+                if (!workModal || !modalImg) return;
+                modalImg.src = el.dataset.img;
+                modalTitle.innerText = el.dataset.title;
+                modalCat.innerText = el.dataset.cat;
+                modalChallenge.innerText = el.dataset.challenge;
+                modalProcess.innerText = el.dataset.process;
+                workModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+            }
 
-        if (menuToggle) {
-            menuToggle.addEventListener('click', (e) => {
-                e.stopPropagation();
-                toggleMenu();
-            });
-        }
-
-        menuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (menuToggle) menuToggle.classList.remove('open');
-                if (mobileMenu) mobileMenu.classList.remove('active');
+            function closeWork() {
+                if (workModal) workModal.classList.remove('active');
                 document.body.style.overflow = '';
-            });
-        });
+            }
 
-        // Current Section Observer for Menu
-        const sections = ['about', 'works', 'journey', 'awards'];
-        const sectionEls = sections.map(id => document.getElementById(id)).filter(Boolean);
-        const sectionObs = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id');
-                    menuLinks.forEach(link => {
-                        link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
-                    });
-                }
-            });
-        }, { rootMargin: '-20% 0px -70% 0px' });
-        sectionEls.forEach(el => sectionObs.observe(el));
+            workItems.forEach(item => item.addEventListener('click', () => openWork(item)));
 
-        // === 4. Work Details Modal & Carousel ===
-        const workModal = document.getElementById('workModal');
-        const modalImg = document.getElementById('modalImg');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalCat = document.getElementById('modalCat');
-        const modalChallenge = document.getElementById('modalChallenge');
-        const modalProcess = document.getElementById('modalProcess');
-        const workItems = document.querySelectorAll('.work-item-container');
+            const closeBtns = document.querySelectorAll('#modalClose, #closeStoryBtn');
+            closeBtns.forEach(btn => btn.addEventListener('click', closeWork));
+            if (workModal) {
+                workModal.addEventListener('click', (e) => { if (e.target === workModal) closeWork(); });
+            }
 
-        function openWork(el) {
-            if (!workModal || !modalImg) return;
-            modalImg.src = el.dataset.img;
-            modalTitle.innerText = el.dataset.title;
-            modalCat.innerText = el.dataset.cat;
-            modalChallenge.innerText = el.dataset.challenge;
-            modalProcess.innerText = el.dataset.process;
-            workModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            if (typeof lucide !== 'undefined') lucide.createIcons();
-        }
+            const carousel = document.querySelector('.carousel-container');
+            const dots = document.querySelectorAll('#carouselDots button');
+            let autoTimer;
 
-        function closeWork() {
-            if (workModal) workModal.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        workItems.forEach(item => item.addEventListener('click', () => openWork(item)));
-        
-        const closeBtns = document.querySelectorAll('#modalClose, #closeStoryBtn');
-        closeBtns.forEach(btn => btn.addEventListener('click', closeWork));
-        if (workModal) {
-            workModal.addEventListener('click', (e) => { if (e.target === workModal) closeWork(); });
-        }
-
-        const carousel = document.querySelector('.carousel-container');
-        const dots = document.querySelectorAll('#carouselDots button');
-        let autoTimer;
-
-        function updateCarousel() {
-            if (!carousel) return;
-            const idx = Math.round(carousel.scrollLeft / carousel.clientWidth);
-            dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-            carousel.querySelectorAll('.snap-center').forEach((s, i) => s.classList.toggle('active', i === idx));
-        }
-
-        if (carousel) {
-            carousel.addEventListener('scroll', updateCarousel, { passive: true });
-            dots.forEach((dot, i) => {
-                dot.addEventListener('click', () => {
-                    carousel.scrollTo({ left: i * carousel.clientWidth, behavior: 'smooth' });
-                    resetAuto();
-                });
-            });
-            function auto() {
+            function updateCarousel() {
+                if (!carousel) return;
                 const idx = Math.round(carousel.scrollLeft / carousel.clientWidth);
-                carousel.scrollTo({ left: ((idx + 1) % dots.length) * carousel.clientWidth, behavior: 'smooth' });
+                dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+                carousel.querySelectorAll('.snap-center').forEach((s, i) => s.classList.toggle('active', i === idx));
             }
-            function resetAuto() { clearInterval(autoTimer); autoTimer = setInterval(auto, 5000); }
-            resetAuto();
-        }
 
-        // === 5. Premium Cursor & Magnetic Effects ===
-        const dot = document.getElementById('cursorDot');
-        const circle = document.getElementById('cursorCircle');
-        const circleSpan = circle ? circle.querySelector('span') : null;
-        if (dot && circle) {
-            let mX = 0, mY = 0, cX = 0, cY = 0;
-            document.addEventListener('mousemove', (e) => {
-                mX = e.clientX; mY = e.clientY;
-                dot.style.opacity = circle.style.opacity = '1';
-                dot.style.transform = `translate(${mX - 6}px, ${mY - 6}px)`;
-            });
-            function anim() {
-                cX += (mX - cX) * 0.15; cY += (mY - cY) * 0.15;
-                const r = circle.classList.contains('cursor-text') ? 40 : 22;
-                circle.style.transform = `translate(${cX - r}px, ${cY - r}px)`;
-                requestAnimationFrame(anim);
+            if (carousel) {
+                carousel.addEventListener('scroll', updateCarousel, { passive: true });
+                dots.forEach((dot, i) => {
+                    dot.addEventListener('click', () => {
+                        carousel.scrollTo({ left: i * carousel.clientWidth, behavior: 'smooth' });
+                        resetAuto();
+                    });
+                });
+                function auto() {
+                    const idx = Math.round(carousel.scrollLeft / carousel.clientWidth);
+                    carousel.scrollTo({ left: ((idx + 1) % dots.length) * carousel.clientWidth, behavior: 'smooth' });
+                }
+                function resetAuto() { clearInterval(autoTimer); autoTimer = setInterval(auto, 5000); }
+                resetAuto();
             }
-            anim();
 
-            document.querySelectorAll('[data-cursor]').forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    if (circleSpan) circleSpan.textContent = el.dataset.cursor;
-                    circle.classList.add('cursor-text');
+            // === 5. Premium Cursor & Magnetic Effects ===
+            const dot = document.getElementById('cursorDot');
+            const circle = document.getElementById('cursorCircle');
+            const circleSpan = circle ? circle.querySelector('span') : null;
+            if (dot && circle) {
+                let mX = 0, mY = 0, cX = 0, cY = 0;
+                document.addEventListener('mousemove', (e) => {
+                    mX = e.clientX; mY = e.clientY;
+                    dot.style.opacity = circle.style.opacity = '1';
+                    dot.style.transform = `translate(${mX - 6}px, ${mY - 6}px)`;
                 });
-                el.addEventListener('mouseleave', () => circle.classList.remove('cursor-text'));
-            });
+                function anim() {
+                    cX += (mX - cX) * 0.15; cY += (mY - cY) * 0.15;
+                    const r = circle.classList.contains('cursor-text') ? 40 : 22;
+                    circle.style.transform = `translate(${cX - r}px, ${cY - r}px)`;
+                    requestAnimationFrame(anim);
+                }
+                anim();
 
-            document.querySelectorAll('a:not([data-cursor]), button:not([data-cursor]), .menu-toggle:not([data-cursor])').forEach(el => {
-                el.addEventListener('mouseenter', () => circle.classList.add('cursor-active'));
-                el.addEventListener('mouseleave', () => circle.classList.remove('cursor-active'));
-            });
-
-            const magnets = document.querySelectorAll('.btn2, .floating-contact-btn, .iso-pro, #menuToggle, .back-to-top, #carouselDots button');
-            magnets.forEach(m => {
-                m.addEventListener('mousemove', (e) => {
-                    const r = m.getBoundingClientRect();
-                    const x = e.clientX - r.left - r.width / 2;
-                    const y = e.clientY - r.top - r.height / 2;
-                    m.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.05)`;
+                document.querySelectorAll('[data-cursor]').forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        if (circleSpan) circleSpan.textContent = el.dataset.cursor;
+                        circle.classList.add('cursor-text');
+                    });
+                    el.addEventListener('mouseleave', () => circle.classList.remove('cursor-text'));
                 });
-                m.addEventListener('mouseleave', () => m.style.transform = '');
+
+                document.querySelectorAll('a:not([data-cursor]), button:not([data-cursor]), .menu-toggle:not([data-cursor])').forEach(el => {
+                    el.addEventListener('mouseenter', () => circle.classList.add('cursor-active'));
+                    el.addEventListener('mouseleave', () => circle.classList.remove('cursor-active'));
+                });
+
+                const magnets = document.querySelectorAll('.btn2, .floating-contact-btn, .iso-pro, #menuToggle, .back-to-top, #carouselDots button');
+                magnets.forEach(m => {
+                    m.addEventListener('mousemove', (e) => {
+                        const r = m.getBoundingClientRect();
+                        const x = e.clientX - r.left - r.width / 2;
+                        const y = e.clientY - r.top - r.height / 2;
+                        m.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.05)`;
+                    });
+                    m.addEventListener('mouseleave', () => m.style.transform = '');
+                });
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') { closeWork(); if (mobileMenu) mobileMenu.classList.remove('active'); document.body.style.overflow = ''; }
             });
-        }
-        
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') { closeWork(); if(mobileMenu) mobileMenu.classList.remove('active'); document.body.style.overflow = ''; }
         });
-    });
     </script>
 
     <!-- ROBUST INDEPENDENT MOBILE MENU LOGIC (Isolated from main errors) -->
     <script>
-    (function() {
-        const toggle = document.getElementById('menuToggle');
-        const menu = document.getElementById('mobileMenu');
-        if (!toggle || !menu) return;
+        (function () {
+            const toggle = document.getElementById('menuToggle');
+            const menu = document.getElementById('mobileMenu');
+            if (!toggle || !menu) return;
 
-        function doToggle(e) {
-            if (e) e.preventDefault();
-            const isOpen = toggle.classList.contains('open');
-            toggle.classList.toggle('open');
-            menu.classList.toggle('active');
-            document.body.style.overflow = isOpen ? '' : 'hidden';
-        }
-
-        // Attach to BOTH click and touchstart for absolute responsiveness
-        toggle.addEventListener('click', doToggle);
-        
-        // Handle links
-        menu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                toggle.classList.remove('open');
-                menu.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
-
-        // Close on background click (Click outside to close)
-        menu.addEventListener('click', (e) => {
-            if (e.target === menu) {
-                toggle.classList.remove('open');
-                menu.classList.remove('active');
-                document.body.style.overflow = '';
+            function doToggle(e) {
+                if (e) e.preventDefault();
+                const isOpen = toggle.classList.contains('open');
+                toggle.classList.toggle('open');
+                menu.classList.toggle('active');
+                document.body.style.overflow = isOpen ? '' : 'hidden';
             }
-        });
 
-        // Current Section Sync
-        const sections = ['about', 'works', 'journey', 'awards'];
-        const sectionEls = sections.map(id => document.getElementById(id)).filter(Boolean);
-        const navLinks = menu.querySelectorAll('a');
-        
-        window.addEventListener('scroll', () => {
-            let current = "";
-            sectionEls.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (window.pageYOffset >= sectionTop - 150) {
-                    current = section.getAttribute('id');
+            // Attach to BOTH click and touchstart for absolute responsiveness
+            toggle.addEventListener('click', doToggle);
+
+            // Handle links
+            menu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    toggle.classList.remove('open');
+                    menu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            // Close on background click (Click outside to close)
+            menu.addEventListener('click', (e) => {
+                if (e.target === menu) {
+                    toggle.classList.remove('open');
+                    menu.classList.remove('active');
+                    document.body.style.overflow = '';
                 }
             });
-            navLinks.forEach(link => {
-                link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
-            });
-        }, { passive: true });
-    })();
+
+            // Current Section Sync
+            const sections = ['about', 'works', 'journey', 'awards'];
+            const sectionEls = sections.map(id => document.getElementById(id)).filter(Boolean);
+            const navLinks = menu.querySelectorAll('a');
+
+            window.addEventListener('scroll', () => {
+                let current = "";
+                sectionEls.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.pageYOffset >= sectionTop - 150) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+                });
+            }, { passive: true });
+        })();
     </script>
 
 </body>
