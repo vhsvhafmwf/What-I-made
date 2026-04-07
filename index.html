@@ -294,6 +294,17 @@
             box-shadow: inset 0 0 15px rgba(24, 119, 242, 0.4);
         }
 
+        .sns-iso-card .iso-pro.note:hover a {
+            color: #238F76;
+            border-color: #238F76;
+            background: rgba(35, 143, 118, 0.1);
+        }
+
+        .sns-iso-card .iso-pro.note span {
+            border-color: #238F76;
+            box-shadow: inset 0 0 15px rgba(35, 143, 118, 0.4);
+        }
+
         .sns-iso-card .iso-pro:hover span {
             opacity: 1;
         }
@@ -648,6 +659,10 @@
 
         .site-footer a:hover {
             color: #ffcc00;
+        }
+
+        .site-footer a.note-link:hover {
+            color: #238F76;
         }
 
         /* Carousel Dot Indicators */
@@ -1441,6 +1456,18 @@
                                 </a>
                                 <div class="text">Facebook</div>
                             </li>
+                            <!-- note -->
+                            <li class="iso-pro note">
+                                <span></span><span></span><span></span>
+                                <a href="https://note.com/goto_anywhere/portal" target="_blank"
+                                    rel="noopener noreferrer" data-cursor="OPEN">
+                                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="Inter, sans-serif" font-weight="900" font-size="18">n</text>
+                                    </svg>
+                                </a>
+                                <div class="text">note</div>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -1940,6 +1967,9 @@
                 <span style="color:#333;">|</span>
                 <a href="https://www.facebook.com/profile.php?id=61575688434111" target="_blank"
                     rel="noopener noreferrer" data-cursor="OPEN">Facebook</a>
+                <span style="color:#333;">|</span>
+                <a href="https://note.com/goto_anywhere/portal" target="_blank" rel="noopener noreferrer"
+                    data-cursor="OPEN" class="note-link">note</a>
             </div>
             <p>&copy; 2026 Yuta Goto. All rights reserved.</p>
         </div>
